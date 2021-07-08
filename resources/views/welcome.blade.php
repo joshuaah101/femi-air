@@ -14,7 +14,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="bg-gray-100 h-screen antialiased leading-none font-sans">
-<div class="flex flex-col">
+{{-- <div class="flex flex-col">
     @if(Route::has('login'))
         <div class="absolute top-0 right-0 mt-4 mr-4 space-x-4 sm:mt-6 sm:mr-6 sm:space-x-6">
             @auth
@@ -27,42 +27,63 @@
             @endauth
         </div>
     @endif
+        
+    <header class="flex">
+        
+    </header>
+</div> --}}
+<nav class="flex justify-between py-4 px-8 bg-gradient-to-r from-blue-700 via-blue-300 to-green-600 font-mono shadow-2xl">
+    <a href="/" class="text-blue-100 hover:text-blue-200 font-bold">{{ config("app.name") }}</a>
+    <div class="hidden md:block text-blue-100 font-semibold space-x-3">
+        <a href="" class="hover:text-yellow-200">Home</a>
+        <a href="" class="hover:text-yellow-200 tracking-tighter">Book a flight</a>
+        <a href="" class="hover:text-yellow-200">Login</a>
+    </div>
 
-    <div class="min-h-screen flex items-center justify-center">
-        <div class="flex flex-col justify-around h-full">
-            <div>
-                <h1 class="mb-6 text-gray-600 text-center font-light tracking-wider text-4xl sm:mb-8 sm:text-6xl">
-                    {{ config('app.name', 'Laravel') }}
-                </h1>
-                <ul class="flex flex-col space-y-2 sm:flex-row sm:flex-wrap sm:space-x-8 sm:space-y-0">
-                    <li>
-                        <a href="https://laravel.com/docs" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Documentation">Documentation</a>
-                    </li>
-                    <li>
-                        <a href="https://laracasts.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Laracasts">Laracasts</a>
-                    </li>
-                    <li>
-                        <a href="https://laravel-news.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="News">News</a>
-                    </li>
-                    <li>
-                        <a href="https://nova.laravel.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Nova">Nova</a>
-                    </li>
-                    <li>
-                        <a href="https://forge.laravel.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Forge">Forge</a>
-                    </li>
-                    <li>
-                        <a href="https://vapor.laravel.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Vapor">Vapor</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/laravel/laravel" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="GitHub">GitHub</a>
-                    </li>
-                    <li>
-                        <a href="https://tailwindcss.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Tailwind Css">Tailwind CSS</a>
-                    </li>
-                </ul>
-            </div>
+    {{-- mobile menu button --}}
+    <button class="focus:outline-none md:hidden sm:block" type="button" id="toggle-mobile-menu">
+        mobile menu
+    </button>
+</nav>
+<div class="flex flex-col md:hidden space-y-3 p-4 bg-yellow-300">
+    <a href="#" class="text-sm font-semibold">Home</a>
+    <a href="#" class="text-sm font-semibold">Book a flight</a>
+    <a href="#" class="text-sm font-semibold">Login</a>
+</div>
+<header class="bg-landing-1 bg-center bg-no-repeat h-auto px-8 py-16 w-auto border-b-8 border-green-400">
+    <div class="w-1/2 flex flex-col">
+        <hgroup class="font-mono leading-relaxed text-green-100 tracking-wider mt-5">
+            <h1 class="text-5xl">
+                Flight Tickets
+            </h1>
+            <h2 class="text-4xl">
+                Reservation online
+            </h2>
+        </hgroup>
+        <p class="mt-4 text-blue-800 font-semibold text-xl leading-8 text-justify tracking-tight">
+            We offer state of the art airline services and experience, click the button below to get started with us!
+        </p>
+        
+    <button type="button" class="bg-green-800 px-5 py-4 text-green-100 w-1/2 mt-5 rounded hover:bg-green-700 focus:outline-none font-semibold text-lg">
+        Get started!
+    </button>
+    </div>
+    
+</header>
+
+<main class="mt-16 px-8 py-5">
+    <div class="grid grid-cols-3 gap-8">
+        <div class="flex flex-col ">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni impedit cum ut animi molestiae reiciendis recusandae maxime itaque ab minima dolorem, officia at laborum dolorum sed atque qui distinctio fugiat?
+        </div>
+        <div class="">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere at cum maiores blanditiis alias ipsa, dolorum repudiandae accusamus incidunt harum perspiciatis explicabo assumenda, sed quisquam doloremque, vero op
+        </div>
+        <div class="">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui id inventore sed commodi esse obcaecati, suscipit voluptates ex illo porro neque eligendi nemo quo architecto natus reiciendis nesciunt nulla iure!
         </div>
     </div>
-</div>
+</main>
+
 </body>
 </html>

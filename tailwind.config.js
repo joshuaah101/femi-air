@@ -4,7 +4,12 @@ module.exports = {
     './resources/css/**/*.css',
   ],
   theme: {
-    extend: {}
+    extend: {
+      backgroundImage : theme => ({
+        'landing-1' : "url('/storage/img/landing/landing-1.jpg')",
+        'landing-2' : "url('/storage/img/landing/landing-2.jpg')"
+      })
+    }
   },
   variants: {},
   plugins: [
