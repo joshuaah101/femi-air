@@ -1,72 +1,15 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-</head>
-<body class="bg-gray-100 h-screen antialiased leading-none font-sans">
-{{-- <div class="flex flex-col">
-    @if(Route::has('login'))
-        <div class="absolute top-0 right-0 mt-4 mr-4 space-x-4 sm:mt-6 sm:mr-6 sm:space-x-6">
-            @auth
-                <a href="{{ url('/home') }}" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase">{{ __('Home') }}</a>
-            @else
-                <a href="{{ route('login') }}" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase">{{ __('Login') }}</a>
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase">{{ __('Register') }}</a>
-                @endif
-            @endauth
-        </div>
-    @endif
-        
-    <header class="flex">
-        
-    </header>
-</div> --}}
-{{-- <nav class="bg-gradient-to-r from-blue-700 via-blue-300 to-green-600 shadow-2xl">
-    <div class="flex justify-between py-4 px-3">
-      
-        <div class="">
-            <a href="/" class="text-blue-100 hover:text-blue-200 font-bold">
-                {{ config("app.name") }}
-            </a>
-        </div>
-        
-      
-        <div class="hidden md:block text-blue-100 font-semibold space-x-3">
-            <a href="" class="hover:text-yellow-200">Home</a>
-            <a href="" class="hover:text-yellow-200 tracking-tighter">Book a flight</a>
-            <a href="" class="hover:text-yellow-200">Login</a>
-        </div>
-
-      
-        <button class="focus:outline-none md:hidden sm:block" type="button" id="toggle-mobile-menu">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
-            </svg>
-        </button>
-    </div>
-
-    <div class="md:hidden bg-yellow-300">
-        <a href="#" class="text-sm font-semibold">Home</a>
-        <a href="#" class="text-sm font-semibold">Book a flight</a>
-        <a href="#" class="text-sm font-semibold">Login</a>
-    </div>
-</nav> --}}
-
+@extends('layouts.master')
+@section('title')
+    {{ config('app.name') }}
+@endsection
+@section('links')
+    @include('partials.links')
+@endsection
 
 {{-- navbar --}}
+@section('nav')
 <nav class="bg-gradient-to-r from-blue-700 via-blue-300 to-green-600 shadow-2xl">
-    <div class="max-w-6xl px-8 mx-auto">    
+    <div class="max-w-6xl px-8 mx-auto">
         <div class="flex justify-between">
             <div class="flex space-x-4">
                 {{-- logo --}}
@@ -100,7 +43,7 @@
             </div>
         </div>
     </div>
-    
+
     {{-- mobile menu --}}
     <div class="hidden mobile-menu md:hidden">
         <a href="" class="block py-2 px-4 text-sm hover:bg-blue-200">Home</a>
@@ -109,28 +52,32 @@
         <a href="" class="block py-2 px-4 text-sm text-yellow-200 font-semibold hover:bg-blue-200 transition duration-300">Sign up</a>
     </div>
 </nav>
+@endsection
 
-<header class="bg-landing-1 bg-center bg-no-repeat h-auto px-8 py-16 w-auto border-b-4 bg-opacity-50 border-blue-400">
-    <div class="w-1/2 flex flex-col">
-        <hgroup class="font-mono leading-relaxed text-green-100 tracking-wider mt-5">
-            <h1 class="text-5xl">
-                Flight Tickets
-            </h1>
-            <h2 class="text-4xl">
-                Reservation online
-            </h2>
-        </hgroup>
-        <p class="mt-4 text-blue-800 font-semibold text-xl leading-8 text-justify tracking-tight">
-            We offer state of the art airline services and experience, click the button below to get started with us!
-        </p>
-        
-    <button type="button" class="bg-blue-800 px-5 py-4 text-blue-100 sm:w-full md:w-1/2  mt-5 rounded hover:bg-blue-700 focus:outline-none font-semibold text-lg">
-        Get started!
-    </button>
-    </div>
-    
-</header>
+@section('header')
+    <header class="bg-landing-1 bg-center bg-no-repeat h-auto px-8 py-16 w-auto border-b-4 bg-opacity-50 border-blue-400">
+        <div class="w-1/2 flex flex-col">
+            <hgroup class="font-mono leading-relaxed text-green-100 tracking-wider mt-5">
+                <h1 class="text-5xl">
+                    Flight Tickets
+                </h1>
+                <h2 class="text-4xl">
+                    Reservation online
+                </h2>
+            </hgroup>
+            <p class="mt-4 text-blue-800 font-semibold text-xl leading-8 text-justify tracking-tight">
+                We offer state of the art airline services and experience, click the button below to get started with us!
+            </p>
 
+        <button type="button" class="bg-blue-800 px-5 py-4 text-blue-100 sm:w-full md:w-1/2  mt-5 rounded hover:bg-blue-700 focus:outline-none font-semibold text-lg">
+            Get started!
+        </button>
+        </div>
+
+    </header>
+@endsection
+
+@section('main')
 <main class="mt-4 px-8 py-5">
     <section class="p-4">
         <div class="flex justify-center items-center text-blue-400 font-bold p-4 text-4xl font-serif">
@@ -176,8 +123,18 @@
             </div>
         </div>
     </section>
-</main>
 
-<script type="text/javascript" src="{{ mix('js/custom.js') }}"></script>
-</body>
-</html>
+    <section class="mt-5">
+
+    </section>
+
+</main>
+@endsection
+
+@section('footer')
+    @include('partials.footer')
+@endsection
+
+@section('scripts')
+    @include('partials.scripts')
+@endsection

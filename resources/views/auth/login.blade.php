@@ -1,6 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.master')
+@section('title')
+    {{ config('app.name') }}
+@endsection
+@section('links')
+    @include('partials.links')
+@endsection
 
-@section('content')
+@section('main')
 <main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">
     <div class="flex">
         <div class="w-full">
@@ -81,4 +87,8 @@
         </div>
     </div>
 </main>
+@endsection
+
+@section('scripts')
+    @include('partials.scripts')
 @endsection
