@@ -1,6 +1,6 @@
-@extends('layouts.master')
+@extends('master')
 @section('title')
-    {{ config('app.name') }}
+    Homepage
 @endsection
 @section('links')
     @include('partials.links')
@@ -8,68 +8,25 @@
 
 {{-- navbar --}}
 @section('nav')
-<nav class="bg-gradient-to-r from-blue-700 via-blue-300 to-green-600 shadow-2xl">
-    <div class="max-w-6xl px-8 mx-auto">
-        <div class="flex justify-between">
-            <div class="flex space-x-4">
-                {{-- logo --}}
-                <div class="">
-                    <a href="/" class="flex items-center py-5 px-2 text-blue-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr- text-blue-400" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-                          </svg>
-                        <span class="font-bold">{{ config("app.name") }}</span>
-                    </a>
-                </div>
-                {{-- primary nav --}}
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="" class="hover:text-gray-900 py-5 px-3 text-blue-100">Home</a>
-                    <a href="" class="hover:text-gray-900 py-5 px-3 text-blue-100">Book a flight</a>
-                </div>
-            </div>
-            {{-- secondary nav --}}
-            <div class="hidden md:flex items-center space-x-1">
-                <a href="" class="hover:text-gray-900 py-5 px-3 text-blue-100">Login</a>
-                <a href="" class="bg-yellow-400 text-yellow-900 rounded hover:bg-yellow-300 hover:text-yellow-800 py-2 font-bold px-3 transition duration-300">Sign up</a>
-            </div>
-
-            {{-- mobile button goes here --}}
-            <div class="md:hidden flex items-center">
-                <button class="mobile-menu-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    {{-- mobile menu --}}
-    <div class="hidden mobile-menu md:hidden">
-        <a href="" class="block py-2 px-4 text-sm hover:bg-blue-200">Home</a>
-        <a href="" class="block py-2 px-4 text-sm hover:bg-blue-200">Book a flight</a>
-        <a href="" class="block py-2 px-4 text-sm hover:bg-blue-200">Login</a>
-        <a href="" class="block py-2 px-4 text-sm text-yellow-200 font-semibold hover:bg-blue-200 transition duration-300">Sign up</a>
-    </div>
-</nav>
+    @include('partials.nav')
 @endsection
 
 @section('header')
     <header class="bg-landing-1 bg-center bg-no-repeat h-auto px-8 py-16 w-auto border-b-4 bg-opacity-50 border-blue-400">
-        <div class="w-1/2 flex flex-col">
+        <div class="sm:w-full md:w-1/2 flex flex-col">
             <hgroup class="font-mono leading-relaxed text-green-100 tracking-wider mt-5">
-                <h1 class="text-5xl">
-                    Flight Tickets
+                <h1 class="text-4xl">
+                    Online Flight Tickets
                 </h1>
-                <h2 class="text-4xl">
-                    Reservation online
+                <h2 class="text-3xl">
+                    Reservation
                 </h2>
             </hgroup>
-            <p class="mt-4 text-blue-800 font-semibold text-xl leading-8 text-justify tracking-tight">
+            <p class="mt-4 text-md text-blue-800 sm:w-full font-semibold leading-8 text-justify tracking-tight">
                 We offer state of the art airline services and experience, click the button below to get started with us!
             </p>
 
-        <button type="button" class="bg-blue-800 px-5 py-4 text-blue-100 sm:w-full md:w-1/2  mt-5 rounded hover:bg-blue-700 focus:outline-none font-semibold text-lg">
+        <button type="button" class="bg-blue-800 px-2 py-3 text-blue-100 sm:w-full md:w-1/2  mt-5 rounded hover:bg-blue-700 focus:outline-none font-semibold text-sm">
             Get started!
         </button>
         </div>
@@ -78,13 +35,13 @@
 @endsection
 
 @section('main')
-<main class="mt-4 px-8 py-5">
-    <section class="p-4">
-        <div class="flex justify-center items-center text-blue-400 font-bold p-4 text-4xl font-serif">
+<main class="mt-2 px-8 py-5">
+    <section class="p-16">
+        <div class="flex justify-center items-center text-blue-800 font-bold text-4xl font-serif">
             Our Credibility
         </div>
 
-        <div class="mt-16 grid md:grid-cols-3 gap-8 sm:grid-cols-1">
+        <div class="mt-32 grid md:grid-cols-3 gap-8 sm:grid-cols-1">
             <div class="flex flex-col bg-white rounded p-4 shadow-2xl hover:shadow-lg">
                 <h1 class="flex flex-col justify-center items-center p-5">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 border-2 rounded-full p-3 border-green-400" viewBox="0 0 20 20" fill="currentColor">
@@ -97,7 +54,7 @@
                 </p>
             </div>
 
-            <div class="flex flex-col bg-blue-500 rounded p-4 shadow-2xl hover:shadow-lg hover:bg-yellow-500 md:-mt-10 sm:mt-10">
+            <div class="flex flex-col bg-blue-700 rounded p-4 shadow-2xl hover:shadow-lg hover:bg-blue-800 md:-mt-10 sm:mt-10">
                 <h1 class="flex flex-col justify-center items-center p-5">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 border-2 rounded-full p-3 text-blue-100 border-green-400" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
