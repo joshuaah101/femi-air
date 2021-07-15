@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,17 +19,17 @@ Route::get('/', function () {
     return view('layouts.general.welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('login', [LoginController::class, 'showLogin']);
-Route::post('login', [LoginController::class, 'userLogin']);
+Route::get('login', [pagesController::class, 'showLoginPage']);
+Route::post('login', [LoginController::class, 'userLoginPage']);
 
-Route::get('ticket/{userId}', function($userId){
-    
-});
+Route::get('ticket', [PagesController::class, 'showTicketPage']);
 
+
+// decagon meeting ID - 997 1858 4133
 
 
 
