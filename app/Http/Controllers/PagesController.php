@@ -21,4 +21,9 @@ class PagesController extends Controller
         ]);
     }
 
+    public function memberDashboardPage()
+    {
+        return view('layouts.user.home');
+    }
+
 }

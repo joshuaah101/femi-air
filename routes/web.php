@@ -28,8 +28,10 @@ Route::post('login', [LoginController::class, 'userLoginPage']);
 
 Route::get('ticket', [PagesController::class, 'showTicketPage']);
 
+//member dashboard area
+Route::get('user', [PagesController::class, 'memberDashboardPage']);
 
-// decagon meeting ID - 997 1858 4133
+
 
 
 
