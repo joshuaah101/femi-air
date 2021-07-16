@@ -24,3 +24,7 @@ radioReturn.addEventListener('click', function(){
     hideRdate.classList.remove('hidden')
 })
 
+
+$(function(){
+
+})
