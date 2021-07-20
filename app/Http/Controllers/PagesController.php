@@ -21,9 +21,13 @@ class PagesController extends Controller
         ]);
     }
 
-    public function memberDashboardPage()
+    public function showDashboardPage()
     {
         return view('layouts.user.home');
     }
 
+    public function memberDashboardMenu(Request $req){
+        $menu = $req->get('menu');
+        return view('layouts.user.home', ['menuUrl' => $menu]);
+    }
 }

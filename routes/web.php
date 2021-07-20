@@ -29,7 +29,11 @@ Route::post('login', [LoginController::class, 'userLoginPage']);
 Route::get('ticket', [PagesController::class, 'showTicketPage']);
 
 //member dashboard area
-Route::get('user', [PagesController::class, 'memberDashboardPage']);
+Route::get('user/home', [PagesController::class, 'showDashboardPage']);
+
+//[PagesController::class, 'memberDashboardPage']
+Route::prefix('user')->get('home', [PagesController::class, 'memberDashboardMenu']);
+
 
 
 
