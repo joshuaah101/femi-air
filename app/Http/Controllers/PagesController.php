@@ -9,11 +9,13 @@ use App\Models\State;
 class PagesController extends Controller
 {
     //
-    public function showLoginPage(){
+    public function showLoginPage()
+    {
         return view('layouts.general.login');
     }
 
-    public function showTicketPage(){
+    public function showTicketPage()
+    {
         $state = json_decode(file_get_contents("apis/state-api.json"));
 
         return view('layouts.general.ticket', [
@@ -26,8 +28,11 @@ class PagesController extends Controller
         return view('layouts.user.home');
     }
 
-    public function memberDashboardMenu(Request $req){
+    public function memberDashboardMenu(Request $req)
+    {
         $menu = $req->get('menu');
         return view('layouts.user.home', ['menuUrl' => $menu]);
     }
+
+
 }
