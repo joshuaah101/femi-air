@@ -1,5 +1,5 @@
-<nav class="border-l border-r shadow-2xl text-sm text-blue-800 font-semibold xs:left-0 md:left-1/6 xs:top-0 fixed w-full xs:bg-white md:bg-none">
-    <div class="flex xs:justify-between md:justify-end items-center py-5 px-5 md:mr-1/6">
+<nav class="shadow-xl text-sm text-blue-800 font-semibold xs:left-0 md:left-1/6 xs:top-0 fixed w-full xs:bg-white md:bg-none">
+    <div class="flex justify-between items-center py-4 px-5 md:mr-1/6">
         <div class="font-bold">
             {{ config('app.name') }} - logo
         </div>

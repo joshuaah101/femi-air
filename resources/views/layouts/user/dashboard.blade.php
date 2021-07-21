@@ -1,6 +1,6 @@
 {{-- dashboard include --}}
-<div class="pb-5">
-    <header class="font-bold text-2xl font-sans">
+<div class="mb-5">
+    <header class="font-bold text-2xl font-sans text-gray-700">
         Welcome Back!
     </header>
     <p class="mt-2 flex items-center">
@@ -11,6 +11,7 @@
             User name
         </span>
     </p>
+    <hr class="mt-2"/>
 </div>
 
 <div class="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">

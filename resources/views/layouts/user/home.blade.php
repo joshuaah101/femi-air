@@ -94,7 +94,7 @@
                 @include('partials.dashboard-nav')
 
                {{-- main content attachment --}}
-               <div class="mt-20">
+               <div class="md:mt-16 xs:mt-20">
                     @if ($menuUrl == 'dash')
                         @include('layouts.user.dashboard')
                     @endif
