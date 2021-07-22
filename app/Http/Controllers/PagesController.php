@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\State;
 // use Illuminate\Support\Facades\Http;
 
 class PagesController extends Controller
