@@ -12,7 +12,7 @@
 @endsection
 
 @section('header')
-    <header class="bg-landing-1 bg-center bg-no-repeat h-auto px-8 py-16 w-auto border-b-4 bg-opacity-50 border-blue-400">
+    <header class="bg-landing-1 bg-center bg-no-repeat h-auto px-8 py-16 w-auto border-b-4 bg-opacity-50 border-blue-700">
         <div class="sm:w-full md:w-1/2 flex flex-col">
             <hgroup class="font-mono leading-relaxed text-green-100 tracking-wider mt-5">
                 <h1 class="text-4xl">

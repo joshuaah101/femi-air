@@ -10,9 +10,9 @@
 @endsection
 
 @section('main')
-    <main class="flex justify-between">
+    <main class="flex">
         {{-- sidebar --}}
-        <div class="xs:hidden md:block w-1/6 bg-white h-screen shadow-lg top-0 left-0 fixed border-r">
+        <div class="xs:hidden md:block w-1/6 bg-white h-screen shadow-lg top-0 left-0 fixed border-r-2 border-blue-100">
             {{-- sidebar user info display --}}
             <div class="mt-4 px-5">
                 <section class="flex flex-col justify-center items-center space-y-2 font-mono">
@@ -30,7 +30,7 @@
             </div>
             {{-- sidebar items --}}
             <div class="py-2 px-2 text-blue-800 space-y-1 mt-5">
-                <a href="?menu=dash" class="{{ request()->is('user/*') ? 'shadow-xl rounded bg-blue-700 text-blue-100 hover:bg-white  hover:shadow-md' : ''}}
+                <a href="?menu=dash" class="{{ request()->is('user/*') ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white rounded rounded-r-full hover:shadow-md' : ''}}
                     text-sm px-5 py-2 font-semibold  hover:text-blue-900 flex items-center">
                     <span class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,6 +38,15 @@
                         </svg>
                     </span>
                     Dashboard
+                </a>
+                <a href="#" class="{{ request()->is('active/*') ? 'shadow-xl rounded bg-gray-100 hover:bg-white  hover:shadow-md' : ''}}
+                    text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center">
+                    <span class="mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z" />
+                        </svg>
+                    </span>
+                    View active
                 </a>
                 <a href="?menu=history" class="{{ request()->is('?history') ? 'shadow-xl rounded bg-gray-100 hover:bg-white  hover:shadow-md' : ''}}
                     text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center">
@@ -56,15 +65,6 @@
                         </svg>
                     </span>
                     Profile
-                </a>
-                <a href="#" class="{{ request()->is('active/*') ? 'shadow-xl rounded bg-gray-100 hover:bg-white  hover:shadow-md' : ''}}
-                    text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center">
-                    <span class="mr-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z" />
-                        </svg>
-                    </span>
-                    View active
                 </a>
                 <a href="#" class="{{ request()->is('menu/*') ? 'shadow-xl rounded bg-gray-100 hover:bg-white  hover:shadow-md' : ''}}
                     text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center">
@@ -88,12 +88,10 @@
         </div>
 
 
-        <div class="xs:ml-0 md:ml-1/6 px-5">
+        <div class="xs:ml-0 md:ml-1/6 px-5 w-full">
             <div class="">
-                {{-- header navigation --}}
+                {{-- fixed header navigation --}}
                 @include('partials.dashboard-nav')
-
-               
 
                {{-- main content attachment --}}
                <div class="md:mt-20 xs:mt-20">

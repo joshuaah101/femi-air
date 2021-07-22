@@ -20,10 +20,10 @@ mix
     require('autoprefixer'),
   ]);
 
-mix
-  .scripts(
-    ['resources/js/custom.js']
-    , 'public/js/custom.js')
+// mix
+//   .scripts(
+//     ['resources/js/custom.js']
+//     , 'public/js/custom.js')
 
 if (mix.inProduction()) {
   mix

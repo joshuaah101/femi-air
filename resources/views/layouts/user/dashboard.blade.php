@@ -8,7 +8,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
           </svg>
         <span class="font-semibold text-xs">
-            User name
+            Joshua Faloye
         </span>
     </p>
     <hr class="mt-2"/>
@@ -23,14 +23,25 @@
             <p class="text-right font-bold text-md">2</p>
         </div>
     </div>
-    <div class="bg-blue-700 text-blue-100 hover:bg-blue-600 rounded-md shadow-2xl text-md p-6">
-        Lorem ipsum dolor sit amet conse
+    <div class="bg-blue-700 hover:bg-blue-600 rounded-md shadow-2xl text-md p-6">
+        <div class="flex flex-col space-y-5">
+            <header class="text-blue-100 font-semibold text-xl">
+                No. of logins today
+            </header>
+            <p class="text-right font-bold text-md text-blue-100">2</p>
+        </div>
     </div>
     <div class="bg-white rounded-md text-gray-500 shadow-2xl text-md p-6">
-        Lorem ipsum dolor sit amet, consectet
+        <div class="flex flex-col space-y-5">
+            <header class="text-blue-700 font-semibold text-xl">
+                Next flight date
+            </header>
+            <p class="text-right font-bold text-md">{{ date('d - m - Y') }}</p>
+        </div>
     </div>
 </div>
-<div class="mt-5">
+
+<div class="mt-5 hidden">
     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt, dolorem? Maiores cumque voluptatem veniam nemo unde, minima magnam, omnis ut nobis placeat modi, ea vitae autem quas architecto voluptate voluptatum!
     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt, dolorem? Maiores cumque voluptatem veniam nemo unde, minima magnam, omnis ut nobis placeat modi, ea vitae autem quas architecto voluptate voluptatum!
     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt, dolorem? Maiores cumque voluptatem veniam nemo unde, minima magnam, omnis ut nobis placeat modi, ea vitae autem quas architecto voluptate voluptatum!

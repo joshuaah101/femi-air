@@ -1840,7 +1840,20 @@ module.exports = {
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // mobile menu config
+// const btn = document.querySelector('.mobile-menu-button')
+// const menu = document.querySelector('.mobile-menu')
+// btn.addEventListener('click', function(){
+//     menu.classList.toggle('hidden')
+// })
+
+
+$(function () {
+  $(".mobile-menu-button").on('click', function (e) {
+    e.preventDefault();
+    $('.mobile-menu').toggle('slow');
+  });
+});
 
 /***/ }),
 
