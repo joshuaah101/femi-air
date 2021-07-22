@@ -16,7 +16,7 @@
             <div class="mt-4 px-5">
                 <section class="flex flex-col justify-center items-center space-y-2 font-mono">
                     <header class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 border-4 border-blue-200 rounded-full text-blue-400 p-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-28 w-28 border-4 border-blue-200 rounded-full text-blue-400 p-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                           </svg>
                     </header>
@@ -94,7 +94,7 @@
                 @include('partials.dashboard-nav')
 
                {{-- main content attachment --}}
-               <div class="md:mt-16 xs:mt-20">
+               <div class="md:mt-20 xs:mt-20">
                     @if ($menuUrl == 'dash')
                         @include('layouts.user.dashboard')
                     @endif

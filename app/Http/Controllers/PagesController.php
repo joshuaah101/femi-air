@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\State;
+
 // use Illuminate\Support\Facades\Http;
 
 class PagesController extends Controller
@@ -30,8 +30,8 @@ class PagesController extends Controller
 
     public function memberDashboardMenu(Request $req)
     {
-        $menu = $req->get('menu');
-        return view('layouts.user.home', ['menuUrl' => $menu]);
+        $menuUrl = $req->get('menu');
+        return view('layouts.user.home', ['menuUrl' => $menuUrl]);
     }
 
 

@@ -2,6 +2,8 @@
 
 return [
 
+    "app_logo" => "storage/img/landing/plane-logo.png",
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

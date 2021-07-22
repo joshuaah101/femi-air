@@ -12,7 +12,7 @@
 @endsection
 
 @section('header')
-    <header class="flex flex-col justify-center items-center space-y-5 p-8 h-1/2 bg-landing-2 bg-fixed bg-center">
+    <header class="flex flex-col justify-center items-center space-y-5 p-8 h-1/2 bg-landing-2 bg-fixed bg-center bg-no-repeat w-full">
         <h1 class="text-6xl text-blue-800 font-bold">
             Book a ticket
         </h1>
@@ -20,7 +20,7 @@
 @endsection
 
 @section('main')
-    <p class="text-md text-blue-800 mt-5 font-semibold text-center p-5 text-center">
+    <p class="text-md text-blue-800 mt-5 font-semibold p-5 text-center">
         Please fill in all appropriate fields correctly and input all details according to the instructions given as the fields are all required.
     </p>
     <main class="my-8 px-8">
