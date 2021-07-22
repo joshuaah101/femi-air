@@ -17,7 +17,7 @@
             <div class="mt-4 px-5">
                 <section class="flex flex-col justify-center items-center space-y-2 font-mono mb-2">
                     <header class="">
-                        <img src="https://scontent.flos1-1.fna.fbcdn.net/v/t1.6435-9/215984527_5867855996618138_7220758743570142723_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeGuYzyZyq2px_ltcyy2TWETEaHkOZ3wzYYRoeQ5nfDNhu8yqw75gRxSwIZEp26mDfgritJ-Cfm93Hl53KeUbePO&_nc_ohc=NYHSaiZGV8EAX-kZJJ8&_nc_ht=scontent.flos1-1.fna&oh=58c53d9d427da5accede6af70b56f176&oe=60FDEB02" alt="" class="border-4 border-blue-200 rounded-full p-1" />
+                        <img src="https://scontent.flos1-1.fna.fbcdn.net/v/t1.6435-9/215984527_5867855996618138_7220758743570142723_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeGuYzyZyq2px_ltcyy2TWETEaHkOZ3wzYYRoeQ5nfDNhu8yqw75gRxSwIZEp26mDfgritJ-Cfm93Hl53KeUbePO&_nc_ohc=NYHSaiZGV8EAX-kZJJ8&_nc_ht=scontent.flos1-1.fna&oh=58c53d9d427da5accede6af70b56f176&oe=60FDEB02" alt="" class="border-4 border-blue-200 rounded-full p-1 h-32 w-32" />
                     </header>
                     <p class="font-semibold text-gray-400 text-center">
                         Joshua Faloye
