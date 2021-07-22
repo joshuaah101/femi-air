@@ -15,17 +15,14 @@
         <div class="xs:hidden md:block w-1/6 bg-white h-screen shadow-lg top-0 left-0 fixed border-r-2 border-blue-100">
             {{-- sidebar user info display --}}
             <div class="mt-4 px-5">
-                <section class="flex flex-col justify-center items-center space-y-2 font-mono">
+                <section class="flex flex-col justify-center items-center space-y-2 font-mono mb-2">
                     <header class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-28 w-28 border-4 border-blue-200 rounded-full text-blue-400 p-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
+                        <img src="https://scontent.flos1-1.fna.fbcdn.net/v/t1.6435-9/215984527_5867855996618138_7220758743570142723_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeGuYzyZyq2px_ltcyy2TWETEaHkOZ3wzYYRoeQ5nfDNhu8yqw75gRxSwIZEp26mDfgritJ-Cfm93Hl53KeUbePO&_nc_ohc=NYHSaiZGV8EAX-kZJJ8&_nc_ht=scontent.flos1-1.fna&oh=58c53d9d427da5accede6af70b56f176&oe=60FDEB02" alt="" class="border-4 border-blue-200 rounded-full p-1" />
                     </header>
                     <p class="font-semibold text-gray-400 text-center">
-                        User name
+                        Joshua Faloye
                     </p>
                 </section>
-
                 <hr>
             </div>
             {{-- sidebar items --}}

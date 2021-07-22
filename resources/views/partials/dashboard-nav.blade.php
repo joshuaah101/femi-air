@@ -6,9 +6,8 @@
 
         <div class="flex justify-between items-center space-x-5">
             <div class="text-blue-700 text-md xs:hidden md:flex md:items-center md:space-x-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                <span class="p-2 bg-green-400 rounded-full animate-pulse"></span>
+                <img src="https://scontent.flos1-1.fna.fbcdn.net/v/t1.6435-9/215984527_5867855996618138_7220758743570142723_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeGuYzyZyq2px_ltcyy2TWETEaHkOZ3wzYYRoeQ5nfDNhu8yqw75gRxSwIZEp26mDfgritJ-Cfm93Hl53KeUbePO&_nc_ohc=NYHSaiZGV8EAX-kZJJ8&_nc_ht=scontent.flos1-1.fna&oh=58c53d9d427da5accede6af70b56f176&oe=60FDEB02" alt="" class="border-2 border-blue-200 rounded-full h-8 w-8" />
                 <span class="">
                     Joshua Faloye
                 </span>
@@ -18,7 +17,7 @@
             </div>
 
             {{-- mobile dashboard menu button --}}
-            <div class="md:hidden xs:flex">
+            <div class="hidden md:hidden xs:flex">
                 <button class="mobile-menu-button">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-10 text-blue-700" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
@@ -29,8 +28,19 @@
     </div>
 
     {{-- mobile dashboard menu --}}
-    <div class="p-4 hidden md:hidden mobile-menu">
-        <a href="#" class="flex items-center text-md px-5 py-3 text-blue-700 hover:text-blue-600 font-semibold">
+    <div class="p-4 hidden md:hidden mobile-menu transition duration-1000 ease-in-out">
+        <div class="flex items-center justify-between px-5 py-3">
+            <div class="flex items-center space-x-2">
+                <img src="https://scontent.flos1-1.fna.fbcdn.net/v/t1.6435-9/215984527_5867855996618138_7220758743570142723_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeGuYzyZyq2px_ltcyy2TWETEaHkOZ3wzYYRoeQ5nfDNhu8yqw75gRxSwIZEp26mDfgritJ-Cfm93Hl53KeUbePO&_nc_ohc=NYHSaiZGV8EAX-kZJJ8&_nc_ht=scontent.flos1-1.fna&oh=58c53d9d427da5accede6af70b56f176&oe=60FDEB02" alt="" class="border-2 border-blue-200 rounded-full h-10 w-12" />
+                <span class="text-blue-700 font-semibold">
+                    Joshua Faloye
+                </span>
+            </div>
+            <span class="p-2 bg-green-400 rounded-full animate-pulse"></span>
+        </div>
+        <hr>
+        
+        <a href="#" class="flex items-center text-md px-5 py-3 text-blue-700 hover:text-blue-600 font-semibold mt-3">
             <span class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
