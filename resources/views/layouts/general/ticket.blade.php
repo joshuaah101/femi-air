@@ -90,7 +90,7 @@
 
                 <div class="flex justify-center space-x-5 my-6 px-5">
                     <div class="flex justify-center item-center space-x-3">
-                        <input type="radio" name="tripType" value="0" class="radio-one" required />
+                        <input type="radio" name="tripType" value="0" class="radio-one" required checked />
                         <label class="text-lg font-semibold italic text-gray-700">One way trip</label>
                     </div>
                     <div class="flex justify-center item-center space-x-3">
@@ -140,7 +140,7 @@
                         <input type="date" name="departureDate" id="departureDate" class="shadow border border-gray-400 py-3 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-blue-100 focus:text-gray-900" required />
                     </div>
 
-                    <div class="mt-6 flex flex-col space-y-3" id="hide-rDate">
+                    <div class="mt-6 flex flex-col space-y-3 hidden" id="hide-rDate">
                         <label for="returningDate" class="text-gray-800 font-semibold">Returning date</label>
                         <input type="date" name="returningDate" id="returningDate" class="shadow border border-gray-400 py-3 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-blue-100 focus:text-gray-900" required />
                     </div>

@@ -1853,6 +1853,16 @@ btn.addEventListener('click', function () {
 //     })
 // })
 
+var one_way = document.querySelector('.radio-one');
+var return_trip = document.querySelector('.radio-return');
+var return_field = document.querySelector('#hide-rDate');
+return_trip.addEventListener('click', function () {
+  return_field.classList.remove('hidden');
+});
+one_way.addEventListener('click', function () {
+  return_field.classList.add('hidden');
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

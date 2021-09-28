@@ -15,28 +15,28 @@
 </div>
 
 <div class="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-    <div class="bg-white rounded-md text-gray-500 shadow-2xl text-md p-6">
-        <div class="flex flex-col space-y-5">
-            <header class="text-blue-700 font-semibold text-xl">
+    <div class="bg-white rounded-md text-gray-500 shadow-xl text-md px-5 py-3">
+        <div class="flex flex-col space-y-5 p-2">
+            <header class="text-blue-700 font-semibold">
                 Active tickets
             </header>
-            <p class="text-right font-bold text-md">2</p>
+            <p class="text-right font-bold text-sm">2</p>
         </div>
     </div>
-    <div class="bg-blue-700 hover:bg-blue-600 rounded-md shadow-2xl text-md p-6">
-        <div class="flex flex-col space-y-5">
-            <header class="text-blue-100 font-semibold text-xl">
+    <div class="bg-blue-700 hover:bg-blue-600 rounded-md shadow-2xl text-md px-5 py-3">
+        <div class="flex flex-col space-y-5 p-2">
+            <header class="text-blue-100 font-semibold">
                 No. of logins today
             </header>
-            <p class="text-right font-bold text-md text-blue-100">2</p>
+            <p class="text-right font-bold text-sm text-blue-100">2</p>
         </div>
     </div>
-    <div class="bg-white rounded-md text-gray-500 shadow-2xl text-md p-6">
-        <div class="flex flex-col space-y-5">
-            <header class="text-blue-700 font-semibold text-xl">
+    <div class="bg-white rounded-md text-gray-500 shadow-xl text-md  px-5 py-3">
+        <div class="flex flex-col space-y-5 p-2">
+            <header class="text-blue-700 font-semibold">
                 Next flight date
             </header>
-            <p class="text-right font-bold text-md">{{ date('d - m - Y') }}</p>
+            <p class="text-right font-bold text-sm">{{ date('d - m - Y') }}</p>
         </div>
     </div>
 </div>

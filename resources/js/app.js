@@ -13,3 +13,16 @@ btn.addEventListener('click', function(){
 //         $('.mobile-menu').toggle('slow')
 //     })
 // })
+
+const one_way = document.querySelector('.radio-one')
+const return_trip = document.querySelector('.radio-return')
+const return_field = document.querySelector('#hide-rDate')
+
+return_trip.addEventListener('click', function(){
+    return_field.classList.remove('hidden')
+})
+
+one_way.addEventListener('click', function(){
+    return_field.classList.add('hidden')
+})
+

@@ -1,6 +1,6 @@
 @section('footer')
     <footer class="mt-5 bg-blue-700">
-        <section class="md:px-32 py-8 grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        <section class="md:px-32 py-6 grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             <div class="p-3">
                 <h1 class="text-2xl text-blue-300 font-mono">
                     Contact
@@ -75,9 +75,21 @@
                 </div>
             </div>
         </section>
-        <hr class="border-blue-400">
-        <div class="py-4 flex justify-center italic text-sm text-gray-200">
-            &copy; {{ date('Y') }}
+        
+        <div class="
+            py-2 px-8
+            flex justify-end space-x-2
+            ">
+            <div class="
+                font-bold text-sm text-blue-200">
+                {{ config('app.name') }} &copy; {{ date('Y') }}
+            </div>
+
+            <div class="
+                flex text-end
+                font-bold text-xs text-blue-200">
+                &middot; All rights reserved
+            </div>
         </div>
     </footer>
 @endsection

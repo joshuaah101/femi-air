@@ -27,7 +27,7 @@
             </div>
             {{-- sidebar items --}}
             <div class="py-2 px-2 text-blue-800 space-y-1 mt-5">
-                <a href="?menu=dash" class="{{ $menuUrl == 'dash' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white hover:shadow-md' : ''}}
+                <a href="?menu=dash&id=90" class="{{ $menuUrl == 'dash' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white hover:shadow-md' : ''}}
                     text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center rounded rounded-r-full">
                     <span class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

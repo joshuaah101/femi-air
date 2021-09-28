@@ -8,7 +8,7 @@
     <title>{{ config('app.name') }} | @yield('title')</title>
     @yield('links')
 </head>
-<body class="bg-gray-100 h-screen antialiased leading-none">
+<body class="bg-white h-screen antialiased leading-none">
     @yield('nav')
     @yield('header')
     @yield('main')
