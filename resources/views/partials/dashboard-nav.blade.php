@@ -7,7 +7,7 @@
         <div class="flex justify-between items-center space-x-5">
             <div class="text-blue-700 text-md xs:hidden md:flex md:items-center md:space-x-1">
                 <span class="p-2 bg-green-400 rounded-full animate-pulse"></span>
-                <img src="https://scontent.flos1-1.fna.fbcdn.net/v/t1.6435-9/215984527_5867855996618138_7220758743570142723_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeGuYzyZyq2px_ltcyy2TWETEaHkOZ3wzYYRoeQ5nfDNhu8yqw75gRxSwIZEp26mDfgritJ-Cfm93Hl53KeUbePO&_nc_ohc=NYHSaiZGV8EAX-kZJJ8&_nc_ht=scontent.flos1-1.fna&oh=58c53d9d427da5accede6af70b56f176&oe=60FDEB02" alt="" class="border-2 border-blue-200 rounded-full h-8 w-8" />
+                <img src="{{ asset('storage/img/profile-pics/josh.jpg') }}" alt="" class="border-2 border-blue-200 rounded-full h-8 w-8" />
                 <span class="">
                     Joshua Faloye
                 </span>
@@ -31,7 +31,7 @@
     <div class="p-4 hidden md:hidden mobile-menu transition duration-1000 ease-in-out">
         <div class="flex items-center justify-between px-5 py-3">
             <div class="flex items-center space-x-2">
-                <img src="https://scontent.flos1-1.fna.fbcdn.net/v/t1.6435-9/215984527_5867855996618138_7220758743570142723_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeGuYzyZyq2px_ltcyy2TWETEaHkOZ3wzYYRoeQ5nfDNhu8yqw75gRxSwIZEp26mDfgritJ-Cfm93Hl53KeUbePO&_nc_ohc=NYHSaiZGV8EAX-kZJJ8&_nc_ht=scontent.flos1-1.fna&oh=58c53d9d427da5accede6af70b56f176&oe=60FDEB02" alt="" class="border-2 border-blue-200 rounded-full h-10 w-12" />
+                <img src="{{ asset('storage/img/profile-pics/josh.jpg') }}" alt="" class="border-2 border-blue-200 rounded-full h-10 w-12" />
                 <div class="flex flex-col space-y-1">
                     <span class="text-blue-700 font-semibold">
                         Joshua Faloye

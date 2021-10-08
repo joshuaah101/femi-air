@@ -12,7 +12,7 @@
             {{-- primary nav --}}
 
             <div class="hidden md:flex items-center">
-                <a href="/" class="{{ request()->is('/') ? 'text-blue-900 hover:text-blue-700' : '' }}
+                <a href="/" class="{{ request()->is('/') ? 'text-blue- hover:text-blue-700' : '' }}
                  py-2 px-3 text-blue-800 font-bold flex items-center hover:text-blue-600 transition duration-300">
                  <span class="mr-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -22,7 +22,7 @@
                     Home
                 </a>
 
-                <a href="ticket" class="{{ request()->is('ticket') ? 'text-blue-900 hover:text-blue-700' : '' }}
+                <a href="ticket" class="{{ request()->is('ticket') ? 'text-blue- hover:text-blue-700' : '' }}
                 py-2 px-3 text-blue-800 font-bold flex items-center hover:text-blue-600 transition duration-300">
                 <span class="mr-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -32,7 +32,7 @@
                     Book a flight
                 </a>
 
-                <a href="login" class="{{ request()->is('login') ? 'text-blue-900 hover:text-blue-700' : '' }}
+                <a href="login" class="{{ request()->is('login') ? 'text-blue- hover:text-blue-700' : '' }}
                 py-2 px-3 text-blue-800 font-bold flex items-center hover:text-blue-600 transition duration-300">
                 <span class="mr-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

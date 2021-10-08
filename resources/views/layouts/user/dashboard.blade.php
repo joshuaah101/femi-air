@@ -1,5 +1,5 @@
 {{-- dashboard include --}}
-<div class="mb-5">
+<div class="mb-5 w-full">
     <header class="font-bold text-2xl font-sans text-gray-700">
         Welcome Back!
     </header>
