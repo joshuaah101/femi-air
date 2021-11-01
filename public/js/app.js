@@ -1847,25 +1847,37 @@ var btn = document.querySelector('.mobile-menu-button');
 var menu = document.querySelector('.mobile-menu');
 btn.addEventListener('click', function () {
   menu.classList.toggle('hidden');
-}); // $(function(){
-//     $(".mobile-menu-button").on('click', function(){
-//         $('.mobile-menu').toggle('slow')
-//     })
-// })
+}); //trip option details
 
-var one_way = document.querySelector('.radio-one');
-var return_trip = document.querySelector('.radio-return');
-var return_field = document.querySelector('#hide-rDate');
+var tripOption = document.querySelector('#trip-option');
+var return_field = document.querySelector('#hide-rDate'); //handling the bus selection and checklist field
+
+var busSelect = document.querySelector('#selectBusBox');
+var checkoutPane = document.querySelector('#checkoutPane');
 
 window.onload = function () {
-  return_field.classList.add('hidden');
+  if (window.location.pathname == '/ticket') {
+    hideReturnField();
+    console.log(tripOption[1].value);
+  }
+
+  if (window.location.pathname == '/checkout') hideCheckoutPane();
 };
 
-return_trip.addEventListener('click', function () {
-  return_field.classList.remove('hidden');
-});
-one_way.addEventListener('click', function () {
+function hideCheckoutPane() {
+  checkoutPane.classList.add('hidden');
+}
+
+function hideReturnField() {
   return_field.classList.add('hidden');
+}
+
+tripOption.addEventListener('change', function () {
+  return_field.classList.toggle('hidden');
+});
+busSelect.addEventListener('click', function () {
+  // checkoutPane.classList.toggle('hidden')
+  console.log('clicked');
 }); //using jquery to control elapsed date
 
 $(function () {

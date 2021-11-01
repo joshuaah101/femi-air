@@ -23,6 +23,10 @@ class PagesController extends Controller
         ]);
     }
 
+    public function showCheckoutPage(){
+        return view('layouts.general.checkout');
+    }
+
     public function showDashboardPage()
     {
         return view('layouts.user.home');

@@ -25,16 +25,15 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 
 Route::get('login', [pagesController::class, 'showLoginPage']);
 Route::post('login', [LoginController::class, 'userLoginPage']);
-
 Route::get('ticket', [PagesController::class, 'showTicketPage']);
+Route::get('checkout', [PagesController::class, 'showCheckoutPage']);
+
 
 //member dashboard area
 Route::get('user/home', [PagesController::class, 'showDashboardPage']);
 
 //[PagesController::class, 'memberDashboardPage']
 Route::prefix('user')->get('home', [PagesController::class, 'memberDashboardMenu']);
-
-
 
 
 

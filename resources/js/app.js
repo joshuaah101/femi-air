@@ -8,27 +8,42 @@ btn.addEventListener('click', function(){
     menu.classList.toggle('hidden')
 })
 
-// $(function(){
-//     $(".mobile-menu-button").on('click', function(){
-//         $('.mobile-menu').toggle('slow')
-//     })
-// })
-
-const one_way = document.querySelector('.radio-one')
-const return_trip = document.querySelector('.radio-return')
+//trip option details
+const tripOption = document.querySelector('#trip-option')
 const return_field = document.querySelector('#hide-rDate')
 
-window.onload = ()=>{
+//handling the bus selection and checklist field
+const busSelect = document.querySelector('#selectBusBox')
+const checkoutPane = document.querySelector('#checkoutPane')
+
+window.onload = (() => {
+    if(window.location.pathname == '/ticket'){
+        hideReturnField()
+        console.log(tripOption[1].value)
+    }
+
+    if(window.location.pathname == '/checkout')
+        hideCheckoutPane()
+})
+
+function hideCheckoutPane(){
+    checkoutPane.classList.add('hidden')
+}
+
+function hideReturnField(){
     return_field.classList.add('hidden')
 }
 
-return_trip.addEventListener('click', function(){
-    return_field.classList.remove('hidden')
+tripOption.addEventListener('change', () => {
+    return_field.classList.toggle('hidden')
 })
 
-one_way.addEventListener('click', function(){
-    return_field.classList.add('hidden')
+busSelect.addEventListener('click', function(){
+    // checkoutPane.classList.toggle('hidden')
+    console.log('clicked')
 })
+
+
 
 //using jquery to control elapsed date
 $(function(){
@@ -51,4 +66,5 @@ $(function(){
     // alert("Today's date is "+ maxDate)
     $('#departureDate').attr('min', maxDate)
     $('#returningDate').attr('min', maxDate)
+
 })
