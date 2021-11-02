@@ -26,7 +26,7 @@
     <main class="my-8 px-8">
         <section class="px-8 py-4 mt-3">
             @csrf
-            <form action="ticket" method="POST" id="reservationForm" class="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-x-4 gap-y-5 px-12 py-8 shadow-lg bg-blue-100">
+            <form action="ticket" method="POST" id="reservationForm" class="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-x-4 gap-y-5 px-12 py-8 shadow-lg bg-blue-500 rounded">
                 <div class="flex flex-col space-y-3">
                     <div class="flex space-x-1 items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
@@ -116,7 +116,7 @@
                 </div>
                 <div class="flex flex-col space-y-3 justify-end">
                     <label class=""></label>
-                    <button type="submit" class="bg-blue-700 text-blue-100 px-2 py-3 rounded w-full hover:bg-blue-600 font-semibold font-mono focus:outline-none flex items-center justify-center">
+                    <button type="submit" class="bg-green-500 text-blue-100 px-2 py-3 rounded w-full hover:bg-green-700 font-semibold font-mono focus:outline-none flex items-center justify-center border border-gray-100">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
                             <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" />
