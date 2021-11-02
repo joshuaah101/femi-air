@@ -1850,18 +1850,35 @@ btn.addEventListener('click', function () {
 }); //trip option details
 
 var tripOption = document.querySelector('#trip-option');
-var return_field = document.querySelector('#hide-rDate'); //handling the bus selection and checklist field
+var return_field = document.querySelector('#hide-rDate');
+var reservationForm = document.querySelector('#reservationForm');
+var informationField = document.querySelector('#informationField'); //handling the bus selection and checklist field
 
 var busSelect = document.querySelector('#selectBusBox');
-var checkoutPane = document.querySelector('#checkoutPane');
+var checkoutPane = document.querySelector('#checkoutPane'); //on document load, do the following
 
 window.onload = function () {
+  //hide the return date field on the ticket page
   if (window.location.pathname == '/ticket') {
-    hideReturnField();
-    console.log(tripOption[1].value);
-  }
+    hideReturnField(); //hideInformationField()
 
-  if (window.location.pathname == '/checkout') hideCheckoutPane();
+    showInformationField();
+  } //hide the checkout panel on the checkout page
+
+
+  if (window.location.pathname == '/checkout') {
+    hideCheckoutPane();
+  }
+}; //show ticket page information field
+
+
+var showInformationField = function showInformationField() {
+  reservationForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    setTimeout(function () {
+      informationField.classList.remove('hidden');
+    }, 3000);
+  });
 };
 
 function hideCheckoutPane() {
@@ -1872,13 +1889,17 @@ function hideReturnField() {
   return_field.classList.add('hidden');
 }
 
+var hideInformationField = function hideInformationField() {
+  informationField.classList.add('hidden');
+};
+
 tripOption.addEventListener('change', function () {
   return_field.classList.toggle('hidden');
-});
-busSelect.addEventListener('click', function () {
-  // checkoutPane.classList.toggle('hidden')
-  console.log('clicked');
-}); //using jquery to control elapsed date
+}); // busSelect.addEventListener('click', function(){
+//     checkoutPane.classList.toggle('hidden')
+//     console.log('clicked')
+// })
+//using jquery to control elapsed date
 
 $(function () {
   var dtToday = new Date();
@@ -1889,7 +1910,7 @@ $(function () {
   if (day < 10) day = '0' + day.toString();
   var maxDate = year + '-' + month + '-' + day; //or instead
   // var maxDate = dtToday.toISOString().substring(0, 10)
-  // alert("Today's date is "+ maxDate)
+  // console.log("Today's date is "+ maxDate)
 
   $('#departureDate').attr('min', maxDate);
   $('#returningDate').attr('min', maxDate);

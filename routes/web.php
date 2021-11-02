@@ -35,6 +35,9 @@ Route::get('user/home', [PagesController::class, 'showDashboardPage']);
 //[PagesController::class, 'memberDashboardPage']
 Route::prefix('user')->get('home', [PagesController::class, 'memberDashboardMenu']);
 
-
+//Post form routes
+Route::post('ticket', function () {
+    return view('layouts.general.ticket');
+});
 
 ?>

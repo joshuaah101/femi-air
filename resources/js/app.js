@@ -11,20 +11,38 @@ btn.addEventListener('click', function(){
 //trip option details
 const tripOption = document.querySelector('#trip-option')
 const return_field = document.querySelector('#hide-rDate')
+const reservationForm = document.querySelector('#reservationForm')
+const informationField = document.querySelector('#informationField')
 
 //handling the bus selection and checklist field
 const busSelect = document.querySelector('#selectBusBox')
 const checkoutPane = document.querySelector('#checkoutPane')
 
+//on document load, do the following
 window.onload = (() => {
+    //hide the return date field on the ticket page
     if(window.location.pathname == '/ticket'){
         hideReturnField()
-        console.log(tripOption[1].value)
+        //hideInformationField()
+        showInformationField()
     }
 
-    if(window.location.pathname == '/checkout')
+    //hide the checkout panel on the checkout page
+    if(window.location.pathname == '/checkout'){
         hideCheckoutPane()
+    }
 })
+
+//show ticket page information field
+
+const showInformationField = () => {
+    reservationForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        setTimeout(function(){
+            informationField.classList.remove('hidden')
+        }, 3000)
+    })
+}
 
 function hideCheckoutPane(){
     checkoutPane.classList.add('hidden')
@@ -34,14 +52,19 @@ function hideReturnField(){
     return_field.classList.add('hidden')
 }
 
+const hideInformationField = () => {
+    informationField.classList.add('hidden')
+}
+
 tripOption.addEventListener('change', () => {
     return_field.classList.toggle('hidden')
 })
 
-busSelect.addEventListener('click', function(){
-    // checkoutPane.classList.toggle('hidden')
-    console.log('clicked')
-})
+
+// busSelect.addEventListener('click', function(){
+//     checkoutPane.classList.toggle('hidden')
+//     console.log('clicked')
+// })
 
 
 
@@ -63,7 +86,7 @@ $(function(){
     //or instead
     // var maxDate = dtToday.toISOString().substring(0, 10)
 
-    // alert("Today's date is "+ maxDate)
+    // console.log("Today's date is "+ maxDate)
     $('#departureDate').attr('min', maxDate)
     $('#returningDate').attr('min', maxDate)
 
