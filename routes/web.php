@@ -23,10 +23,11 @@ Route::get('/', function () {
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('login', [pagesController::class, 'showLoginPage']);
+Route::get('login', [PagesController::class, 'showLoginPage']);
 Route::post('login', [LoginController::class, 'userLoginPage']);
 Route::get('ticket', [PagesController::class, 'showTicketPage']);
 Route::get('checkout', [PagesController::class, 'showCheckoutPage']);
+Route::get('/', [PagesController::class, 'welcomePage']);
 
 
 //member dashboard area

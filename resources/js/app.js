@@ -22,9 +22,13 @@ const checkoutPane = document.querySelector('#checkoutPane')
 window.onload = (() => {
     //hide the return date field on the ticket page
     if(window.location.pathname == '/ticket'){
-        hideReturnField()
         //hideInformationField()
         showInformationField()
+    }
+    
+    //hide the return field from the welcome page
+    if(window.location.pathname == '/'){
+        hideReturnField()
     }
 
     //hide the checkout panel on the checkout page
@@ -40,6 +44,9 @@ const showInformationField = () => {
         e.preventDefault()
         setTimeout(function(){
             informationField.classList.remove('hidden')
+        }, 3000)
+        setTimeout(function(){
+            hideReservationForm()
         }, 3000)
     })
 }
@@ -59,6 +66,10 @@ const hideInformationField = () => {
 tripOption.addEventListener('change', () => {
     return_field.classList.toggle('hidden')
 })
+
+const hideReservationForm = () => {
+    reservationForm.classList.add('hidden')
+}
 
 
 // busSelect.addEventListener('click', function(){

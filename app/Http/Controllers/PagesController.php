@@ -9,16 +9,27 @@ use App\Models\State;
 class PagesController extends Controller
 {
     //
+
+    
     public function showLoginPage()
     {
         return view('layouts.general.login');
     }
-
+    
     public function showTicketPage()
+    {
+        
+        $state = json_decode(file_get_contents("apis/state-api.json"));
+        return view('layouts.general.ticket', [
+            'states' => $state->data
+        ]);
+    }
+
+    public function welcomePage()
     {
         $state = json_decode(file_get_contents("apis/state-api.json"));
 
-        return view('layouts.general.ticket', [
+        return view('layouts.general.welcome', [
             'states' => $state->data
         ]);
     }

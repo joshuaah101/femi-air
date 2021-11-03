@@ -7,7 +7,10 @@ module.exports = {
     extend: {
       backgroundImage : theme => ({
         'landing-1' : "url('/storage/img/landing/landing-1.jpg')",
-        'landing-2' : "url('/storage/img/landing/landing-2.jpg')"
+        'landing-2' : "url('/storage/img/landing/landing-2.jpg')",
+        'plane1-bg' : "url('/storage/img/landing/plane1.jpg')",
+        'plane2-bg' : "url('/storage/img/landing/plane2.jpg')",
+        'plane3-bg' : "url('/storage/img/landing/plane3.jpg')"
       })
     },
     screens : {

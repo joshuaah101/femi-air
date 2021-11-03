@@ -1860,9 +1860,13 @@ var checkoutPane = document.querySelector('#checkoutPane'); //on document load, 
 window.onload = function () {
   //hide the return date field on the ticket page
   if (window.location.pathname == '/ticket') {
-    hideReturnField(); //hideInformationField()
-
+    //hideInformationField()
     showInformationField();
+  } //hide the return field from the welcome page
+
+
+  if (window.location.pathname == '/') {
+    hideReturnField();
   } //hide the checkout panel on the checkout page
 
 
@@ -1877,6 +1881,9 @@ var showInformationField = function showInformationField() {
     e.preventDefault();
     setTimeout(function () {
       informationField.classList.remove('hidden');
+    }, 3000);
+    setTimeout(function () {
+      hideReservationForm();
     }, 3000);
   });
 };
@@ -1895,11 +1902,16 @@ var hideInformationField = function hideInformationField() {
 
 tripOption.addEventListener('change', function () {
   return_field.classList.toggle('hidden');
-}); // busSelect.addEventListener('click', function(){
+});
+
+var hideReservationForm = function hideReservationForm() {
+  reservationForm.classList.add('hidden');
+}; // busSelect.addEventListener('click', function(){
 //     checkoutPane.classList.toggle('hidden')
 //     console.log('clicked')
 // })
 //using jquery to control elapsed date
+
 
 $(function () {
   var dtToday = new Date();
