@@ -27,7 +27,7 @@
                 With Femi-airline, you can easily book any flight you need to travel safely thanks to our detailed system, services and experience.
             </p>
 
-            <button type="button" class="bg-transparent px-2 py-4 text-white sm:w-full md:w-1/3 mt-5 rounded border-2 border-orange-500 hover:border-white hover:text-orange-500 font-semibold text-md">
+            <button type="button" class="bg-transparent px-2 py-4 text-white sm:w-full md:w-1/3 mt-5 rounded border-2 border-orange-500 hover:border-white hover:text-orange-500 font-semibold text-sm transition duration-300">
                 Read more
             </button>  
         </div> 
