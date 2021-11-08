@@ -16,9 +16,12 @@ class PagesController extends Controller
         return view('layouts.general.login');
     }
     
+    public function showSignupPage(){
+        return view('layouts.general.register');
+    }
+
     public function showTicketPage()
-    {
-        
+    {        
         $state = json_decode(file_get_contents("apis/state-api.json"));
         return view('layouts.general.ticket', [
             'states' => $state->data
@@ -34,8 +37,8 @@ class PagesController extends Controller
         ]);
     }
 
-    public function showCheckoutPage(){
-        return view('layouts.general.checkout');
+    public function showFlightSelectionPage(){
+        return view('layouts.general.flight-selection');
     }
 
     public function showDashboardPage()

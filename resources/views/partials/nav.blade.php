@@ -1,4 +1,4 @@
-<nav class="bg-orange-100 shadow-2xl">
+<nav class="bg-white shadow-2xl">
     <div class="px-4 md:px-8 mx-auto">
         <div class="flex justify-between items-center">
             {{-- logo --}}
@@ -11,23 +11,23 @@
             {{-- primary nav --}}
 
             <div class="hidden md:flex items-center">
-                <a href="/" class="{{ request()->is('/') ? 'bg-orange-500 hover:bg-white border-t-2 border-gray-500' : '' }}
-                hover:text-orange-500 font-semibold px-2 py-4 text-xs transition duration-300">
+                <a href="/" class="{{ request()->is('/') ? 'text-orange-500 border-b-2 border-orange-500 hover:text-black' : 'hover:text-orange-500 ' }}
+                 font-semibold px-2 py-4 text-xs transition duration-300">
                     Home
                 </a>
 
-                <a href="ticket" class="{{ request()->is('ticket') ? 'bg-orange-500 hover:bg-white border-t-2 border-gray-500' : '' }}
-                hover:text-orange-500 text-xs font-semibold px-2 py-4 text-gray-900 transition duration-300">
+                {{-- <a href="ticket" class="{{ request()->is('ticket') ? 'bg-orange-500 hover:bg-white border-t-2 border-gray-500' : 'hover:text-orange-500 ' }}
+                 text-xs font-semibold px-2 py-4 text-gray-900 transition duration-300">
                     Book a flight
-                </a>
+                </a> --}}
 
-                <a href="login" class="{{ request()->is('login') ? 'bg-orange-500 hover:bg-white border-t-2 border-gray-500' : '' }}
-                hover:text-orange-500 text-xs font-semibold px-2 py-4 text-gray-900 transition duration-300">
+                <a href="login" class="{{ request()->is('login') ? 'bg-orange-500 hover:bg-white border-t-2 border-gray-500' : 'hover:text-orange-500 ' }}
+                 text-xs font-semibold px-2 py-4 text-gray-900 transition duration-300">
                     Login
                 </a>
 
-                <a href="register" class="{{ request()->is('register') ? 'bg-orange-500 hover:bg-white border-t-2 border-gray-500' : '' }}
-                hover:text-orange-500 text-xs font-semibold px-2 py-4 text-gray-900 transition duration-300 flex items-center">
+                <a href="register" class="{{ request()->is('register') ? 'bg-orange-500 hover:bg-white border-t-2 border-gray-500' : 'hover:text-orange-500 ' }}
+                 text-xs font-semibold px-2 py-4 text-gray-900 transition duration-300 flex items-center">
                     Sign up
                 </a>
             </div>

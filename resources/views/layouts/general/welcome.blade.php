@@ -15,11 +15,11 @@
 
     <div class="flex md:justify-between items-center xs:flex-col md:flex-row px-2 py-8">
         <div class="sm:w-full md:w-1/2 flex flex-col w-2/3">
-            <hgroup class="font-sans font-bold leading-relaxed text-orange-500 tracking-wide mt-5">
-                <h1 class="text-4xl">
+            <hgroup class="font-mono font-bold leading-relaxed text-orange-500 tracking-tight mt-5">
+                <h1 class="text-5xl">
                     Online Flight Tickets
                 </h1>
-                <h2 class="text-3xl">
+                <h2 class="text-4xl">
                     Reservation
                 </h2>
             </hgroup>
@@ -35,6 +35,7 @@
         <div class="w-1/3">
             <div class="flex">
                 <form action="ticket" method="POST" id="reservationForm" class="grid xs:grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-5 px-8 py-12  bg-transparent border-b-2 border-orange-500 shadow-2xl rounded">
+                    @csrf
                     <div class="flex flex-col space-y-3">
                         <div class="flex space-x-1 items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-orange-100" text-orange-100 viewBox="0 0 20 20" fill="currentColor">
@@ -70,7 +71,7 @@
                             </svg>
                             <label for="noOfTicket" class="text-sm text-orange-100 font-semibold">Number of ticket</label>
                         </div>
-                        <input type="number" name="noOfTicket" id="noOfTicket" min="1" max="15" placeholder="1" class="shadow border border-gray-400 py-2 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-blue-100 focus:text-gray-900 text-sm" required/>
+                        <input type="number" name="noOfTicket" id="noOfTicket" min="1" max="15"  class="shadow border border-gray-400 py-2 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-blue-100 focus:text-gray-900 text-sm" required/>
                     </div>
     
                     <div class="flex flex-col space-y-3">
@@ -143,13 +144,13 @@
 @endsection
 
 @section('main')
-<main class="mt-2 px-8 py-5">
-    <section class="p-16">
-        <div class="flex justify-center items-center text-blue-800 font-bold text-4xl font-serif">
+<main class="px-8 py-5">
+    <section class="p-8">
+        {{-- <div class="flex justify-center items-center text-gray-800 font-bold text-4xl font-serif">
             Our Credibility
-        </div>
+        </div> --}}
 
-        <div class="mt-32 grid md:grid-cols-3 gap-8 sm:grid-cols-1">
+        <div class="mt-20 p-8 grid md:grid-cols-3 gap-8 sm:grid-cols-1">
             <div class="flex flex-col bg-white rounded p-4 shadow-2xl hover:shadow-lg">
                 <h1 class="flex flex-col justify-center items-center p-5">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 border-2 rounded-full p-3 border-green-400" viewBox="0 0 20 20" fill="currentColor">
@@ -162,7 +163,7 @@
                 </p>
             </div>
 
-            <div class="flex flex-col bg-blue-700 rounded p-4 shadow-2xl hover:shadow-lg hover:bg-blue-800 md:-mt-10 sm:mt-10">
+            <div class="flex flex-col bg-orange-700 rounded p-4 shadow-2xl hover:shadow-lg hover:bg-orange-800 md:-mt-10 sm:mt-10">
                 <h1 class="flex flex-col justify-center items-center p-5">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 border-2 rounded-full p-3 text-blue-100 border-green-400" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
@@ -189,8 +190,139 @@
         </div>
     </section>
 
-    <section class="mt-5">
+    <section class="flex justify-center flex-col p-8 space-y-12">
+        <div class="text-gray-700 text-2xl flex justify-center font-semibold">
+            Operational Procedure
+        </div>
+        <div class="flex justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-green-500 text-white flex justify-between px-12 py-8 rounded shadow-sm">
+                    1
+                </div>
+                <span class="">
+                    Flight search
+                </span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <div class="bg-green-500 text-white flex justify-between px-12 py-8 rounded shadow-sm">
+                    2
+                </div>
+                <span class="">
+                    Flight selection
+                </span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <div class="bg-green-500 text-white flex justify-between px-12 py-8 rounded shadow-sm">
+                    3
+                </div>
+                <span class="">
+                    Information
+                </span>
+            </div>
+            <div class="flex items-center space-x-3">
+               <div class="bg-green-500 text-white flex justify-between px-12 py-8 rounded shadow-sm">
+                    4
+               </div>
+                <span class="">
+                    Payment and checkout
+                </span>
+            </div>
+        </div>
+    </section>
 
+    <hr>
+
+    <div class="mt-5 mb-2 border-b text-gray-700 text-2xl font-semibold p-8 flex justify-center">
+        Top destinations
+    </div>
+    <section class="mt-5 grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4 space-x-3 p-8 gap-y-5">
+        <div class="flex flex-col border-2 border-orange-200 rounded">
+            <header class="bg-plane1-bg bg-center bg-cover bg-no-repeat h-64 py-1 px-5 flex flex-col">
+                <span class="text-sm text-white font-bold flex justify-end py-2">
+                    20&deg;
+                </span>
+            </header>
+            <p class="bg-white flex justify-center p-2 font-bold text-xs uppercase">
+                {{ config('app.name') }} airport
+            </p>
+        </div>
+
+        <div class="flex flex-col border-2 border-orange-200 rounded">
+            <header class="bg-anambra-bg bg-center bg-cover bg-no-repeat h-64 py-1 px-5 flex flex-col">
+                <span class="text-sm text-white font-bold flex justify-end py-2">
+                    20&deg;
+                </span>
+            </header>
+            <p class="bg-white flex justify-center p-2 font-bold text-xs uppercase">
+                anambra
+            </p>
+        </div>
+
+        <div class="flex flex-col border-2 border-orange-200 rounded">
+            <header class="bg-lagos-bg bg-center bg-cover bg-no-repeat h-64 py-1 px-5 flex flex-col">
+                <span class="text-sm text-white font-bold flex justify-end py-2">
+                    20&deg;
+                </span>
+            </header>
+            <p class="bg-white flex justify-center p-2 font-bold text-xs uppercase">
+                lagos
+            </p>
+        </div>
+
+        <div class="flex flex-col border-2 border-orange-200 rounded">
+            <header class="bg-kogi-bg bg-center bg-cover bg-no-repeat h-64 py-1 px-5 flex flex-col">
+                <span class="text-sm text-white font-bold flex justify-end py-2">
+                    20&deg;
+                </span>
+            </header>
+            <p class="bg-white flex justify-center p-2 font-bold text-xs uppercase">
+               kogi
+            </p>
+        </div>
+
+        <div class="flex flex-col border-2 border-orange-200 rounded">
+            <header class="bg-texas-bg bg-center bg-cover bg-no-repeat h-64 py-1 px-5 flex flex-col">
+                <span class="text-sm text-white font-bold flex justify-end py-2">
+                    20&deg;
+                </span>
+            </header>
+            <p class="bg-white flex justify-center p-2 font-bold text-xs uppercase">
+               texas
+            </p>
+        </div>
+
+        <div class="flex flex-col border-2 border-orange-200 rounded">
+            <header class="bg-dubai-bg bg-center bg-cover bg-no-repeat h-64 py-1 px-5 flex flex-col">
+                <span class="text-sm text-white font-bold flex justify-end py-2">
+                    20&deg;
+                </span>
+            </header>
+            <p class="bg-white flex justify-center p-2 font-bold text-xs uppercase">
+                dubai
+            </p>
+        </div>
+
+        <div class="flex flex-col border-2 border-orange-200 rounded">
+            <header class="bg-abuja-bg bg-center bg-cover bg-no-repeat h-64 py-1 px-5 flex flex-col">
+                <span class="text-sm text-white font-bold flex justify-end py-2">
+                    20&deg;
+                </span>
+            </header>
+            <p class="bg-white flex justify-center p-2 font-bold text-xs uppercase">
+               abuja
+            </p>
+        </div>
+
+        <div class="flex flex-col border-2 border-orange-200 rounded">
+            <header class="bg-jos-bg bg-center bg-cover bg-no-repeat h-64 py-1 px-5 flex flex-col">
+                <span class="text-sm text-white font-bold flex justify-end py-2">
+                    20&deg;
+                </span>
+            </header>
+            <p class="bg-white flex justify-center p-2 font-bold text-xs uppercase">
+                jos
+            </p>
+        </div>
     </section>
 
 </main>

@@ -29,8 +29,8 @@
         <span class="text-white text-xs font-semibold">
             Follow us :    
         </span> 
-        <a href="#" class="text-white text-xs hover:text-orange-500 transition duration-300">Instagram</a>
-        <a href="#" class="text-white text-xs hover:text-orange-500 transition duration-300">Facebook</a>
-        <a href="#" class="text-white text-xs hover:text-orange-500 transition duration-300">twitter</a>
+        <a href="#" class="text-orange-500 text-xs hover:text-white font-semibold transition duration-300">Instagram</a>
+        <a href="#" class="text-orange-500 text-xs hover:text-white font-semibold transition duration-300">Facebook</a>
+        <a href="#" class="text-orange-500 text-xs hover:text-white font-semibold transition duration-300">twitter</a>
     </div>
 </div>
