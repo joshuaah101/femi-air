@@ -26,7 +26,9 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 Route::get('login', [PagesController::class, 'showLoginPage']);
 Route::post('login', [LoginController::class, 'userLoginPage']);
 
-Route::get('register', [PagesController::class, 'showSignupPage'])->name('register');
+Route::get('register', [PagesController::class, 'showSignupPage']);
+Route::get('summary', [PagesController::class, 'showSummaryPage']);
+Route::get('payment', [PagesController::class, 'showPaymentPage']);
 Route::get('ticket', [PagesController::class, 'showTicketPage']);
 Route::get('flight', [PagesController::class, 'showFlightSelectionPage']);
 Route::get('/', [PagesController::class, 'welcomePage']);

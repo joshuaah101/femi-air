@@ -20,6 +20,14 @@ class PagesController extends Controller
         return view('layouts.general.register');
     }
 
+    public function showPaymentPage(){
+        return view('layouts.general.payment');
+    }
+
+    public function showSummaryPage(){
+        return view('layouts.general.summary-preview');
+    }
+
     public function showTicketPage()
     {        
         $state = json_decode(file_get_contents("apis/state-api.json"));
