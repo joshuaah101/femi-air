@@ -27,8 +27,8 @@
                 With Femi-airline, you can easily book any flight you need to travel safely thanks to our detailed system, services and experience.
             </p>
 
-            <button type="button" class="bg-transparent px-2 py-4 text-white sm:w-full md:w-1/3 mt-5 rounded border-2 border-orange-500 hover:border-white hover:text-orange-500 font-semibold text-sm transition duration-300">
-                Read more
+            <button type="button" onclick="document.getElementById('trip-option').focus()" class="bg-transparent px-2 py-4 text-white sm:w-full md:w-1/3 mt-5 rounded border-2 border-orange-500 hover:border-white hover:text-orange-500 font-semibold text-sm transition duration-300 focus:outline-none">
+                Book now
             </button>  
         </div> 
         
@@ -43,7 +43,7 @@
                             </svg>
                             <label class="text-sm font-semibold italic text-orange-100">Trip type</label>
                         </div>
-                        <select name="tripType" class="shadow border border-gray-400 py-3 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-blue-100 focus:text-gray-900 text-sm appearance-none" id="trip-option" required >
+                        <select name="tripType" class="shadow border border-gray-400 py-3 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-orange-200 focus:text-gray-900 text-sm appearance-none" id="trip-option" required >
                             <option value="0" selected>One way trip</option>
                             <option value="1">Round trip</option>
                         </select>
@@ -56,7 +56,7 @@
                             </svg>
                             <label for="ticketType" class="text-sm text-orange-100 font-semibold">Ticket type</label>
                         </div>
-                        <select name="ticketType" id="ticketType" class="shadow border border-gray-400 py-3 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-blue-100 focus:text-gray-900 text-sm appearance-none" required>
+                        <select name="ticketType" id="ticketType" class="shadow border border-gray-400 py-3 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-orange-200 focus:text-gray-900 text-sm appearance-none" required>
                             <option value="">Type ...</option>
                             <option value="Adult">Adult</option>
                             <option value="Child">Child</option>
@@ -71,7 +71,7 @@
                             </svg>
                             <label for="noOfTicket" class="text-sm text-orange-100 font-semibold">Number of ticket</label>
                         </div>
-                        <input type="number" name="noOfTicket" id="noOfTicket" min="1" max="15"  class="shadow border border-gray-400 py-2 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-blue-100 focus:text-gray-900 text-sm" required/>
+                        <input type="number" name="noOfTicket" id="noOfTicket" min="1" max="15"  class="shadow border border-gray-400 py-2 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-orange-200 focus:text-gray-900 text-sm" required/>
                     </div>
     
                     <div class="flex flex-col space-y-3">
@@ -81,7 +81,7 @@
                             </svg>
                             <label for="stateFrom" class="text-sm text-orange-100 font-semibold">Traveling from</label>
                         </div>
-                        <select name="stateFrom" id="stateFrom" class="shadow border border-gray-400 py-3 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-blue-100 focus:text-gray-900 text-sm appearance-none" required>
+                        <select name="stateFrom" id="stateFrom" class="shadow border border-gray-400 py-3 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-orange-200 focus:text-gray-900 text-sm appearance-none" required>
                             <option value="">From ...</option>
                             <option value="Lagos">Lagos</option>
                             <option value="Abuja">Abuja</option>
@@ -96,7 +96,7 @@
                             </svg>
                             <label for="stateTo" class="text-sm text-orange-100 font-semibold">Traveling to</label>
                         </div>
-                        <select name="stateTo" id="stateTo" class="shadow border border-gray-400 py-3 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-blue-100 focus:text-gray-900 text-sm appearance-none" required>
+                        <select name="stateTo" id="stateTo" class="shadow border border-gray-400 py-3 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-orange-200 focus:text-gray-900 text-sm appearance-none" required>
                             <option value="">To ...</option>
                             @foreach ($states as $state)
                                 <option value="{{ $state }}">{{ $state }}</option>
@@ -111,7 +111,7 @@
                             </svg>
                             <label for="departureDate" class="text-sm text-orange-100 font-semibold">Departure date</label>
                         </div>
-                        <input type="date" name="departureDate" id="departureDate" class="shadow border border-gray-400 py-2 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-blue-100 focus:text-gray-900 text-sm" required />
+                        <input type="date" name="departureDate" id="departureDate" class="shadow border border-gray-400 py-2 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-orange-200 focus:text-gray-900 text-sm" required />
                     </div>
     
                     <div class="flex flex-col space-y-3" id="hide-rDate">
@@ -121,7 +121,7 @@
                             </svg>
                             <label for="returningDate" class="text-sm text-orange-100 font-semibold">Returning date</label>
                         </div>
-                        <input type="date" name="returningDate" id="returningDate" class="shadow border border-gray-400 py-2 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-blue-100 focus:text-gray-900 text-sm" />
+                        <input type="date" name="returningDate" id="returningDate" class="shadow border border-gray-400 py-2 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-orange-200 focus:text-gray-900 text-sm" />
                     </div>
                     <div class="flex flex-col space-y-3 justify-end">
                         <label class=""></label>

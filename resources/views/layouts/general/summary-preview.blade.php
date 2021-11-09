@@ -116,7 +116,7 @@
         </div>
 
         <section class="flex justify-between mt-5">
-            <button type="button" class="px-8 py-4 text-xs font-semibold text-white bg-red-500 hover:bg-red-600 rounded">
+            <button type="button" onclick="window.history.back()" class="px-8 py-4 text-xs font-semibold text-white bg-red-500 hover:bg-red-600 rounded">
                 &lt; Back
             </button>
             
