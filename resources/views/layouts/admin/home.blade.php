@@ -63,7 +63,7 @@
                     </span>
                     Profile
                 </a>
-                {{-- <a href="?menu=settings" class="{{ $menuUrl == 'settings' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white  hover:shadow-md' : ''}}
+                <a href="?menu=settings" class="{{ $menuUrl == 'settings' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white  hover:shadow-md' : ''}}
                     text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center rounded rounded-r-full">
                     <span class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -72,7 +72,7 @@
                         </svg>
                     </span>
                     Settings
-                </a> --}}
+                </a>
                 <a href="logout" class="text-sm px-5 py-2 font-semibold text-red-700 hover:text-red-600 hover:bg-red-100 rounded rounded-r-full flex items-center">
                     <span class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -93,15 +93,15 @@
                {{-- main content attachment --}}
                <div class="md:mt-20 xs:mt-20">
                     @if ($menuUrl == 'dash')
-                        @include('layouts.user.dashboard')
+                        @include('layouts.admin.dashboard')
                         @elseif ($menuUrl == 'history')
-                            @include('layouts.user.history')
+                            @include('layouts.admin.history')
                         @elseif ($menuUrl == 'profile')
-                            @include('layouts.user.profile')
-                        {{-- @elseif ($menuUrl == 'settings')
-                            @include ('layouts.user.settings') --}}
+                            @include('layouts.admin.profile')
+                        @elseif ($menuUrl == 'settings')
+                            @include ('layouts.admin.settings')
                         @elseif ($menuUrl == 'active')
-                            @include ('layouts.user.active')
+                            @include ('layouts.admin.active')
                     @endif
                </div>
             </div>

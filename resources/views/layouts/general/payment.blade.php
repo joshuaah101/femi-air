@@ -6,10 +6,17 @@
     @include('partials.links')
 @endsection
 
+@section('header')
+    <header class="px-8 py-3 w-full flex flex-col bg-blue-800">
+        @include('partials.header-contact')
+        {{-- @include('partials.nav') --}}
+    </header>
+@endsection
+
 @section('main')
     <main class="my-4 px-32">
         <div class="bg-white px-5 py-4 shadow-lg rounded">
-            <section class="flex justify-between items-center py-3">
+            <section class="flex justify-between items-center py-1">
                 <div class="flex justify-center items-center">
                     <img src="{{ asset(config("app.app_logo")) }}" alt="logo" class="w-16 h-8">
                     <span class="">

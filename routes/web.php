@@ -37,8 +37,13 @@ Route::get('/', [PagesController::class, 'welcomePage']);
 //member dashboard area
 Route::get('user/home', [PagesController::class, 'showDashboardPage']);
 
+//admin dashboard area
+Route::get('admin/home', [PagesController::class, 'showUserDashboardPage']);
+
 //[PagesController::class, 'memberDashboardPage']
-Route::prefix('user')->get('home', [PagesController::class, 'memberDashboardMenu']);
+Route::prefix('user')->get('home', [PagesController::class, 'userDashboardMenu']);
+
+Route::prefix('admin')->get('home', [PagesController::class, 'adminDashboardMenu']);
 
 //Post form routes
 Route::post('ticket', function () {

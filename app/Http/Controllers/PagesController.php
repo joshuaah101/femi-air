@@ -49,15 +49,26 @@ class PagesController extends Controller
         return view('layouts.general.flight-selection');
     }
 
-    public function showDashboardPage()
+    public function showUserDashboardPage()
     {
         return view('layouts.user.home');
     }
 
-    public function memberDashboardMenu(Request $req)
+    public function showAdminDashboardPage()
+    {
+        return view('layouts.admin.home');
+    }
+
+    public function userDashboardMenu(Request $req)
     {
         $menuUrl = $req->get('menu');
         return view('layouts.user.home', ['menuUrl' => $menuUrl]);
+    }
+
+    public function adminDashboardMenu(Request $req)
+    {
+        $menuUrl = $req->get('menu');
+        return view('layouts.admin.home', ['menuUrl' => $menuUrl]);
     }
 
 

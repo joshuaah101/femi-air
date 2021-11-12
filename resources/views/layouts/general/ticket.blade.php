@@ -8,7 +8,7 @@
 @endsection
 
 @section('header')
-    <header class="bg-plane2-bg bg-center bg-cover bg-no-repeat h-1/2 px-8 py-3 w-full flex flex-col object-cover">
+    <header class="h-1/2 px-8 py-3 w-full flex flex-col bg-blue-800">
         @include('partials.header-contact')
         @include('partials.nav')
         <div class="flex justify-center items-center flex-col">
@@ -146,11 +146,11 @@
                             </section>
 
                             <section class="flex justify-between mt-5">
-                                <button type="button" onclick="window.history.back()" class="px-8 py-4 text-xs font-semibold text-white bg-red-500 hover:bg-red-600 rounded">
+                                <button type="button" onclick="window.history.back()" class="px-8 py-4 text-xs font-semibold text-white bg-red-600 hover:bg-red-500 rounded">
                                     &lt; Back
                                 </button>
                                 
-                                <button type="submit" class="px-8 py-4 text-xs font-semibold text-white bg-blue-500 hover:bg-blue-600 rounded">
+                                <button type="submit" class="px-8 py-4 text-xs font-semibold text-white bg-blue-800 hover:bg-blue-700 rounded">
                                     Preview &gt;
                                 </button>
                             </section>

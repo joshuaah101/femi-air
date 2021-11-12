@@ -7,7 +7,7 @@
 @endsection
 
 @section('header')
-    <header class="px-8 py-3 w-full flex flex-col bg-gray-400">
+    <header class="px-8 py-3 w-full flex flex-col bg-blue-800">
         @include('partials.header-contact')
         @include('partials.nav')
     </header>
@@ -15,7 +15,7 @@
 
 @section('main')
     <main class="my-4 px-8">
-        <div class="bg-white px-5 py-4 shadow-lg rounded">
+        <div class="bg-white px-5 py-4 shadow-2xl rounded">
             <section class="flex justify-between items-center border-b-2 py-3">
                 <div class="flex justify-center items-center">
                     <img src="{{ asset(config("app.app_logo")) }}" alt="logo" class="w-16 h-8">

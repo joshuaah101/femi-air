@@ -7,7 +7,7 @@
 @endsection
 
 @section('header')
-    <header class="px-8 py-3 w-full flex flex-col bg-gray-400">
+    <header class="px-8 py-3 w-full flex flex-col bg-blue-800">
         @include('partials.header-contact')
         @include('partials.nav')
     </header>
@@ -35,25 +35,25 @@
             <section class="mt-5 flex justify-between font-medium font-mono">
                 <table class="min-w-full">
                     <thead>
-                        <tr class="bg-gray-400">
-                            <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-100 uppercase border-b border-gray-200">
+                        <tr class="bg-blue-800">
+                            <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-blue-100 uppercase border-b border-blue-200">
                                 Flight information
                             </th>
-                            <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-100 uppercase border-b border-gray-200">
+                            <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-blue-100 uppercase border-b border-blue-200">
                                 Economy
                             </th>
-                            <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-100 uppercase border-b border-gray-200">
+                            <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-blue-100 uppercase border-b border-blue-200">
                                 Business
                             </th>
-                            <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-100 uppercase border-b border-gray-200">
+                            <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-blue-100 uppercase border-b border-blue-200">
                                 Premium
                             </th>
                         </tr>
                     </thead>
     
-                    <tbody class="bg-gray-100">
+                    <tbody class="">
                         <tr>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 flex justify-center flex-col items-center">
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-200 flex justify-center flex-col items-center">
                                 <div class="flex items-center space-x-5">
                                     <div class="flex flex-col">
                                         10:40
@@ -78,7 +78,7 @@
                                 </p>
                             </td>
     
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center">
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-200 text-center">
                                 <div class="flex flex-col space-y-4">
                                     <div class="flex flex-col">
                                         15,000
@@ -87,13 +87,13 @@
                                         </span>
                                     </div>
 
-                                    <button type="button" class="px-3 py-2 border-2 rounded hover:bg-gray-300 hover:text-gray-700 transition duration-300">
+                                    <button type="button" class="px-3 py-2 border-2 rounded border-blue-800 hover:bg-blue-800 hover:text-blue-100 transition duration-300">
                                         Select
                                     </button>
                                 </div>
                             </td>
     
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center">
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-200 text-center">
                                 <div class="flex flex-col space-y-4">
                                     <div class="flex flex-col">
                                         25,000
@@ -102,13 +102,13 @@
                                         </span>
                                     </div>
 
-                                    <button type="button" class="px-3 py-2 border-2 rounded hover:bg-gray-300 hover:text-gray-700 transition duration-300">
+                                    <button type="button" class="px-3 py-2 border-2 border-blue-800 rounded hover:bg-blue-800 hover:text-blue-100 transition duration-300">
                                         Select
                                     </button>
                                 </div>
                             </td>
     
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200 text-center">
+                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-blue-200 text-center">
                                 <div class="p-5 border-2">
                                     Sold out
                                 </div>
