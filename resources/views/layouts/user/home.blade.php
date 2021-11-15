@@ -17,10 +17,10 @@
             <div class="mt-4 px-5">
                 <section class="flex flex-col justify-center items-center space-y-2 font-mono mb-2">
                     <header class="">
-                        <img src="{{ asset('storage/img/profile-pics/josh.jpg') }}" alt="" class="border-4 border-blue-200 rounded-full p-1 h-32 w-32" />
+                        <img src="{{ asset('storage/img/profile-pics/user.jpg') }}" alt="" class="border-4 border-blue-200 rounded-full p-1 h-32 w-32" />
                     </header>
                     <p class="font-semibold text-gray-400 text-center">
-                        Joshua Faloye
+                        Femi Awe
                     </p>
                 </section>
                 <hr>

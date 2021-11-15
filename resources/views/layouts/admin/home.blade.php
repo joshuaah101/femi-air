@@ -17,51 +17,54 @@
             <div class="mt-4 px-5">
                 <section class="flex flex-col justify-center items-center space-y-2 font-mono mb-2">
                     <header class="">
-                        <img src="{{ asset('storage/img/profile-pics/josh.jpg') }}" alt="" class="border-4 border-blue-200 rounded-full p-1 h-32 w-32" />
+                        <img src="{{ asset('storage/img/profile-pics/user.jpg') }}" alt="" class="border-4 border-blue-200 rounded-full p-1 h-32 w-32" />
                     </header>
-                    <p class="font-semibold text-gray-400 text-center">
-                        Joshua Faloye
+                    <p class="font-semibold text-gray-400 text-center flex flex-col space-y-2">
+                        Femi Awe
+                        <span class="text-xs font-medium">
+                            Admin
+                        </span>
                     </p>
                 </section>
                 <hr>
             </div>
             {{-- sidebar items --}}
             <div class="py-2 px-2 text-blue-800 space-y-1 mt-5">
-                <a href="?menu=dash&id=90" class="{{ $menuUrl == 'dash' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white hover:shadow-md' : ''}}
+                <a href="?menu=dashboard" class="{{ $menuUrl == 'dashboard' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white hover:shadow-md' : ''}}
                     text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center rounded rounded-r-full">
                     <span class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
                         </svg>
                     </span>
-                    Dashboard
+                    Overview
                 </a>
-                <a href="?menu=active" class="{{ $menuUrl == 'active' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white  hover:shadow-md' : ''}}
+                <a href="?menu=fleets" class="{{ $menuUrl == 'fleets' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white  hover:shadow-md' : ''}}
                     text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center rounded rounded-r-full">
                     <span class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
                         </svg>
                     </span>
-                    View active
+                    Fleets
                 </a>
-                <a href="?menu=history" class="{{ $menuUrl == 'history' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white  hover:shadow-md' : ''}}
+                <a href="?menu=reports" class="{{ $menuUrl == 'reports' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white  hover:shadow-md' : ''}}
                     text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center rounded rounded-r-full">
                     <span class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                         </svg>
                     </span>
-                    Ticket history
+                    Reports
                 </a>
-                <a href="?menu=profile" class="{{ $menuUrl == 'profile' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white  hover:shadow-md' : ''}}
+                <a href="?menu=staff" class="{{ $menuUrl == 'staff' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white  hover:shadow-md' : ''}}
                     text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center rounded rounded-r-full">
                     <span class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </span>
-                    Profile
+                    Staff
                 </a>
                 <a href="?menu=settings" class="{{ $menuUrl == 'settings' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white  hover:shadow-md' : ''}}
                     text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center rounded rounded-r-full">
@@ -84,24 +87,23 @@
             </div>
         </div>
 
-
         <div class="xs:ml-0 md:ml-1/6 px-5 w-full">
             <div class="">
                 {{-- fixed header navigation --}}
-                @include('partials.dashboard-nav')
+                @include('partials.admin-nav')
 
                {{-- main content attachment --}}
                <div class="md:mt-20 xs:mt-20">
-                    @if ($menuUrl == 'dash')
+                    @if ($menuUrl == 'dashboard')
                         @include('layouts.admin.dashboard')
-                        @elseif ($menuUrl == 'history')
-                            @include('layouts.admin.history')
-                        @elseif ($menuUrl == 'profile')
-                            @include('layouts.admin.profile')
+                        @elseif ($menuUrl == 'fleets')
+                            @include('layouts.admin.fleets')
+                        @elseif ($menuUrl == 'reports')
+                            @include('layouts.admin.reports')
+                        @elseif ($menuUrl == 'staff')
+                            @include ('layouts.admin.staff')
                         @elseif ($menuUrl == 'settings')
                             @include ('layouts.admin.settings')
-                        @elseif ($menuUrl == 'active')
-                            @include ('layouts.admin.active')
                     @endif
                </div>
             </div>
@@ -111,4 +113,5 @@
 
 @section('scripts')
     @include('partials.scripts')
+    <script src="{{ asset('js/chartjs.js') }}" type="text/javascript"></script>
 @endsection
