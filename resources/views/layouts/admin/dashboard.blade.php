@@ -14,21 +14,81 @@
     <hr class="mt-2"/>
 </div>
 
-<div class="flex xs:flex-col md:flex-row md:space-x-8 xs:space-x-0 space-y-8 items-center">
-    <div class="xs:w-full md:w-2/3 bg-white px-5 py-3 shadow-lg rounded">
+<div class="flex xs:flex-col md:flex-row md:space-x-8 xs:space-x-0 xs:space-y-8 md:space-y-0 items-start">
+    <div class="xs:w-full md:w-2/4 bg-white px-5 py-3 shadow-lg rounded">
         <header class="text-lg font-bold text-blue-600 font-mono">
-            Active flights
+            Passenger Information
         </header>
         <section class="py-5 px-3">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis, voluptatum officiis. Et, optio quae? Vero a accusantium dolor quos, quo omnis sequi tempore nesciunt nihil itaque provident quasi, architecto explicabo!
+            <canvas id="myChart" width="" height="100"></canvas>
         </section>
     </div>
-    <div class="flex flex-col xs:w-full md:w-1/3 space-y-8">
+    <div class="flex flex-col xs:w-full md:w-2/4 space-y-8">
         <div class="px-5 py-3 bg-white shadow-lg rounded">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate dicta quos modi suscipit saepe corporis vel vero facilis velit? Eos, dolores nesciunt natus consequatur nisi quis ipsa illum quam porro!
-        </div>
-        <div class="px-5 py-3 bg-white shadow-lg rounded">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt quasi porro laboriosam impedit in! In possimus perferendis dolores fugit repellendus commodi omnis soluta nesciunt, animi quam, at voluptas totam sapiente.
+            <header class="text-lg font-bold text-blue-600 font-mono">
+                Active Flights
+            </header>
+            <section class="py-5 px-3 space-y-4">
+                <div class="flex justify-between items-center">
+                    Lagos to Delta | 2021-11-16 <span class="rounded-full bg-blue-800 text-blue-100 p-2 text-xs">Duration: 10:20 - 12:20</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    Abuja to Benin | 2021-11-16 <span class="rounded-full bg-blue-800 text-blue-100 p-2 text-xs">Duration: 10:20 - 12:20</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    Kaduna to Lagos | 2021-11-16 <span class="rounded-full bg-blue-800 text-blue-100 p-2 text-xs">Duration: 10:20 - 12:20</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    Lagos to Kogi | 2021-11-16 <span class="rounded-full bg-blue-800 text-blue-100 p-2 text-xs">Duration: 10:20 - 12:20</span>
+                </div>
+            </section>
         </div>
     </div>
+</div>
+
+
+<div class="mt-8 px-5 py-5 bg-white shadow-lg rounded">
+    <header class="text-lg font-bold text-blue-600 font-mono">
+        User table
+    </header>
+    <section class="py-5 px-3 overflow-auto">
+        <table class="min-w-full">
+            <thead>
+                <tr class="border-b-2 border-blue-800">
+                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-blue-800 uppercase">
+                        Full name
+                    </th>
+                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-blue-800 uppercase">
+                        Gender
+                    </th>
+                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-blue-800 uppercase">
+                        E-mail
+                    </th>
+                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-blue-800 uppercase">
+                        Phone
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody class="">
+                <tr class="text-xs font-medium text-gray-500">
+                    <td class="px-6 py-4 whitespace-no-wrap flex justify-center flex-col items-center">
+                        Femi Awe
+                    </td>
+
+                    <td class="px-6 py-4 whitespace-no-wrap text-center">
+                        Male
+                    </td>
+
+                    <td class="px-6 py-4 whitespace-no-wrap text-center">
+                        femiawe@gmail.com
+                    </td>
+
+                    <td class="px-6 py-4 whitespace-no-wrap text-center">
+                        09012876656
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 </div>

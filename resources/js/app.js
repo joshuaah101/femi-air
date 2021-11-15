@@ -1,4 +1,6 @@
-require('./bootstrap');
+require('./bootstrap')
+
+import './mychart.js'
 
 //mobile menu config
 const btn = document.querySelector('.mobile-menu-button')
