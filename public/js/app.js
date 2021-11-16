@@ -1842,10 +1842,11 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mychart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mychart.js */ "./resources/js/mychart.js");
+/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
- //mobile menu config
+ // import './mychart.js'
+//mobile menu config
 
 var btn = document.querySelector('.mobile-menu-button');
 var menu = document.querySelector('.mobile-menu');
@@ -1876,6 +1877,34 @@ window.onload = function () {
 
   if (window.location.pathname == '/checkout') {
     hideCheckoutPane();
+  }
+
+  if (window.location.pathname == '/admin/home') {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Adult', 'Child', 'Infant'],
+        datasets: [{
+          label: 'Passenger chart',
+          data: [55, 30, 15],
+          backgroundColor: [// 'rgba(255, 99, 132, 0.2)',
+          // 'rgba(54, 162, 235, 0.2)',
+          'orange', 'pink', 'green'],
+          borderColor: [// 'rgba(255, 99, 132, 1)',
+          // 'rgba(54, 162, 235, 1)',
+          'orange', 'pink', 'green'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
   }
 }; //show ticket page information field
 
@@ -1973,44 +2002,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
-
-/***/ }),
-
-/***/ "./resources/js/mychart.js":
-/*!*********************************!*\
-  !*** ./resources/js/mychart.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js");
-
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['Adult', 'Child', 'Infant'],
-    datasets: [{
-      label: 'Passenger chart',
-      data: [55, 30, 15],
-      backgroundColor: [// 'rgba(255, 99, 132, 0.2)',
-      // 'rgba(54, 162, 235, 0.2)',
-      'orange', 'pink', 'green'],
-      borderColor: [// 'rgba(255, 99, 132, 1)',
-      // 'rgba(54, 162, 235, 1)',
-      'orange', 'pink', 'green'],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
 
 /***/ }),
 

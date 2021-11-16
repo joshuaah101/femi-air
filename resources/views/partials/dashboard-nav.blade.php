@@ -7,7 +7,7 @@
         <div class="flex justify-between items-center space-x-5">
             <div class="text-blue-700 text-md xs:hidden md:flex md:items-center md:space-x-1">
                 <span class="p-2 bg-green-400 rounded-full animate-pulse"></span>
-                <img src="{{ asset('storage/img/profile-pics/josh.jpg') }}" alt="" class="border-2 border-blue-200 rounded-full h-8 w-8" />
+                <img src="{{ asset('storage/img/profile-pics/user.jpg') }}" alt="" class="border-2 border-blue-200 rounded-full h-8 w-8" />
                 <span class="">
                     Femi Awe
                 </span>

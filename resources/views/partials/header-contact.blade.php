@@ -1,4 +1,4 @@
-<div class="flex justify-between mb-2 px-2">
+<div class="flex xs:flex-col md:flex-row xs:space-y-4 md:space-y-0 md:justify-between mb-2 px-2">
     <div class="flex space-x-5">
         <div class="flex text-white font-semibold text-xs items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

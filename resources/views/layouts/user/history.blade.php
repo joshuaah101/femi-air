@@ -30,39 +30,38 @@
 </div>
 <hr class="mt-2"/>
 
- <!--Container-->
-<div class="flex space-y-3 items-center px-2 py-2">
-    <div class="xs:w-full md:w-">
+<div class="mt-8 px-2 py-3 bg-white shadow-lg rounded">
+    <section class="py-5 px-3 overflow-auto">
         <table class="min-w-full">
             <thead class="bg-blue-800 text-blue-100">
                 <tr class="font-sans font-medium uppercase text-sm">
-                    <th class="px-8 py-3">
+                    <th class="px-2 py-3">
                         S/n
                     </th>
-                    <th class="px-8 py-3">
+                    <th class="px-2 py-3">
                         Outbound
                     </th>
-                    <th class="px-8 py-3">
+                    <th class="px-2 py-3">
                         Flight code
                     </th>
-                    <th class="px-8 py-3">
+                    <th class="px-2 py-3">
                         Cabin
                     </th>
-                    <th class="px-8 py-3">
+                    <th class="px-2 py-3">
                         Date
                     </th>
-                    <th class="px-8 py-3">
+                    <th class="px-2 py-3">
                         Duration
                     </th>
-                    <th class="px-8 py-3">
+                    <th class="px-2 py-3">
                         Price (NGN)
                     </th>
-                    <th class="px-8 py-3">
+                    <th class="px-2 py-3">
                         Action
                     </th>
                 </tr>
             </thead>
-            <tbody class="bg-blue-100">
+            <tbody>
                 <tr class="border-b">
                     <td class="text-center text-xs font-bold py-5 px-3">
                         1
@@ -95,9 +94,9 @@
                 </tr>
             </tbody>
             <tfoot class="">
-
+                
             </tfoot>
         </table>
-    </div>  
+    </section>  
 </div>
 <!--/Card-->

@@ -31,7 +31,7 @@
     <div class="p-4 hidden md:hidden mobile-menu transition duration-1000 ease-in-out">
         <div class="flex items-center justify-between px-5 py-3">
             <div class="flex items-center space-x-2">
-                <img src="{{ asset('storage/img/profile-pics/josh.jpg') }}" alt="" class="border-2 border-blue-200 rounded-full h-10 w-12" />
+                <img src="{{ asset('storage/img/profile-pics/user.jpg') }}" alt="" class="border-2 border-blue-200 rounded-full h-10 w-12" />
                 <div class="flex flex-col space-y-1">
                     <span class="text-blue-700 font-semibold">
                         Femi Awe
