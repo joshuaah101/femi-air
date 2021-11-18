@@ -8,7 +8,7 @@
             </div>
 
             <div class="p-3">
-                <h1 class="text-2xl text-white font-mono">
+                <h1 class="text-2xl text-white font-mono font-medium">
                     Contact
                 </h1>
                 <div class="mt-5 text-sm">
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="p-3">
-                <h1 class="text-2xl text-white font-mono">
+                <h1 class="text-2xl text-white font-mono font-medium">
                     Quick links
                 </h1>
                 <div class="mt-5 flex flex-col space-y-2 text-sm ">
@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="p-3">
-                <h1 class="text-2xl text-white font-mono">
+                <h1 class="text-2xl text-white font-mono font-medium">
                     Address
                 </h1>
                 <div class="mt-5 text-sm">
@@ -82,20 +82,8 @@
             </div>
         </section>
         
-        <div class="
-            py-5 px-11
-            flex justify-center space-x-2
-            ">
-            <div class="
-                font-bold text-xs text-white">
-                {{ config('app.name') }} &copy; {{ date('Y') }}
-            </div>
-
-            <div class="
-                flex text-end
-                font-bold text-xs text-white">
-                &middot; All rights reserved
-            </div>
+        <div class="py-5 flex justify-center font-medium text-xs text-white">
+            &middot; All rights reserved
         </div>
     </footer>
 @endsection
