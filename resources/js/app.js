@@ -1,7 +1,5 @@
 require('./bootstrap')
 import Chart from 'chart.js/auto'
-// import './mychart.js'
-
 
 //mobile menu config
 const btn = document.querySelector('.mobile-menu-button')
@@ -111,12 +109,28 @@ const hideReservationForm = () => {
     reservationForm.classList.add('hidden')
 }
 
+var stateFrom = document.querySelector('#stateFrom')
+var stateTo = document.querySelector('#stateTo')
+var reservationBtn = document.querySelector('#reservationBtn')
 
 // busSelect.addEventListener('click', function(){
 //     checkoutPane.classList.toggle('hidden')
 //     console.log('clicked')
 // })
 
+
+       stateTo.addEventListener('change', (e) => {
+        e.preventDefault()
+            if(stateFrom.value == stateTo.value){
+                alert("Error! you can't possibly travel to the same state")
+                stateFrom.focus()
+                reservationBtn.classList.add('hidden')
+                return false
+            }else{
+                reservationBtn.classList.remove('hidden')
+            }
+       })
+        
 
 
 //using jquery to control elapsed date
@@ -141,4 +155,10 @@ $(function(){
     $('#departureDate').attr('min', maxDate)
     $('#returningDate').attr('min', maxDate)
 
+
+    $("#reservationForm").on('submit', (e) => {
+        console.log("form has been clicked")
+        
+        
+    })
 })

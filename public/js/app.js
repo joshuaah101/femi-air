@@ -1845,8 +1845,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
- // import './mychart.js'
-//mobile menu config
+ //mobile menu config
 
 var btn = document.querySelector('.mobile-menu-button');
 var menu = document.querySelector('.mobile-menu');
@@ -1939,12 +1938,27 @@ tripOption.addEventListener('change', function () {
 
 var hideReservationForm = function hideReservationForm() {
   reservationForm.classList.add('hidden');
-}; // busSelect.addEventListener('click', function(){
+};
+
+var stateFrom = document.querySelector('#stateFrom');
+var stateTo = document.querySelector('#stateTo');
+var reservationBtn = document.querySelector('#reservationBtn'); // busSelect.addEventListener('click', function(){
 //     checkoutPane.classList.toggle('hidden')
 //     console.log('clicked')
 // })
-//using jquery to control elapsed date
 
+stateTo.addEventListener('change', function (e) {
+  e.preventDefault();
+
+  if (stateFrom.value == stateTo.value) {
+    alert("Error! you can't possibly travel to the same state");
+    stateFrom.focus();
+    reservationBtn.classList.add('hidden');
+    return false;
+  } else {
+    reservationBtn.classList.remove('hidden');
+  }
+}); //using jquery to control elapsed date
 
 $(function () {
   var dtToday = new Date();
@@ -1959,6 +1973,9 @@ $(function () {
 
   $('#departureDate').attr('min', maxDate);
   $('#returningDate').attr('min', maxDate);
+  $("#reservationForm").on('submit', function (e) {
+    console.log("form has been clicked");
+  });
 });
 
 /***/ }),

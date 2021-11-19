@@ -1,7 +1,7 @@
 @section('footer')
     <footer class="mt-5 bg-plane3-bg bg-no-repeat bg-cover bg-center bg-fixed">
         <section class="md:px-8 py-4 grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
-            <div class="">
+            <div class="flex items-center justify-center">
                 <a href="/" class="">
                     <img src="{{ config('app.app_logo') }}" class="" alt="App logo">
                 </a>
@@ -82,8 +82,8 @@
             </div>
         </section>
         
-        <div class="py-5 flex justify-center font-medium text-xs text-white">
-            &middot; All rights reserved
+        <div class="py-5 flex px-8 justify-start font-medium text-xs text-white">
+            &copy; {{ date('Y') }} &middot; All Rights Reserved
         </div>
     </footer>
 @endsection
