@@ -38,7 +38,7 @@ window.onload = (() => {
     }
 
     if(window.location.pathname == '/admin/home'){
-        const ctx = document.getElementById('myChart').getContext('2d')
+        const ctx = document.getElementById('passengerInfo').getContext('2d')
         const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -71,6 +71,42 @@ window.onload = (() => {
                 }
             }
         })
+    }
+
+    if(window.location.pathname == '/user/home'){
+        const ctx = document.getElementById('mostVisitedChart').getContext('2d')
+        const myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Lagos', 'Abuja','Kaduna'],
+                datasets: [{
+                    label: 'Most visited',
+                    data: [55, 30, 15],
+                    backgroundColor: [
+                        // 'rgba(255, 99, 132, 0.2)',
+                        // 'rgba(54, 162, 235, 0.2)',
+                        'orange',
+                        'pink',
+                        'green'
+                    ],
+                    borderColor: [
+                        // 'rgba(255, 99, 132, 1)',
+                        // 'rgba(54, 162, 235, 1)',
+                        'orange',
+                        'pink',
+                        'green'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        })   
     }
 
 })
@@ -119,17 +155,17 @@ var reservationBtn = document.querySelector('#reservationBtn')
 // })
 
 
-       stateTo.addEventListener('change', (e) => {
-        e.preventDefault()
-            if(stateFrom.value == stateTo.value){
-                alert("Error! you can't possibly travel to the same state")
-                stateFrom.focus()
-                reservationBtn.classList.add('hidden')
-                return false
-            }else{
-                reservationBtn.classList.remove('hidden')
-            }
-       })
+stateTo.addEventListener('change', (e) => {
+    e.preventDefault()
+    if(stateFrom.value == stateTo.value){
+        reservationBtn.classList.add('hidden')
+        alert("Error! you can't possibly travel to the same state")
+        stateFrom.focus()
+        return false
+    }else{
+        reservationBtn.classList.remove('hidden')
+    }
+})
         
 
 
@@ -155,10 +191,4 @@ $(function(){
     $('#departureDate').attr('min', maxDate)
     $('#returningDate').attr('min', maxDate)
 
-
-    $("#reservationForm").on('submit', (e) => {
-        console.log("form has been clicked")
-        
-        
-    })
 })

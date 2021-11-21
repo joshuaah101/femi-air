@@ -19,7 +19,6 @@
    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script> --}}
 </head>
 <body class="bg-white antialiased leading-none">
-    {{-- @yield('nav') --}}
     @yield('header')
     @yield('main')
     @yield('footer')

@@ -1879,13 +1879,42 @@ window.onload = function () {
   }
 
   if (window.location.pathname == '/admin/home') {
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById('passengerInfo').getContext('2d');
     var myChart = new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(ctx, {
       type: 'bar',
       data: {
         labels: ['Adult', 'Child', 'Infant'],
         datasets: [{
           label: 'Passenger chart',
+          data: [55, 30, 15],
+          backgroundColor: [// 'rgba(255, 99, 132, 0.2)',
+          // 'rgba(54, 162, 235, 0.2)',
+          'orange', 'pink', 'green'],
+          borderColor: [// 'rgba(255, 99, 132, 1)',
+          // 'rgba(54, 162, 235, 1)',
+          'orange', 'pink', 'green'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
+  if (window.location.pathname == '/user/home') {
+    var _ctx = document.getElementById('mostVisitedChart').getContext('2d');
+
+    var _myChart = new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(_ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Lagos', 'Abuja', 'Kaduna'],
+        datasets: [{
+          label: 'Most visited',
           data: [55, 30, 15],
           backgroundColor: [// 'rgba(255, 99, 132, 0.2)',
           // 'rgba(54, 162, 235, 0.2)',
@@ -1951,9 +1980,9 @@ stateTo.addEventListener('change', function (e) {
   e.preventDefault();
 
   if (stateFrom.value == stateTo.value) {
+    reservationBtn.classList.add('hidden');
     alert("Error! you can't possibly travel to the same state");
     stateFrom.focus();
-    reservationBtn.classList.add('hidden');
     return false;
   } else {
     reservationBtn.classList.remove('hidden');
@@ -1973,9 +2002,6 @@ $(function () {
 
   $('#departureDate').attr('min', maxDate);
   $('#returningDate').attr('min', maxDate);
-  $("#reservationForm").on('submit', function (e) {
-    console.log("form has been clicked");
-  });
 });
 
 /***/ }),

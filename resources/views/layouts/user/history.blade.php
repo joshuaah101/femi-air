@@ -31,7 +31,7 @@
 <hr class="mt-2"/>
 
 <div class="mt-8 px-2 py-3 bg-white shadow-lg rounded">
-    <section class="py-5 px-3 overflow-auto">
+    <section class="py-5 px-3">
         <table class="min-w-full">
             <thead class="bg-blue-800 text-blue-100">
                 <tr class="font-sans font-medium uppercase text-sm">

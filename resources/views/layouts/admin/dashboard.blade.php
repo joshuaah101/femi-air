@@ -20,7 +20,7 @@
             Passenger Information
         </header>
         <section class="py-5 px-3">
-            <canvas id="myChart" vlass="w-auto h-auto"></canvas>
+            <canvas id="passengerInfo" vlass="w-auto h-auto"></canvas>
         </section>
     </div>
     <div class="flex flex-col xs:w-full md:w-2/4 space-y-8">
