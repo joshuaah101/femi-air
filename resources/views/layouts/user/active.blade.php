@@ -27,10 +27,10 @@
 
             {{-- this section will be dynamic --}}
             <div class="flex space-y-3 items-center px-2 py-2">
-                <div class="xs:w-full md:w-">
+                <div class="xs:w-full overflow-auto">
                     <table class="min-w-full">
-                        <thead class="bg-blue-800 text-blue-100">
-                            <tr class="font-sans font-medium uppercase text-sm">
+                        <thead class="text-blue-500">
+                            <tr class="font-mono uppercase text-sm border-b">
                                 <th class="px-8 py-3">
                                     S/n
                                 </th>
@@ -57,8 +57,8 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="bg-blue-100">
-                            <tr class="border-b">
+                        <tbody class="">
+                            <tr class="">
                                 <td class="text-center text-xs font-bold py-5 px-3">
                                     1
                                 </td>

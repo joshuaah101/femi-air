@@ -14,57 +14,46 @@
     <hr class="mt-2"/>
 </div>
 
-<div class="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 w-full">
-    <div class="bg-white rounded-md text-gray-500 shadow-xl text-md px-5 py-3">
-        <div class="flex flex-col space-y-5 p-2">
-            <header class="text-blue-700 font-semibold">
-                Active tickets
-            </header>
-            <p class="text-right font-bold text-sm">2</p>
-        </div>
-    </div>
-    <div class="bg-blue-700 hover:bg-blue-600 rounded-md shadow-2xl text-md px-5 py-3">
-        <div class="flex flex-col space-y-5 p-2">
-            <header class="text-blue-100 font-semibold">
-                No. of logins today
-            </header>
-            <p class="text-right font-bold text-sm text-blue-100">2</p>
-        </div>
-    </div>
-    <div class="bg-white rounded-md text-gray-500 shadow-xl text-md  px-5 py-3">
-        <div class="flex flex-col space-y-5 p-2">
-            <header class="text-blue-700 font-semibold">
-                Next flight date
-            </header>
-            <p class="text-right font-bold text-sm">{{ date('d - m - Y') }}</p>
-        </div>
-    </div>
-</div>
-
-
 <div class="mt-8 flex w-full xs:space-x-0 md:space-x-5 xs:space-y-5 md:space-y-0 xs:flex-col md:flex-row">
-    <div class="flex bg-white xs:px-5 md:px-24 xs:py-2 md:py-8 shadow-2xl rounded flex-col xs:w-full md:w-1/2">
-        <header class="text-md font-medium text-blue-800">
-            Most visited places
+    <div class="flex  xs:px-5 md:px-16 xs:py-4 shadow-xl rounded flex-col xs:w-full md:w-2/3">
+        <section class="py-5 px-3">
+            <canvas id="mostVisitedChart" class="h-auto w-auto"></canvas>
+        </section>
+        <header class="text-sm font-bold text-blue-600 font-mono flex justify-center border-t p-2">
+            Most Visited Places
         </header>
-        <canvas id="mostVisitedChart" class="h-auto w-auto mt-12"></canvas>
     </div>
     
-    <div class="flex flex-col px-5 py-8 shadow-2xl rounded xs:w-full md:w-1/2">
-        <header class="">
-            
-        </header>
-        <p class="">
-
-        </p>
+    <div class="flex flex-col px-5 py-2 xs:w-full md:w-1/3 space-y-5">
+        <div class="bg-white rounded-md text-gray-500 shadow-xl text-md px-2 py-1">
+            <div class="flex flex-col space-y-5 p-2">
+                <header class="text-blue-700 font-semibold">
+                    Active tickets
+                </header>
+                <p class="text-right font-bold text-sm">2</p>
+            </div>
+        </div>
+        <div class="bg-blue-700 hover:bg-blue-600 rounded-md shadow-2xl text-md px-2 py-1">
+            <div class="flex flex-col space-y-5 p-2">
+                <header class="text-blue-100 font-semibold">
+                    No. of logins today
+                </header>
+                <p class="text-right font-bold text-sm text-blue-100">2</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-md text-gray-500 shadow-xl text-md  px-2 py-1">
+            <div class="flex flex-col space-y-5 p-2">
+                <header class="text-blue-700 font-semibold">
+                    Next flight date
+                </header>
+                <p class="text-right font-bold text-sm">{{ date('d - m - Y') }}</p>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="bg-white  px-5 py-8 shadow-2xl rounded">
-    <header class="text-md font-medium text-blue-800">
-        Flight history overview
-    </header>
-    <section class="py-5 px-3 overflow-auto">
+<div class="bg-white mt-12 px-6 py-8 shadow-2xl rounded mb-5">
+    <section class="p-2 overflow-auto">
         <table class="min-w-full">
             <thead class="text-blue-500">
                 <tr class="font-mono uppercase text-sm border-b">
@@ -126,8 +115,14 @@
                     </td>
                 </tr>
             </tbody>
-            <tfoot class="">
-                
+            <tfoot class="border-t">
+                <tr>
+                    <td colspan="8">
+                        <header class="flex justify-center text-sm font-mono font-semibold text-blue-800 p-2">
+                            Flight history overview
+                        </header>
+                    </td>
+                </tr>
             </tfoot>
         </table>
     </section>

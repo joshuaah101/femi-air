@@ -1910,7 +1910,7 @@ window.onload = function () {
     var _ctx = document.getElementById('mostVisitedChart').getContext('2d');
 
     var _myChart = new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(_ctx, {
-      type: 'pie',
+      type: 'bar',
       data: {
         labels: ['Lagos', 'Abuja', 'Kaduna'],
         datasets: [{
@@ -1933,6 +1933,8 @@ window.onload = function () {
         }
       }
     });
+
+    hideReturnField();
   }
 }; //show ticket page information field
 

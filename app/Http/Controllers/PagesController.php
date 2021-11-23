@@ -36,6 +36,10 @@ class PagesController extends Controller
         ]);
     }
 
+    public function showFlightSelectionPage(){
+        return view('layouts.general.flight-selection');
+    }
+
     public function welcomePage()
     {
         $state = json_decode(file_get_contents("apis/state-api.json"));
@@ -45,30 +49,24 @@ class PagesController extends Controller
         ]);
     }
 
-    public function showFlightSelectionPage(){
-        return view('layouts.general.flight-selection');
-    }
-
-    public function showUserDashboardPage()
+    public function userDashboard(Request $req)
     {
-        return view('layouts.user.home');
-    }
-
-    public function showAdminDashboardPage()
-    {
-        return view('layouts.admin.home');
-    }
-
-    public function userDashboardMenu(Request $req)
-    {
+        $state = json_decode(file_get_contents("apis/state-api.json"));
         $menuUrl = $req->get('menu');
-        return view('layouts.user.home', ['menuUrl' => $menuUrl]);
+
+        return view('layouts.user.home', [
+            'menuUrl' => $menuUrl,
+            'states' => $state->data
+        ]);
     }
 
     public function adminDashboardMenu(Request $req)
-    {
+    {        
         $menuUrl = $req->get('menu');
-        return view('layouts.admin.home', ['menuUrl' => $menuUrl]);
+
+        return view('layouts.admin.home', [
+            'menuUrl' => $menuUrl            
+        ]);
     }
 
 

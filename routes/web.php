@@ -15,14 +15,12 @@ use App\Http\Controllers\PagesController;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.general.welcome');
-});
 
 //Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/', [PagesController::class, 'welcomePage']);
 Route::get('login', [PagesController::class, 'showLoginPage']);
 Route::post('login', [LoginController::class, 'userLoginPage']);
 
@@ -31,19 +29,11 @@ Route::get('summary', [PagesController::class, 'showSummaryPage']);
 Route::get('payment', [PagesController::class, 'showPaymentPage']);
 Route::get('ticket', [PagesController::class, 'showTicketPage']);
 Route::get('flight', [PagesController::class, 'showFlightSelectionPage']);
-Route::get('/', [PagesController::class, 'welcomePage']);
 
 
-//member dashboard area
-Route::get('user/home', [PagesController::class, 'showDashboardPage']);
-
-//admin dashboard area
-Route::get('admin/home', [PagesController::class, 'showUserDashboardPage']);
-
-//[PagesController::class, 'memberDashboardPage']
-Route::prefix('user')->get('home', [PagesController::class, 'userDashboardMenu']);
-
-Route::prefix('admin')->get('home', [PagesController::class, 'adminDashboardMenu']);
+//dynamic menu across both user and admin dashboard area
+Route::prefix('user')->get('home', [PagesController::class, 'userDashboard']);
+Route::prefix('admin')->get('home', [PagesController::class, 'adminDashboard']);
 
 //Post form routes
 Route::post('ticket', function () {

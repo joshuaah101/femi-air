@@ -33,8 +33,8 @@
 <div class="mt-8 px-2 py-3 bg-white shadow-lg rounded">
     <section class="py-5 px-3">
         <table class="min-w-full">
-            <thead class="bg-blue-800 text-blue-100">
-                <tr class="font-sans font-medium uppercase text-sm">
+            <thead class="text-blue-500">
+                <tr class="font-mono uppercase text-sm border-b">
                     <th class="px-2 py-3">
                         S/n
                     </th>
@@ -62,7 +62,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="border-b">
+                <tr class="">
                     <td class="text-center text-xs font-bold py-5 px-3">
                         1
                     </td>

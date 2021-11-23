@@ -1,7 +1,5 @@
 {
     "data" : [
-        "Abia","Adamawa","Akwa Ibom","Anambra","Bauchi","Bayelsa","Benue","Borno","Cross River","Delta","Ebonyi",
-        "Edo","Ekiti","Enugu","Gombe","Imo","Jigawa","Kaduna","Kano","Katsina","Kebbi","Kogi","Kwara","Lagos","Nasarawa",
-        "Niger","Ogun","Ondo","Osun","Oyo","Plateau","Rivers","Sokoto","Taraba","Yobe","Zamfara", "Abuja"
+        "Abuja","Akwa Ibom","Benue","Cross River","Delta","Enugu","Kaduna","Kano","Kwara","Lagos","Ogun","Ondo","Oyo","Plateau","Rivers","Sokoto"
     ]
 }

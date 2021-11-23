@@ -16,12 +16,12 @@
 
 <div class="flex xs:flex-col md:flex-row md:space-x-8 xs:space-x-0 xs:space-y-8 md:space-y-0 items-start">
     <div class="xs:w-full md:w-2/4 bg-white px-5 py-3 shadow-lg rounded">
-        <header class="text-lg font-bold text-blue-600 font-mono">
+        <section class="py-5 px-3">
+            <canvas id="passengerInfo" class="w-auto h-auto"></canvas>
+        </section>
+        <header class="text-sm font-bold text-blue-600 font-mono flex justify-center border-t p-2">
             Passenger Information
         </header>
-        <section class="py-5 px-3">
-            <canvas id="passengerInfo" vlass="w-auto h-auto"></canvas>
-        </section>
     </div>
     <div class="flex flex-col xs:w-full md:w-2/4 space-y-8">
         <div class="px-5 py-3 bg-white shadow-lg rounded">

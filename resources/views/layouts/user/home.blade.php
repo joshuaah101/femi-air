@@ -36,6 +36,16 @@
                     </span>
                     Dashboard
                 </a>
+                <a href="?menu=bookTicket" class="{{ $menuUrl == 'bookTicket' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white  hover:shadow-md' : ''}}
+                    text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center rounded rounded-r-full">
+                    <span class="mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </span>
+                    Book a flight
+                </a>
                 <a href="?menu=active" class="{{ $menuUrl == 'active' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white  hover:shadow-md' : ''}}
                     text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center rounded rounded-r-full">
                     <span class="mr-2">
@@ -63,16 +73,6 @@
                     </span>
                     Profile
                 </a>
-                {{-- <a href="?menu=settings" class="{{ $menuUrl == 'settings' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white  hover:shadow-md' : ''}}
-                    text-sm px-5 py-2 font-semibold hover:bg-blue-100 hover:text-blue-900 flex items-center rounded rounded-r-full">
-                    <span class="mr-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                    </span>
-                    Settings
-                </a> --}}
                 <a href="logout" class="text-sm px-5 py-2 font-semibold text-red-700 hover:text-red-600 hover:bg-red-100 rounded rounded-r-full flex items-center">
                     <span class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -83,8 +83,7 @@
                 </a>
             </div>
         </div>
-
-
+        
         <div class="xs:ml-0 md:ml-1/6 px-5 w-full">
             <div class="">
                 {{-- fixed header navigation --}}
@@ -98,8 +97,8 @@
                             @include('layouts.user.history')
                         @elseif ($menuUrl == 'profile')
                             @include('layouts.user.profile')
-                        {{-- @elseif ($menuUrl == 'settings')
-                            @include ('layouts.user.settings') --}}
+                        @elseif ($menuUrl == 'bookTicket')
+                            @include ('layouts.user.bookTicket')
                         @elseif ($menuUrl == 'active')
                             @include ('layouts.user.active')
                     @endif

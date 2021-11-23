@@ -72,11 +72,11 @@ window.onload = (() => {
             }
         })
     }
-
+    
     if(window.location.pathname == '/user/home'){
         const ctx = document.getElementById('mostVisitedChart').getContext('2d')
         const myChart = new Chart(ctx, {
-            type: 'pie',
+            type: 'bar',
             data: {
                 labels: ['Lagos', 'Abuja','Kaduna'],
                 datasets: [{
@@ -107,8 +107,9 @@ window.onload = (() => {
                 }
             }
         })   
-    }
 
+        hideReturnField()
+    }
 })
 
 //show ticket page information field
