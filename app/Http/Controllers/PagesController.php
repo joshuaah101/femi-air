@@ -60,7 +60,7 @@ class PagesController extends Controller
         ]);
     }
 
-    public function adminDashboardMenu(Request $req)
+    public function adminDashboard(Request $req)
     {        
         $menuUrl = $req->get('menu');
 

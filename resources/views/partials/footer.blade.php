@@ -82,7 +82,7 @@
             </div>
         </section>
         
-        <div class="py-5 flex px-8 justify-start font-medium text-xs text-white">
+        <div class="py-3 flex px-8 justify-center font-medium text-xs text-white border-t ">
             &copy; {{ date('Y') }} &middot; All Rights Reserved
         </div>
     </footer>
