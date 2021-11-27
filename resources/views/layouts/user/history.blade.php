@@ -8,13 +8,13 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
               </svg>
             <span class="font-semibold text-xs">
-                Femi Awe
+           @auth() {{ auth()->user()->first_name.' '.auth()->user()->last_name }}@endauth
             </span>
         </p>
     </div>
 
     <div class="flex items-center justify-end w-full">
-        <a href="#" class="bg-red-600 text-white 
+        <a href="#" class="bg-red-600 text-white
                             py-3 px-3 rounded-lg
                             text-sm font-bold
                             hover:bg-red-700 hover:text-red-100
@@ -94,9 +94,9 @@
                 </tr>
             </tbody>
             <tfoot class="">
-                
+
             </tfoot>
         </table>
-    </section>  
+    </section>
 </div>
 <!--/Card-->

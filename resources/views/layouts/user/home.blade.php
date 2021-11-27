@@ -1,4 +1,3 @@
-{{-- {{ dd($menuUrl) }} --}}
 @extends('master')
 
 @section('title')
@@ -21,7 +20,8 @@
                              class="border-4 border-blue-200 rounded-full p-1 h-32 w-32"/>
                     </header>
                     <p class="font-semibold text-gray-400 text-center">
-                        Femi Awe
+
+                        @auth() {{ auth()->user()->first_name.' '.auth()->user()->last_name }}@endauth
                     </p>
                 </section>
                 <hr>

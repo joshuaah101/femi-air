@@ -5,7 +5,7 @@ import Chart from 'chart.js/auto'
 const btn = document.querySelector('.mobile-menu-button')
 const menu = document.querySelector('.mobile-menu')
 
-btn.addEventListener('click', function(){
+btn.addEventListener('click', function () {
     menu.classList.toggle('hidden')
 })
 
@@ -19,30 +19,40 @@ const informationField = document.querySelector('#informationField')
 const busSelect = document.querySelector('#selectBusBox')
 const checkoutPane = document.querySelector('#checkoutPane')
 
-//on document load, do the following
+// This code helps in checking if the url search contains the currently provided link name
+var getPara = (linkName) => {
+    var result = null, tmp = [];
+    var items = location.search.substr(1).split("&");
+    for (var index = 0; index < items.length; index++) {
+        tmp = items[index].split("=");
+        if (tmp[1] === linkName) result = decodeURIComponent(tmp[1]);
+    }
+    return result;
+}
+
 window.onload = (() => {
     //hide the return date field on the ticket page
-    if(window.location.pathname == '/ticket'){
+    if (getPara('ticket')) {
         //hideInformationField()
         showInformationField()
     }
-    
+
     //hide the return field from the welcome page
-    if(window.location.pathname == '/'){
+    if (window.location.pathname == '/') {
         hideReturnField()
     }
 
     //hide the checkout panel on the checkout page
-    if(window.location.pathname == '/checkout'){
+    if (getPara('checkout')) {
         hideCheckoutPane()
     }
 
-    if(window.location.pathname == '/admin/home'){
+    if (getPara('admin')) {
         const ctx = document.getElementById('passengerInfo').getContext('2d')
         const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Adult', 'Child','Infant'],
+                labels: ['Adult', 'Child', 'Infant'],
                 datasets: [{
                     label: 'Passenger chart',
                     data: [55, 30, 15],
@@ -72,75 +82,77 @@ window.onload = (() => {
             }
         })
     }
-    
-    if(window.location.pathname == '/user/home'){
-        const ctx = document.getElementById('mostVisitedChart').getContext('2d')
-        const myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Lagos', 'Abuja','Kaduna'],
-                datasets: [{
-                    label: 'Most visited',
-                    data: [55, 30, 15],
-                    backgroundColor: [
-                        // 'rgba(255, 99, 132, 0.2)',
-                        // 'rgba(54, 162, 235, 0.2)',
-                        'orange',
-                        'pink',
-                        'green'
-                    ],
-                    borderColor: [
-                        // 'rgba(255, 99, 132, 1)',
-                        // 'rgba(54, 162, 235, 1)',
-                        'orange',
-                        'pink',
-                        'green'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+    if (getPara('dash') || getPara('user')) {
+        if ($('#mostVisitedChart').length) {
+            const ctx = document.getElementById('mostVisitedChart').getContext('2d')
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Lagos', 'Abuja', 'Kaduna'],
+                    datasets: [{
+                        label: 'Most visited',
+                        data: [55, 30, 15],
+                        backgroundColor: [
+                            // 'rgba(255, 99, 132, 0.2)',
+                            // 'rgba(54, 162, 235, 0.2)',
+                            'orange',
+                            'pink',
+                            'green'
+                        ],
+                        borderColor: [
+                            // 'rgba(255, 99, 132, 1)',
+                            // 'rgba(54, 162, 235, 1)',
+                            'orange',
+                            'pink',
+                            'green'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            }
-        })   
-
-        hideReturnField()
+            })
+            hideReturnField()
+        }
     }
 })
 
 //show ticket page information field
 
 const showInformationField = () => {
-    reservationForm.addEventListener('submit', (e) => {
-        e.preventDefault()
-        setTimeout(function(){
-            informationField.classList.remove('hidden')
-        }, 3000)
-        setTimeout(function(){
-            hideReservationForm()
-        }, 3000)
-    })
+    if (reservationForm)
+        reservationForm.addEventListener('submit', (e) => {
+            e.preventDefault()
+            setTimeout(function () {
+                informationField.classList.remove('hidden')
+            }, 3000)
+            setTimeout(function () {
+                hideReservationForm()
+            }, 3000)
+        })
 }
 
-function hideCheckoutPane(){
+function hideCheckoutPane() {
     checkoutPane.classList.add('hidden')
 }
 
-function hideReturnField(){
-    return_field.classList.add('hidden')
+function hideReturnField() {
+    if (return_field) return_field.classList.add('hidden')
 }
 
 const hideInformationField = () => {
     informationField.classList.add('hidden')
 }
 
-tripOption.addEventListener('change', () => {
-    return_field.classList.toggle('hidden')
-})
+if (tripOption)
+    tripOption.addEventListener('change', () => {
+        return_field.classList.toggle('hidden')
+    })
 
 const hideReservationForm = () => {
     reservationForm.classList.add('hidden')
@@ -155,32 +167,31 @@ var reservationBtn = document.querySelector('#reservationBtn')
 //     console.log('clicked')
 // })
 
-
-stateTo.addEventListener('change', (e) => {
-    e.preventDefault()
-    if(stateFrom.value == stateTo.value){
-        reservationBtn.classList.add('hidden')
-        alert("Error! you can't possibly travel to the same state")
-        stateFrom.focus()
-        return false
-    }else{
-        reservationBtn.classList.remove('hidden')
-    }
-})
-        
+if (stateTo)
+    stateTo.addEventListener('change', (e) => {
+        e.preventDefault()
+        if (stateFrom.value == stateTo.value) {
+            reservationBtn.classList.add('hidden')
+            alert("Error! you can't possibly travel to the same state")
+            stateFrom.focus()
+            return false
+        } else {
+            reservationBtn.classList.remove('hidden')
+        }
+    })
 
 
 //using jquery to control elapsed date
-$(function(){
+$(function () {
     var dtToday = new Date()
 
     var month = dtToday.getMonth() + 1
     var day = dtToday.getDate()
     var year = dtToday.getFullYear()
 
-    if(month < 10)
+    if (month < 10)
         month = '0' + month.toString()
-    if(day < 10)
+    if (day < 10)
         day = '0' + day.toString()
 
     var maxDate = year + '-' + month + '-' + day

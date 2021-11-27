@@ -8,13 +8,13 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
               </svg>
             <span class="font-semibold text-xs">
-                Femi Awe
+           @auth() {{ auth()->user()->first_name.' '.auth()->user()->last_name }}@endauth
             </span>
         </p>
     </div>
 
     <div class="flex items-center justify-end w-full">
-        <a href="#" class="bg-yellow-400 text-white 
+        <a href="#" class="bg-yellow-400 text-white
                             py-3 px-5 rounded-lg
                             text-sm font-bold
                             hover:bg-yellow-500 hover:text-yellow-100
@@ -48,7 +48,7 @@
                         Value
                     </span>
                 </p>
-    
+
                 <p class="flex items-center font-bold space-x-5  p-2">
                     <span class="text-sm">
                         Gender:
@@ -75,7 +75,7 @@
                         Value
                     </span>
                 </p>
-    
+
                 <p class="flex items-center font-bold space-x-5 p-2">
                     <span class="text-sm">
                         Phone number:
@@ -102,7 +102,7 @@
                         Value
                     </span>
                 </p>
-    
+
                 {{-- <p class="flex items-center font-bold space-x-5 p-2">
                     <span class="text-sm">
                         Password:
@@ -116,5 +116,5 @@
 
    </div>
 
-   
+
 </div>

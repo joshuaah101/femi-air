@@ -1859,11 +1859,24 @@ var reservationForm = document.querySelector('#reservationForm');
 var informationField = document.querySelector('#informationField'); //handling the bus selection and checklist field
 
 var busSelect = document.querySelector('#selectBusBox');
-var checkoutPane = document.querySelector('#checkoutPane'); //on document load, do the following
+var checkoutPane = document.querySelector('#checkoutPane'); // This code helps in checking if the url search contains the currently provided link name
+
+var getPara = function getPara(linkName) {
+  var result = null,
+      tmp = [];
+  var items = location.search.substr(1).split("&");
+
+  for (var index = 0; index < items.length; index++) {
+    tmp = items[index].split("=");
+    if (tmp[1] === linkName) result = decodeURIComponent(tmp[1]);
+  }
+
+  return result;
+};
 
 window.onload = function () {
   //hide the return date field on the ticket page
-  if (window.location.pathname == '/ticket') {
+  if (getPara('ticket')) {
     //hideInformationField()
     showInformationField();
   } //hide the return field from the welcome page
@@ -1874,11 +1887,11 @@ window.onload = function () {
   } //hide the checkout panel on the checkout page
 
 
-  if (window.location.pathname == '/checkout') {
+  if (getPara('checkout')) {
     hideCheckoutPane();
   }
 
-  if (window.location.pathname == '/admin/home') {
+  if (getPara('admin')) {
     var ctx = document.getElementById('passengerInfo').getContext('2d');
     var myChart = new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(ctx, {
       type: 'bar',
@@ -1906,41 +1919,43 @@ window.onload = function () {
     });
   }
 
-  if (window.location.pathname == '/user/home') {
-    var _ctx = document.getElementById('mostVisitedChart').getContext('2d');
+  if (getPara('dash') || getPara('user')) {
+    if ($('#mostVisitedChart').length) {
+      var _ctx = document.getElementById('mostVisitedChart').getContext('2d');
 
-    var _myChart = new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(_ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Lagos', 'Abuja', 'Kaduna'],
-        datasets: [{
-          label: 'Most visited',
-          data: [55, 30, 15],
-          backgroundColor: [// 'rgba(255, 99, 132, 0.2)',
-          // 'rgba(54, 162, 235, 0.2)',
-          'orange', 'pink', 'green'],
-          borderColor: [// 'rgba(255, 99, 132, 1)',
-          // 'rgba(54, 162, 235, 1)',
-          'orange', 'pink', 'green'],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+      var _myChart = new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(_ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Lagos', 'Abuja', 'Kaduna'],
+          datasets: [{
+            label: 'Most visited',
+            data: [55, 30, 15],
+            backgroundColor: [// 'rgba(255, 99, 132, 0.2)',
+            // 'rgba(54, 162, 235, 0.2)',
+            'orange', 'pink', 'green'],
+            borderColor: [// 'rgba(255, 99, 132, 1)',
+            // 'rgba(54, 162, 235, 1)',
+            'orange', 'pink', 'green'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
-      }
-    });
+      });
 
-    hideReturnField();
+      hideReturnField();
+    }
   }
 }; //show ticket page information field
 
 
 var showInformationField = function showInformationField() {
-  reservationForm.addEventListener('submit', function (e) {
+  if (reservationForm) reservationForm.addEventListener('submit', function (e) {
     e.preventDefault();
     setTimeout(function () {
       informationField.classList.remove('hidden');
@@ -1956,14 +1971,14 @@ function hideCheckoutPane() {
 }
 
 function hideReturnField() {
-  return_field.classList.add('hidden');
+  if (return_field) return_field.classList.add('hidden');
 }
 
 var hideInformationField = function hideInformationField() {
   informationField.classList.add('hidden');
 };
 
-tripOption.addEventListener('change', function () {
+if (tripOption) tripOption.addEventListener('change', function () {
   return_field.classList.toggle('hidden');
 });
 
@@ -1978,7 +1993,7 @@ var reservationBtn = document.querySelector('#reservationBtn'); // busSelect.add
 //     console.log('clicked')
 // })
 
-stateTo.addEventListener('change', function (e) {
+if (stateTo) stateTo.addEventListener('change', function (e) {
   e.preventDefault();
 
   if (stateFrom.value == stateTo.value) {
