@@ -184,7 +184,6 @@ if (stateTo)
 //using jquery to control elapsed date
 $(function () {
     var dtToday = new Date()
-
     var month = dtToday.getMonth() + 1
     var day = dtToday.getDate()
     var year = dtToday.getFullYear()

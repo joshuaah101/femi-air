@@ -1,5 +1,4 @@
 @extends('master')
-
 @section('title')
     Dashboard
 @endsection
@@ -7,12 +6,11 @@
 @section('links')
     @include('partials.links')
 @endsection
-
 @section('main')
     <main class="flex">
-        {{-- sidebar --}}
+        {{--        sidebar--}}
         <div class="xs:hidden md:block w-1/6 bg-white h-screen shadow-lg top-0 left-0 fixed border-r-2 border-blue-100">
-            {{-- sidebar user info display --}}
+            {{--            sidebar user info display--}}
             <div class="mt-4 px-5">
                 <section class="flex flex-col justify-center items-center space-y-2 font-mono mb-2">
                     <header class="">
@@ -26,7 +24,7 @@
                 </section>
                 <hr>
             </div>
-            {{-- sidebar items --}}
+            {{--            sidebar items--}}
             <div class="py-2 px-2 text-blue-800 space-y-1 mt-5">
                 <a href="{{url('user')}}?menu=dash"
                    class="{{ $menuUrl == 'dash' ? 'shadow-xl bg-blue-700 text-blue-100 hover:bg-white hover:shadow-md' : ''}}
@@ -109,10 +107,10 @@
         </div>
         <div class="xs:ml-0 md:ml-1/6 px-5 w-full">
             <div class="">
-                {{-- fixed header navigation --}}
+                {{--                fixed header navigation--}}
                 @include('partials.dashboard-nav')
 
-                {{-- main content attachment --}}
+                {{--                main content attachment--}}
                 <div class="md:mt-20 xs:mt-20">
                     @if ($menuUrl == 'dash')
                         @include('layouts.user.dashboard')

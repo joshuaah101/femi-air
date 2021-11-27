@@ -1,4 +1,3 @@
-{{-- dashboard include --}}
 <div class="mb-5 w-full">
     <header class="font-bold text-2xl font-sans text-gray-700">
         Welcome Back!
@@ -53,7 +52,6 @@
         </div>
     </div>
 </div>
-
 <div class="bg-white mt-12 px-6 py-8 shadow-2xl rounded mb-5">
     <section class="p-2 overflow-auto">
         <table class="min-w-full">
