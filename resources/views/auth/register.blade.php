@@ -62,11 +62,10 @@
                     </div>
 
                     <div class="flex flex-wrap">
-                        <label for="password-confirm" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="password-confirmation" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
                             {{ __('Confirm Password') }}:
                         </label>
-
-                        <input id="password-confirm" type="password" class="form-input w-full"
+                        <input id="password-confirmation" type="password" class="form-input w-full"
                             name="password_confirmation" required autocomplete="new-password">
                     </div>
 

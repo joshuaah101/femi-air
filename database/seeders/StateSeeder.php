@@ -16,9 +16,9 @@ class StateSeeder extends Seeder
     public function run()
     {
         //
-        for($i=0; $i <= 20; $i++){
+        for ($i = 0; $i <= 20; $i++) {
             DB::table('states')->insert([
-                'states' => Str::random(10)
+                'title' => Str::random(10)
             ]);
         }
     }

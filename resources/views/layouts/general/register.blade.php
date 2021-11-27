@@ -60,7 +60,7 @@
                         </p>
                     @enderror
                 </div>
-                        
+
                 <div class="flex flex-col py-1">
                     <label for="password" class="py-1 font-medium">
                         {{ __('Password') }}:
@@ -76,13 +76,13 @@
                 </div>
 
                 <div class="flex flex-col py-1">
-                    <label for="confirmPassword" class="py-1 font-medium">
+                    <label for="password_confirmation" class="py-1 font-medium">
                         {{ __('Confirm password') }}:
                     </label>
-                    <input type="password" id="confirmPassword" name="confirmPassword"  placeholder="Password again" class="border border-gray-400 placeholder-gray-800 rounded-lg w-full p-2
-                    @error('confirmPassword')  border-red-500 @enderror">
+                    <input type="password" id="password_confirmation" name="password_confirmation"  placeholder="Password again" class="border border-gray-400 placeholder-gray-800 rounded-lg w-full p-2
+                    @error('password_confirmation')  border-red-500 @enderror">
 
-                    @error('confirmPassword')
+                    @error('password_confirmation')
                         <p class="text-red-500 text-xs italic mt-4">
                             {{ $message }}
                         </p>

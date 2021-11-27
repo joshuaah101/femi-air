@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PagesController;
@@ -18,13 +20,13 @@ use App\Http\Controllers\PagesController;
 
 //Auth::routes();
 
-Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', [PagesController::class, 'welcomePage']);
+Route::get('/', [PagesController::class, 'index']);
 Route::get('login', [PagesController::class, 'showLoginPage']);
 Route::post('login', [LoginController::class, 'userLoginPage']);
 
 Route::get('register', [PagesController::class, 'showSignupPage']);
+Route::post('register', [\App\Http\Controllers\Auth\RegisterController::class, 'register']);
 Route::get('summary', [PagesController::class, 'showSummaryPage']);
 Route::get('payment', [PagesController::class, 'showPaymentPage']);
 Route::get('ticket', [PagesController::class, 'showTicketPage']);
@@ -32,12 +34,22 @@ Route::get('flight', [PagesController::class, 'showFlightSelectionPage']);
 
 
 //dynamic menu across both user and admin dashboard area
-Route::prefix('user')->get('home', [PagesController::class, 'userDashboard']);
-Route::prefix('admin')->get('home', [PagesController::class, 'adminDashboard']);
+// Users
+Route::prefix('user')->group(function () {
+
+    Route::get('/', [UsersController::class, 'index']);
+
+});
+
+// Admin
+Route::prefix('admin')->group(function () {
+
+    Route::get('/', [AdminController::class, 'index']);
+
+});
 
 //Post form routes
 Route::post('ticket', function () {
     return view('layouts.general.ticket');
 });
 
-?>
