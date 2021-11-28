@@ -44,6 +44,7 @@ class PagesController extends Controller
     public function showTicketPage()
     {
         $state = json_decode(file_get_contents("apis/state-api.json"));
+
         return view('layouts.general.ticket', [
             'states' => $state->data
         ]);

@@ -50,6 +50,11 @@ Route::prefix('admin')->group(function () {
 
 //Post form routes
 Route::post('ticket', function () {
-    return view('layouts.general.ticket');
+
+    $state = json_decode(file_get_contents("apis/state-api.json"));
+
+    return view('layouts.general.ticket', [
+        'states' => $state->data
+    ]);
 });
 

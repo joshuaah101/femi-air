@@ -15,16 +15,14 @@ class CreateFlightsTable extends Migration
     {
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('current_country')->nullable();
+            $table->unsignedBigInteger('terminal_id');
             $table->string('flight_number')->unique();
-            $table->string('outbound')->nullable();
-            $table->string('inbound')->nullable();
+            $table->string('outbound_code')->nullable();
+            $table->string('inbound_code')->nullable();
             $table->string('cabin')->nullable();
-            $table->string('amount')->nullable();
-            $table->string('date')->nullable();
-            $table->string('duration')->nullable();
-            $table->boolean('flight_type')->nullable()->default(false);
+            $table->string('departure')->nullable();
+            $table->string('landing')->nullable();
+            $table->boolean('cancelled')->nullable()->default(false);
             $table->timestamps();
         });
     }
