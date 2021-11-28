@@ -17,6 +17,7 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+        "livewire/livewire": "^2.8",
         "pragmarx/countries": "^0.7.2",
         "stevebauman/location": "^6.2"
     },

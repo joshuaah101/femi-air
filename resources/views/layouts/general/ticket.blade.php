@@ -179,7 +179,7 @@
                                         <select name="state" id="state"
                                                 class="shadow border border-gray-400 py-3 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-blue-100 focus:text-gray-900 text-sm appearance-none"
                                                 required>
-                                            <option value="">State ...</option>
+                                            <option value="">State </option>
                                             @if(isset($states))
                                                 @foreach ($states as $state)
                                                     <option value="{{ $state }}">{{ $state }}</option>

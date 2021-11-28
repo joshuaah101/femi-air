@@ -15,8 +15,12 @@ class CreateTerminalsTable extends Migration
     {
         Schema::create('terminals', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
+            $table->string('country');
+            $table->string('state');
             $table->string('code')->unique();
+            $table->string('title')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('image')->nullable();
             $table->boolean('active')->nullable()->default(true);
             $table->timestamps();
         });
