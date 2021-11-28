@@ -24,8 +24,8 @@ class FlightFactory extends Factory
             'inbound_terminal_id' => $land['id'],
             'departure' => $dep['state'],
             'landing' => $land['state'],
-            'departure_at' => $this->faker->dateTimeBetween('now', '10 hour'),
-            'landing_at' => $this->faker->dateTime('-1 hour', '25 hour'),
+            'departure_at' => $this->faker->dateTimeBetween('now', '2 hours'),
+            'landing_at' => $this->faker->dateTimeBetween('2 hours', '4 days'),
             'cancelled' => $this->faker->boolean(20)
         ];
     }

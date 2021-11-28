@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->count(30)->create();
         Terminal::factory()->count(30)->create();
         TaxCharge::factory()->count(10)->create();
-        Flight::factory()->count(30)->forTaxCharge(4)->has(FlightSeat::factory()->count(30))->create();
+        Flight::factory()->count(30)->for(TaxCharge::factory()->count(4),'tax_charge')->has(FlightSeat::factory()->count(30),'seats')->create();
         FlightTaxCharge::factory()->count(20)->create();
 
 
