@@ -22,10 +22,18 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $states = get_all_states('NGA');
+
         return [
-            'name' => $this->faker->name(),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'gender' => $this->faker->randomElement(['M', 'F']),
+            'phone' => $this->faker->phoneNumber(),
+            'country' => 'NGA',
+            'state' => $this->faker->randomElement($states->pluck('postal')->toArray()),
+            'dob' => $this->faker->dateTimeBetween('-30 years'),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
         ];

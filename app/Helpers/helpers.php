@@ -107,6 +107,17 @@ function get_country($country_code, $country_cca = null)
  */
 function get_state($country_code, $state_code, $country_cca = null)
 {
+    $states = get_all_states($country_code,$country_cca);
+
+    if ($states && count($states) > 0) {
+        return $states->where('postal', $state_code)->first();
+    }
+    return null;
+}
+
+function get_all_states($country_code, $country_cca = null)
+{
+
     $app = app(PragmaRX\Countries\Package\Countries::class);
 
     if ($country_cca !== null) {
@@ -118,7 +129,7 @@ function get_state($country_code, $state_code, $country_cca = null)
         $app = $app->hydrateStates();
     }
     if ($app && count($app) > 0) {
-        return $app->states->where('postal', $state_code)->first();
+        return $app->states;
     }
     return null;
 }

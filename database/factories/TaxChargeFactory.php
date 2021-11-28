@@ -14,7 +14,11 @@ class TaxChargeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->sentence(10),
+            'description' => $this->faker->sentence(30),
+            'percentage_amount' => $this->faker->numberBetween(1000, 2000),
+            'flat_amount' => $this->faker->numberBetween(1000, 2000),
+            'use_percentage' => $this->faker->boolean(20)
         ];
     }
 }

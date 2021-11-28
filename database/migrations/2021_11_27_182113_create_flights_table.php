@@ -22,6 +22,7 @@ class CreateFlightsTable extends Migration
             $table->string('landing');
             $table->dateTime('departure_at');
             $table->dateTime('landing_at');
+            $table->string('amount');
             $table->boolean('cancelled')->nullable()->default(false);
             $table->timestamps();
         });
