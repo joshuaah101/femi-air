@@ -20,6 +20,7 @@ class CreateBookingsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('seat_id');
             $table->enum('cabin', ['economy', 'premium', 'business', 'first'])->nullable()->default('economy');
+            $table->enum('age_type', ['adult', 'child', 'infant'])->nullable()->default('adult');
             $table->string('country')->nullable();
             $table->string('amount')->nullable();
             $table->string('luggage_size')->nullable();

@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int seat_id
  * @property mixed country
  * @property mixed cabin
+ * @property mixed age_type
  * @property mixed amount
  * @property boolean flight_type
  */
@@ -23,7 +24,7 @@ class Booking extends Model
 
     public function flight()
     {
-        return $this->belongsTo(Flight::class);
+        return $this->belongsTo(Flight::class, 'flight_id', 'id');
     }
 
     public function payment()

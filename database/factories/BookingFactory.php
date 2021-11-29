@@ -19,12 +19,14 @@ class BookingFactory extends Factory
         $vals = ['economy', 'premium', 'business', 'first'];
         $flight = Flight::inRandomOrder()->first();
         $seat = $flight->seats()->inRandomOrder()->first();
+        $age_type = ['adult', 'child', 'infant'];
         return [
             'flight_id' => $flight->id,
             'terminal_id' => $this->faker->randomElement(Terminal::pluck('id')->toArray()),
             'user_id' => $this->faker->randomElement(User::pluck('id')->toArray()),
             'seat_id' => $seat ? $seat['id'] : null,
             'cabin' => $this->faker->randomElement($vals),
+            'age_type' => $this->faker->randomElement($age_type),
             'country' => 'NGA',
             'amount' => $this->faker->numberBetween(5000, 60000),
             'luggage_size' => $this->faker->numberBetween(3, 40),

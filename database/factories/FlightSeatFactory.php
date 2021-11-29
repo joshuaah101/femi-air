@@ -15,9 +15,11 @@ class FlightSeatFactory extends Factory
      */
     public function definition()
     {
+        $sentences = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+        $code = $sentences[random_int(0, 25)] . $sentences[random_int(0, 25)] .$sentences[random_int(0, 25)] . $sentences[random_int(0, 25)] .random_int(10, 99) . random_int(10, 99)   . random_int(10, 99) . random_int(10, 99);
         return [
-            'flight_id' => $this->faker->unique()->randomElement(Flight::pluck('id')->toArray()),
-            'seat_id' => $this->faker->unique()->randomElement(FlightSeat::pluck('id')->toArray())
+            'flight_id' => $this->faker->randomElement(Flight::pluck('id')->toArray()),
+            'code' => $code
         ];
     }
 }

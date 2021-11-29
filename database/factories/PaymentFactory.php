@@ -17,7 +17,9 @@ class PaymentFactory extends Factory
     public function definition()
     {
         $booking = Booking::with(['flight', 'flight.tax_charge'])->inRandomOrder()->first();
-        $charges = (float)$booking ? $booking->flight->tax_charge()->sum('percentage_amount') : 0;
+
+        $charges = isset($booking, $booking->flight['tax_charge']) ? (float)$booking->flight->tax_charge()->sum('percentage_amount') : 0;
+
         $user = User::inRandomOrder()->first();
         return [
             'flight_id' => $this->faker->randomElement(Flight::pluck('id')->toArray()),

@@ -15,7 +15,8 @@ class TerminalFactory extends Factory
     {
         $states = get_all_states('NGA');
         $number = random_int(1, 6);
-        $code = $this->faker->text[$number] . $this->faker->text[$number] . time();
+        $val = $this->faker->sentence($number) . $this->faker->sentence($number) . time();
+        $code = implode(explode(" ", $val));
         $images = ['img/logo1.webp', 'img/logo2.webp', 'img/logo3.webp', 'img/logo4.webp'];
         return [
             'country' => 'NGA',

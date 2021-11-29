@@ -25,6 +25,12 @@ class Flight extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'departure_at' => 'datetime',
+        'landing_at' => 'datetime',
+        'cancelled' => 'boolean'
+    ];
+
     public function outbound_terminal()
     {
         return $this->belongsTo(Terminal::class, 'outbound_terminal_id', 'id');
@@ -35,6 +41,11 @@ class Flight extends Model
         return $this->belongsTo(Terminal::class, 'inbound_terminal_id', 'id');
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'flight_id', 'id');
+    }
+
     public function tax_charge()
     {
         return $this->belongsToMany(TaxCharge::class, FlightTaxCharge::class);
@@ -42,6 +53,6 @@ class Flight extends Model
 
     public function seats()
     {
-        return $this->hasMany(FlightSeat::class,'flight_id','id');
+        return $this->hasMany(FlightSeat::class, 'flight_id', 'id');
     }
 }

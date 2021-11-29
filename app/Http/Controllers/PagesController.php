@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\State;
+
 
 // use Illuminate\Support\Facades\Http;
 
@@ -43,11 +43,7 @@ class PagesController extends Controller
 
     public function showTicketPage()
     {
-        $state = json_decode(file_get_contents("apis/state-api.json"));
-
-        return view('layouts.general.ticket', [
-            'states' => $state->data
-        ]);
+        return view('layouts.general.ticket');
     }
 
     public function showFlightSelectionPage()
