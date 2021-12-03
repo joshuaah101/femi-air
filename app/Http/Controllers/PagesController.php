@@ -9,15 +9,11 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-    //
+
 
     public function index()
     {
-        $state = json_decode(file_get_contents("apis/state-api.json"));
-
-        return view('layouts.general.welcome', [
-            'states' => $state->data
-        ]);
+        return view('layouts.general.welcome');
     }
 
 
