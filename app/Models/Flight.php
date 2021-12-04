@@ -48,11 +48,17 @@ class Flight extends Model
 
     public function tax_charge()
     {
-        return $this->belongsToMany(TaxCharge::class, FlightTaxCharge::class);
+        return $this->belongsToMany(TaxCharge::class, FlightTaxCharge::class, 'flight_id', 'tax_charge_id');
+    }
+
+    public function cabin()
+    {
+        return $this->belongsToMany(Cabin::class, FlightCabin::class, 'flight_id', 'cabin_id')->withPivot(['amount','currency']);
     }
 
     public function seats()
     {
         return $this->hasMany(FlightSeat::class, 'flight_id', 'id');
     }
+
 }

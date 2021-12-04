@@ -15,7 +15,7 @@ class CreateFlightTaxChargesTable extends Migration
     {
         Schema::create('flight_tax_charges', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('flight_id');
+            $table->string('flight_id');
             $table->unsignedBigInteger('tax_charge_id');
             $table->timestamps();
         });

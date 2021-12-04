@@ -15,8 +15,9 @@ class CreateFlightSeatsTable extends Migration
     {
         Schema::create('flight_seats', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('flight_id');
-            $table->string('code')->unique();
+            $table->unsignedBigInteger('flight_id')->nullable();
+            $table->unsignedBigInteger('cabin_id');
+            $table->string('code');
             $table->timestamps();
         });
     }

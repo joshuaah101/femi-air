@@ -15,7 +15,7 @@ class FlightFactory extends Factory
     public function definition()
     {
         $sentences = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-        $code = $sentences[random_int(0, 25)] . $sentences[random_int(0, 25)] . random_int(10, 99) . random_int(10, 99) .$sentences[random_int(0, 25)] . $sentences[random_int(0, 25)] . random_int(10, 99) . random_int(10, 99);
+        $code = $sentences[random_int(0, 25)] . $sentences[random_int(0, 25)] . random_int(10, 99) . random_int(10, 99) . $sentences[random_int(0, 25)] . $sentences[random_int(0, 25)] . random_int(10, 99) . random_int(10, 99);
         $dep = Terminal::inRandomOrder()->first();
         $land = Terminal::inRandomOrder()->first();
         return [
@@ -24,9 +24,9 @@ class FlightFactory extends Factory
             'inbound_terminal_id' => $land['id'],
             'departure' => $dep['state'],
             'landing' => $land['state'],
-            'departure_at' => $this->faker->dateTimeBetween('2 hours', '48 hours'),
+            'departure_at' => $this->faker->dateTimeBetween('2 hours', '8 hours'),
             'amount' => $this->faker->numberBetween(10000, 35000),
-            'landing_at' => $this->faker->dateTimeBetween('48 hours', '90 days'),
+            'landing_at' => $this->faker->dateTimeBetween('8 hours', '1 days'),
             'cancelled' => $this->faker->boolean(20)
         ];
     }

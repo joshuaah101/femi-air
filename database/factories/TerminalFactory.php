@@ -13,6 +13,7 @@ class TerminalFactory extends Factory
      */
     public function definition()
     {
+        $names = ['Arid', 'Afrik', 'Dana', 'United Airlines', 'Delta Airlines', 'Virgin Airlines', 'Icelandair', 'Continental Airlines', 'Air Peace', 'Aero Contract', 'Allied Air', 'Azman Air', 'Max Air'];
         $states = get_all_states('NGA');
         $number = random_int(1, 6);
         $val = $this->faker->sentence($number) . $this->faker->sentence($number) . time();
@@ -22,7 +23,7 @@ class TerminalFactory extends Factory
             'country' => 'NGA',
             'state' => $this->faker->randomElement($states->pluck('postal')->toArray()),
             'code' => $code,
-            'title' => $this->faker->sentence(6),
+            'title' => $this->faker->randomElement($names),
             'description' => $this->faker->sentence(20),
             'image' => $this->faker->randomElement($images),
             'active' => true

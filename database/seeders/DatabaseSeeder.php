@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Booking;
+use App\Models\Cabin;
 use App\Models\Flight;
 use App\Models\FlightSeat;
 use App\Models\FlightTaxCharge;
@@ -11,6 +12,7 @@ use App\Models\TaxCharge;
 use App\Models\Terminal;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,10 +25,33 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         if (User::count() < 1) User::factory()->count(30)->create();
-        if (Terminal::count() < 1) Terminal::factory()->count(30)->create();
-        if (TaxCharge::count() < 1) TaxCharge::factory()->count(10)->create();
-        if (Flight::count() < 1) Flight::factory()->count(30)->has(TaxCharge::factory()->count(4), 'tax_charge')->has(FlightSeat::factory()->count(30), 'seats')->create();
-        if (FlightTaxCharge::count() < 1) FlightTaxCharge::factory()->count(20)->create();
+        if (Terminal::count() < 1) Terminal::factory()->count(30)->create(); // Dana, Arid, Afrik etc
+        if (TaxCharge::count() < 1) TaxCharge::factory()->count(10)->create(); // taxes imposed on flights by country or terminal
+        if (Cabin::count() < 1) {
+            $cabins = ['Economy', 'Premium', 'Business', 'First'];
+            foreach ($cabins as $cabin) {
+                Cabin::create([
+                    'title' => $cabin,
+                    'slug' => Str::slug($cabin)
+                ]);
+            }
+        }
+        // each flight has its own charges and number of cabins for each of the cabin and different cost for each cabin type e.g economic is has a flat fee but first class has its own extra charge
+        if (Flight::count() < 1) {
+            Flight::factory()->count(30)->has(TaxCharge::factory(), 'tax_charge')->create()->each(function ($flight) {
+                $cabins = Cabin::all();
+                // for each flight
+                foreach ($cabins as $cabin) {
+                    $amount = $cabin['slug'] === 'economic' ? random_int(1000, 10000) : random_int(10000, 1000000);
+                    // attach each cabin type created
+                    $flight->cabin()->attach($cabin, ['amount' => $amount, 'currency' => 'NGN']);
+                    $rand = random_int(6, 10);
+                    // add add flight seats to the flight
+                    FlightSeat::factory()->count($rand)->create(['cabin_id' => $cabin['id'], 'flight_id' => $flight['id']]);
+                }
+            });
+        }
+        // Bookings and payments base on the flights
         if (Booking::count() < 1) Booking::factory()->count(20)->create();
         if (Payment::count() < 1) Payment::factory()->count(20)->create();
 
