@@ -20,10 +20,12 @@
             <form action="" method="POST">
                 @csrf
                 <div class="flex flex-col py-1">
-                    <label for="username" class="py-1 font-medium">
-                        Username or email
+                    <label for="email" class="py-1 font-medium">
+                        Email
                     </label>
-                    <input type="text" id="username" name="username"  placeholder="adamsmith123" class="border border-gray-400 placeholder-gray-800 rounded-lg w-full p-2">
+                    <input type="text" id="email" name="email" placeholder="adamsmith123" value="{{old('email')}}"
+                           class="border border-gray-400 placeholder-gray-800 rounded-lg w-full p-2">
+                    @error('email')<p class="text-red-800">{{ $message }}</p> @enderror
                 </div>
 
                 <div class="flex flex-col py-1">
@@ -31,16 +33,23 @@
                         Password
                     </label>
                     <div class="">
-                        <input type="password" id="password" name="password" placeholder="Password" class="border border-gray-400 placeholder-gray-800 rounded-lg w-full p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 cursor-pointer float-right relative right-3" style="margin-left: -25px; margin-top: 13px;" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                        <input type="password" id="password" name="password" placeholder="Password"
+                               class="border border-gray-400 placeholder-gray-800 rounded-lg w-full p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="h-5 w-5 cursor-pointer float-right relative right-3"
+                             style="margin-left: -25px; margin-top: 13px;" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                            <path fill-rule="evenodd"
+                                  d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                  clip-rule="evenodd"/>
                         </svg>
+                        @error('password')<p class="text-red-800">{{ $message }}</p> @enderror
                     </div>
                 </div>
 
                 <div class="flex flex-col py-1">
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-5 py-4 w-full text-white font-semibold rounded-full">
+                    <button type="submit"
+                            class="bg-blue-600 hover:bg-blue-700 px-5 py-4 w-full text-white font-semibold rounded-full">
                         Log in
                     </button>
                 </div>
@@ -53,9 +62,8 @@
                 </div>
 
                 <div class="flex flex-col justify-center items-center text-sm font-sans mt-5 space-y-3">
-                    <a href="#" class="underline hover:no-underline text-red-600">Forgot password / username?</a>
+                    <a href="#" class="underline hover:no-underline text-red-600">Forgot password / email?</a>
 
-                    
 
                     <span class="">
                         Don't have an account?

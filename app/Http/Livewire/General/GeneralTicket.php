@@ -107,7 +107,6 @@ class GeneralTicket extends Component
                 $msg = 'Sorry, Flight is fully Booked now';
             }
             $this->emit('alert', ['message' => $msg, 'type' => 'error']);
-
         }
     }
 
@@ -195,7 +194,6 @@ class GeneralTicket extends Component
                     if (isset($get_data['stateTo'])) $this->stateTo = $get_data['stateTo'];
                     if (isset($get_data['departureDate'])) $this->departureDate = $get_data['departureDate'];
                     if (isset($get_data['returningDate'])) $this->returningDate = $get_data['returningDate'];
-                    dd($this);
                 } else {
                     if ($this->new_booking) {
 
@@ -208,7 +206,6 @@ class GeneralTicket extends Component
                 $this->current_step = 4;
                 $this->hidden_step = 4;
             }
-            dd('unable to fetch prev_booking');
         } else {
             // save all transaction into temporal file and register/login user before going to payment gateway
 

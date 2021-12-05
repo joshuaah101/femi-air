@@ -11,7 +11,7 @@ class LoginController extends Controller
     //testing login form
     public function userLoginPage(Request $req)
     {
-
+dd($req->all());
         $data = $req->input();
         $req->session()->put([
             'username' => $data['username'],

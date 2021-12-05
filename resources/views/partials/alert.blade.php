@@ -46,7 +46,11 @@
     }
 
     ?>
-    window.livewire.on('alert', data => {
-        toastr[data.type](data.message);
-    });
+    $(document).ready(function () {
+
+        window.livewire.on('alert', data => {
+            toastr[data.type](data.message);
+        });
+    })
 </script>
+

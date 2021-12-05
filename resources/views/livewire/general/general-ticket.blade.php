@@ -545,7 +545,7 @@
 
                 <button wire:click="payForBooking"
                         class="px-8 py-4 text-xs font-semibold text-white bg-blue-800 hover:bg-blue-700 rounded">
-                    Preview &gt;
+                    Proceed to Payment &gt;
                 </button>
             </section>
         @elseif($current_step ===4)
