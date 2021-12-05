@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int seat_id
  * @property mixed country
  * @property mixed cabin
- * @property mixed age_type
  * @property mixed amount
  * @property boolean flight_type
  */

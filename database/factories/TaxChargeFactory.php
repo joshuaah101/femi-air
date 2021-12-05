@@ -13,10 +13,11 @@ class TaxChargeFactory extends Factory
      */
     public function definition()
     {
+        $names = ['cargo tax', 'fuel tax', 'loading tax', 'maintenance tax', 'exchange tax'];
         return [
-            'title' => $this->faker->sentence(10),
+            'title' => $this->faker->randomElement($names),
             'description' => $this->faker->sentence(30),
-            'percentage_amount' => $this->faker->numberBetween(1000, 2000),
+            'percentage_amount' => $this->faker->numberBetween(5, 50),
             'flat_amount' => $this->faker->numberBetween(1000, 2000),
             'use_percentage' => $this->faker->boolean(20)
         ];

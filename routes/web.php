@@ -20,7 +20,6 @@ use App\Http\Controllers\PagesController;
 
 //Auth::routes();
 
-
 Route::get('/', [PagesController::class, 'index']);
 Route::get('login', [PagesController::class, 'showLoginPage']);
 Route::post('login', [LoginController::class, 'userLoginPage']);
@@ -36,7 +35,6 @@ Route::get('flight', [PagesController::class, 'showFlightSelectionPage']);
 //dynamic menu across both user and admin dashboard area
 // Users
 Route::prefix('user')->group(function () {
-
     Route::get('/', [UsersController::class, 'index']);
 
 });

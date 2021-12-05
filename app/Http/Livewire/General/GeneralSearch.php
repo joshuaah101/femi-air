@@ -39,7 +39,7 @@ class GeneralSearch extends Component
         ]);
         $data = 'ticketType=' . $this->ticketType .
             '&trip_type=' . $this->trip_type .
-            '&$noOfTicket=' . $this->noOfTicket .
+            '&noOfTicket=' . $this->noOfTicket .
             '&stateFrom=' . $this->stateFrom .
             '&stateTo=' . $this->stateTo .
             '&departureDate=' . $this->departureDate .

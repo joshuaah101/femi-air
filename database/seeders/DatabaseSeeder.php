@@ -42,7 +42,21 @@ class DatabaseSeeder extends Seeder
                 $cabins = Cabin::all();
                 // for each flight
                 foreach ($cabins as $cabin) {
-                    $amount = $cabin['slug'] === 'economic' ? random_int(1000, 10000) : random_int(10000, 1000000);
+                    switch ($cabin['slug']) {
+                        case 'economy':
+                            $amount = random_int(1000, 10000);
+                            break;
+                        case 'business':
+                            $amount = random_int(10000, 50000);
+                            break;
+                        case 'premium':
+                            $amount = random_int(50000, 100000);
+                            break;
+                        default:
+                            $amount = random_int(100000, 300000); //first class
+                            break;
+                    }
+//                    $amount = $cabin['slug'] === 'economy' ? random_int(1000, 10000) : random_int(10000, 1000000);
                     // attach each cabin type created
                     $flight->cabin()->attach($cabin, ['amount' => $amount, 'currency' => 'NGN']);
                     $rand = random_int(6, 10);

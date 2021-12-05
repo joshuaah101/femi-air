@@ -25,7 +25,7 @@
 
 @section('main')
     <main class="my-8 px-8">
-            @livewire('general.general-ticket')
+        @livewire('general.general-ticket')
     </main>
 @endsection
 

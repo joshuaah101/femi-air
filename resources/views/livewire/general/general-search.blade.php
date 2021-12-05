@@ -118,7 +118,7 @@
                 </svg>
                 <label for="departureDate" class="text-sm text-white font-semibold">Departure date</label>
             </div>
-            <input type="date" wire:model="departureDate" id="departureDate"
+            <input type="datetime-local" wire:model="departureDate" id="departureDate"
                    class="shadow border border-gray-400 py-2 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-orange-200 focus:text-gray-900 text-sm"
                    required/>
             @error('departureDate') <span class="error">{{ $message }}</span> @enderror
