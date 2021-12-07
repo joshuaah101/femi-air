@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed departure_at
  * @property mixed landing_at
  * @property boolean cancelled
+ * @property boolean has_landed
  */
 class Flight extends Model
 {
@@ -28,7 +29,8 @@ class Flight extends Model
     protected $casts = [
         'departure_at' => 'datetime',
         'landing_at' => 'datetime',
-        'cancelled' => 'boolean'
+        'cancelled' => 'boolean',
+        'has_landed' => 'boolean'
     ];
 
     public function outbound_terminal()
@@ -53,12 +55,24 @@ class Flight extends Model
 
     public function cabin()
     {
-        return $this->belongsToMany(Cabin::class, FlightCabin::class, 'flight_id', 'cabin_id')->withPivot(['amount','currency']);
+        return $this->belongsToMany(Cabin::class, FlightCabin::class, 'flight_id', 'cabin_id')->withPivot(['amount', 'currency']);
     }
 
     public function seats()
     {
         return $this->hasMany(FlightSeat::class, 'flight_id', 'id');
+    }
+
+    public function pivot_seats()
+    {
+        return $this->hasManyThrough(
+            FlightSeat::class, // The model to access to
+            FlightCabin::class, // The intermediate table that connects the Flight with the Cabin.
+            'flight_id',// The column of the intermediate table that connects to this model by its ID.
+            'cabin_id',// The column of the intermediate table that connects the Cabin by its ID.
+            'id',// The column that connects this model with the intermediate model table.
+            'cabin_id' // The column of the Seats table that ties it to the Cabin.
+        );
     }
 
 }

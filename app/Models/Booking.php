@@ -11,10 +11,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property int flight_id
  * @property int terminal_id
  * @property int user_id
- * @property int seat_id
+ * @property mixed cabin_id
  * @property mixed country
- * @property mixed cabin
  * @property mixed amount
+ * @property mixed email
+ * @property mixed phone
+ * @property mixed state
  * @property boolean flight_type
  */
 class Booking extends Model
@@ -41,8 +43,14 @@ class Booking extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function seat()
+    public function passengers()
     {
-        return $this->belongsTo(FlightSeat::class, 'seat_id', 'id');
+        return $this->hasMany(Passenger::class);
     }
+
+    public function cabin()
+    {
+        return $this->belongsTo(Cabin::class, 'cabin_id', 'id');
+    }
+
 }

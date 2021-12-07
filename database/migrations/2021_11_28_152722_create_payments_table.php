@@ -19,6 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger('booking_id');
             $table->unsignedBigInteger('user_id');
             $table->string('reference');
+            $table->string('invoice_no')->nullable();
             $table->string('amount');
             $table->string('currency');
             $table->string('country');
@@ -26,6 +27,7 @@ class CreatePaymentsTable extends Migration
             $table->string('email');
             $table->string('payment_gateway');
             $table->boolean('payment_successful');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

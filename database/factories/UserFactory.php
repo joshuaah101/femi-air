@@ -25,6 +25,7 @@ class UserFactory extends Factory
         $states = get_all_states('NGA');
 
         return [
+            'username' => $this->faker->unique()->userName(),
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),

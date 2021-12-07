@@ -22,6 +22,7 @@ class CreateTerminalsTable extends Migration
             $table->longText('description')->nullable();
             $table->string('image')->nullable();
             $table->boolean('active')->nullable()->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

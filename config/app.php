@@ -168,6 +168,8 @@ return [
          * Package Service Providers...
          */
         Stevebauman\Location\LocationServiceProvider::class,
+        Unicodeveloper\Paystack\PaystackServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

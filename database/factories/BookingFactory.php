@@ -19,12 +19,10 @@ class BookingFactory extends Factory
     {
         $states = get_all_states('NGA');
         $flight = Flight::inRandomOrder()->first();
-        $seat = $flight->seats()->inRandomOrder()->first();
         return [
             'flight_id' => $flight->id,
             'terminal_id' => $this->faker->randomElement(Terminal::pluck('id')->toArray()),
             'user_id' => $this->faker->randomElement(User::pluck('id')->toArray()),
-            'seat_id' => $seat ? $seat['id'] : null,
             'cabin_id' => $this->faker->randomElement(Cabin::pluck('id')->toArray()),
             'country' => 'NGA',
             'amount' => $this->faker->numberBetween(5000, 60000),

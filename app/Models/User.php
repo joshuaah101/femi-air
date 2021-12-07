@@ -7,6 +7,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Class User
+ * @package App\Models
+ * @property mixed username
+ * @property mixed first_name
+ * @property mixed last_name
+ * @property mixed email
+ * @property mixed password
+ * @property mixed gender
+ * @property mixed phone
+ * @property mixed country
+ * @property mixed state
+ * @property mixed dob
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -21,6 +35,12 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'gender',
+        'phone',
+        'country',
+        'state',
+        'dob',
+        'username'
     ];
 
     /**
@@ -40,5 +60,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'dob' => 'date'
     ];
 }

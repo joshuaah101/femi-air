@@ -20,6 +20,20 @@
             <form action="" method="POST">
                 @csrf
                 <div class="flex flex-col py-1">
+                    <label for="username" class="py-1 font-medium">
+                        {{ __('User name') }}:
+                    </label>
+                    <input type="text" id="username" name="username"  placeholder="User name" class="border border-gray-400 placeholder-gray-800 rounded-lg w-full p-2
+                    @error('username')  border-red-500 @enderror">
+
+                    @error('username')
+                        <p class="text-red-500 text-xs italic mt-4">
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+
+                <div class="flex flex-col py-1">
                     <label for="lastname" class="py-1 font-medium">
                         {{ __('Last name') }}:
                     </label>

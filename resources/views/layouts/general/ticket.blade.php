@@ -5,6 +5,7 @@
 
 @section('links')
     @include('partials.links')
+
 @endsection
 
 @section('header')

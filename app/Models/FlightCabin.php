@@ -16,4 +16,19 @@ use Illuminate\Database\Eloquent\Model;
 class FlightCabin extends Model
 {
     use HasFactory;
+
+    public function flight()
+    {
+        return $this->belongsTo(Flight::class, 'flight_id', 'id');
+    }
+
+    public function cabin()
+    {
+        return $this->belongsTo(Cabin::class, 'cabin_id', 'id');
+    }
+
+    public function cabin_seats()
+    {
+        return $this->hasManyThrough(FlightSeat::class, Cabin::class, 'cabin_id', 'seat_id', 'id', 'seat_id');
+    }
 }

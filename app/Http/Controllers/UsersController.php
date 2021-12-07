@@ -13,15 +13,55 @@ class UsersController extends Controller
         $this->middleware(['auth', 'verified','ticket']);
     }
 
-    public function index(Request $req)
+    public function index()
     {
-
-        $state = json_decode(file_get_contents("apis/state-api.json"));
-        $menuUrl = $req->get('menu');
-
+        if (request()->has('menu')) {
+            $menu = request()->get('menu');
+        } else {
+            $menu = 'dash';
+        }
         return view('layouts.user.home', [
-            'menuUrl' => $menuUrl,
-            'states' => $state->data
-        ]);
+            'menuUrl' => $menu]);
+    }
+
+    public function profile()
+    {
+        if (request()->has('menu')) {
+            $menu = request()->get('menu');
+        } else {
+            $menu = 'profile';
+        }
+        return view('layouts.user.home', ['menuUrl' => $menu]);
+    }
+
+    public function bookTicket()
+    {
+        if (request()->has('menu')) {
+            $menu = request()->get('menu');
+        } else {
+            $menu = 'bookTicket';
+        }
+        return view('layouts.user.home', ['menuUrl' => $menu]);
+    }
+
+    public function history()
+    {
+        if (request()->has('menu')) {
+            $menu = request()->get('menu');
+        } else {
+            $menu = 'history';
+        }
+        return view('layouts.user.home', ['menuUrl' => $menu]);
+    }
+
+    public function active()
+    {
+        if (request()->has('menu')) {
+            $menu = request()->get('menu');
+        } else {
+            $menu = 'active';
+        }
+        return view('layouts.user.home', ['menuUrl' => $menu]);
+
     }
 }

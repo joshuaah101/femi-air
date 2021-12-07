@@ -7,6 +7,7 @@
     @include('partials.links')
 @endsection
 @section('main')
+
     <main class="flex">
         {{--        sidebar--}}
         <div class="xs:hidden md:block w-1/6 bg-white h-screen shadow-lg top-0 left-0 fixed border-r-2 border-blue-100">
@@ -18,7 +19,6 @@
                              class="border-4 border-blue-200 rounded-full p-1 h-32 w-32"/>
                     </header>
                     <p class="font-semibold text-gray-400 text-center">
-
                         @auth() {{ auth()->user()->first_name.' '.auth()->user()->last_name }}@endauth
                     </p>
                 </section>

@@ -1,5 +1,4 @@
-<script src="{{ asset('js/toastr.js') }}"
-></script>
+<script src="{{ asset('js/toastr.js') }}" ></script>
 <script>
     toastr.options = {
         "closeButton": false,
@@ -18,7 +17,6 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     };
-
     <?php
         if(Session::has('error') && Session::get('error') != ''){
         ?>toastr["error"]("{{Session::get('error') }}");
@@ -47,7 +45,6 @@
 
     ?>
     $(document).ready(function () {
-
         window.livewire.on('alert', data => {
             toastr[data.type](data.message);
         });

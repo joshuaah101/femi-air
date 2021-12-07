@@ -31,7 +31,7 @@ class PaymentFactory extends Factory
             'country' => 'NGA',
             'name' => $user['first_name'] . ' ' . $user['last_name'],
             'email' => $user['email'],
-            'payment_gateway' => 'paystack',
+            'payment_gateway' => 'paypal',
             'payment_successful' => $this->faker->boolean
         ];
     }

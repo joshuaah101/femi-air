@@ -17,6 +17,7 @@ class CreateFlightTaxChargesTable extends Migration
             $table->id();
             $table->string('flight_id');
             $table->unsignedBigInteger('tax_charge_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

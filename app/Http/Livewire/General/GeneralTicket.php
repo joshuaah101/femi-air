@@ -7,9 +7,13 @@ use App\Models\Cabin;
 use App\Models\Flight;
 use App\Models\FlightCabin;
 use App\Models\FlightSeat;
+use App\Models\Passenger;
+use App\Models\Payment;
 use App\Models\TempBooking;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
+
 
 class GeneralTicket extends Component
 {
@@ -47,6 +51,100 @@ class GeneralTicket extends Component
         'returningDate' => ['except' => ''],
     ];
 
+    protected $listeners = ['paymentConfirmed'];
+
+
+    public function paymentConfirmed($new_data)
+    {
+        $data = collect($new_data);
+        $state = $this->state_of_origin;
+        $payment_units = $data['purchase_units'][0];
+        $payer = $data['payer'];
+
+        if (isset($data['id'])) $reference = $data['id'];
+        if (isset($payer['name']['given_name'], $payer['name']['surname'])) {
+            $name = $payer['name']['given_name'] . ' ' . $payer['name']['surname'];
+        } else {
+            $name = auth()->user()->first_name . ' ' . auth()->user()->last_name;
+        }
+        if (isset($payer['email_address'])) {
+            $email = $payer['email_address'];
+        } else {
+            $email = auth()->user()->email;
+        }
+        if (isset($payer['address']['country_code'])) $country = $payer['address']['country_code'];
+        $amount = $payment_units['amount']['value'] ?? $this->total;
+        if (isset($payment_units['amount']['currency_code'])) {
+            $currency = $payment_units['amount']['currency_code'];
+        } else {
+            $currency = $this->ticket_fee_currency;
+        }
+        if (isset($payment_units['payments']['captures'])) {
+            $payments = $payment_units['payments']['captures'];
+        }
+        if (isset($payments[0]['final_capture'])) $status = $payments[0]['final_capture'];
+
+        $check = Booking::where('user_id', auth()->id())->where('flight_id', $this->new_booking['flight_id'])->where('cabin_id', $this->new_booking['cabin_id'])->whereDate('created_at', '>=', now()->addHours(2)); // booking done 2 hours ago
+        if ($check->count() > 0) {
+            $booking = $check->first();
+        } else {
+            $booking = new Booking();
+        }
+
+        if (isset($this->new_booking['flight'])) $booking->terminal_id = $this->new_booking['flight']['outbound_terminal_id'];
+
+        if (isset($this->new_booking['flight_id'])) $booking->flight_id = $this->new_booking['flight_id'];
+
+        $booking->user_id = auth()->id();
+        if (isset($this->new_booking['cabin_id'])) $booking->cabin_id = $this->new_booking['cabin_id'];
+        if (isset($country)) $booking->country = $country;
+        if (isset($state)) $booking->state = $state;
+        if (isset($amount)) $booking->amount = $amount;
+        if (isset($this->new_booking['flight_type'])) $booking->flight_type = $this->new_booking['flight_type'];
+        if (isset($email)) $booking->email = $email;
+        $booking->phone = auth()->user()->phone;
+        if (isset($this->new_booking['state'])) $booking->state = $this->new_booking['state'];
+
+        $booking->save();
+
+        $new_payment = new Payment();
+        $new_payment->user_id = auth()->id();
+        $new_payment->booking_id = $booking['id'];
+        if (isset($payments[0])) $new_payment->invoice_no = $payments[0]['id'];
+        if (isset($reference)) $new_payment->reference = $reference;
+        if (isset($name)) $new_payment->name = $name;
+        if (isset($email)) $new_payment->email = $email;
+        if (isset($country)) $new_payment->country = $country;
+        if (isset($amount)) $new_payment->amount = $amount;
+        if (isset($currency)) $new_payment->currency = $currency;
+        if (isset($status)) $new_payment->payment_successful = $status;
+        if (isset($this->new_booking['flight_id'])) $new_payment->flight_id = $this->new_booking['flight_id'];
+
+        $new_payment->payment_gateway = 'paypal';
+        $new_payment->save();
+        foreach ($this->passengers as $person) {
+            $flight_id = $this->new_booking['flight_id'];
+            $cabin_id = $this->new_booking['cabin_id'];
+            $seat = $this->get_free_seats($flight_id, $cabin_id)->first();
+            Passenger::create([
+                'booking_id' => $booking['id'],
+                'payment_id' => $new_payment['id'],
+                'flight_seat_id' => ($seat) ? $seat['id'] : null,
+                'cabin_id' => $cabin_id,
+                'flight_id' => $flight_id,
+                'gender' => $person['gender'],
+                'first_name' => $person['first_name'],
+                'last_name' => $person['last_name'],
+                'date_of_birth' => $person['date_of_birth']
+            ]);
+        }
+        $this->clear_prev_cache();
+        return redirect(url('user/active'));
+    }
+
+    /**
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
     public function mount()
     {
         $this->check_current_step();
@@ -61,6 +159,9 @@ class GeneralTicket extends Component
         if (auth()->check()) {
             if (cache()->has($this->prev_session_name)) {
                 $this->payForBooking();
+            } else {
+                $this->current_step = 1;
+                $this->hidden_step = 1;
             }
         } else {
             if (cache()->has($this->prev_session_name)) {
@@ -70,7 +171,6 @@ class GeneralTicket extends Component
             $this->current_step = 1;
             $this->hidden_step = 1;
         }
-
     }
 
     public function bookTicket()
@@ -88,12 +188,21 @@ class GeneralTicket extends Component
 
     }
 
+    public function get_free_seats($flight_id, $cabin_id)
+    {
+        return FlightSeat::with('passenger')->where('flight_id', $flight_id)->where('cabin_id', $cabin_id);
+    }
+
     public function purchaseCabinSeat($flight_id, $cabin_id)
     {
         // get empty seats space and check if space will be enough for passengers
-        $check = FlightSeat::with('booking')->where('flight_id', $flight_id)->where('cabin_id', $cabin_id)->whereDoesntHave('booking');
+        $check = $this->get_free_seats($flight_id, $cabin_id);
+//        $cabin = Cabin::with(['flight' => function ($query) use ($flight_id) {
+//            $query->where('flight_id', $flight_id);
+//        }])->where('id', $cabin_id)->first();
+        $cabin = FlightCabin::with(['flight', 'cabin'])->where('flight_id', $flight_id)->where('cabin_id', $cabin_id)->first();
         if ($check->count() > $this->noOfTicket) {
-            $this->new_booking = $check->first();
+            $this->new_booking = $cabin;
             $this->get_ticket_fee($flight_id, $cabin_id);
             $this->get_flight_tax($flight_id);
             $this->calculate_total($flight_id);
@@ -173,10 +282,12 @@ class GeneralTicket extends Component
         if (auth()->check()) {
             if (cache()->has($this->prev_session_name)) {
                 $prev_session = cache()->get($this->prev_session_name);
-                $prev_data = TempBooking::where('session_id', cache()->get($this->prev_session_name));
+                $prev_data = TempBooking::where('session_id', $prev_session);
                 if ($prev_data->count() > 0) {
                     $get_data = $prev_data->first()['data'];
-                    $this->new_booking = $get_data['booking'];
+                    $booking = $this->get_free_seats($get_data['booking']['flight_id'], $get_data['booking']['cabin_id'])->first();
+                    dd($booking, $get_data);
+                    $this->new_booking = $booking;
                     $this->email = $get_data['email'];
                     $this->phone = $get_data['phone'];
                     $this->passengers = $get_data['passengers'];
@@ -186,7 +297,9 @@ class GeneralTicket extends Component
                     $this->taxes = $get_data['taxes'];
                     $this->sub_total = $get_data['sub_total'];
                     $this->total = $get_data['total'];
+
                     /******************************/
+
                     if (isset($get_data['ticketType'])) $this->ticketType = $get_data['ticketType'];
                     if (isset($get_data['trip_type'])) $this->trip_type = $get_data['trip_type'];
                     if (isset($get_data['noOfTicket'])) $this->noOfTicket = $get_data['noOfTicket'];
@@ -194,25 +307,25 @@ class GeneralTicket extends Component
                     if (isset($get_data['stateTo'])) $this->stateTo = $get_data['stateTo'];
                     if (isset($get_data['departureDate'])) $this->departureDate = $get_data['departureDate'];
                     if (isset($get_data['returningDate'])) $this->returningDate = $get_data['returningDate'];
-                } else {
-                    if ($this->new_booking) {
 
-                    } else {
+                    $this->current_step = 4;
+                    $this->hidden_step = 4;
+                } else {
+                    if (!$this->new_booking) {
                         session()->flash('error', 'Unable to fetch Previous Booking');
                         return redirect(url('/'));
                     }
-
                 }
-                $this->current_step = 4;
-                $this->hidden_step = 4;
             }
+            $this->current_step = 4;
+            $this->hidden_step = 4;
         } else {
             // save all transaction into temporal file and register/login user before going to payment gateway
-
             $session = session_id();
             TempBooking::create([
                 'session_id' => $session,
-                'data' => ['booking' => $this->new_booking, 'passengers' => $this->passengers, 'email' => $this->email, 'phone' => $this->phone,
+                'data' => [
+                    'booking' => $this->new_booking, 'passengers' => $this->passengers, 'email' => $this->email, 'phone' => $this->phone,
                     'state_of_origin' => $this->state_of_origin,
                     'ticket_fee' => $this->ticket_fee,
                     'ticket_fee_currency' => $this->ticket_fee_currency,
@@ -235,8 +348,8 @@ class GeneralTicket extends Component
             session()->flash('error', 'Login Required');
             return redirect('login');
         }
-
     }
+
 
     public function render()
     {
@@ -244,17 +357,21 @@ class GeneralTicket extends Component
             $query->count();
         };
         $states = get_all_states('NGA');
-
         if ($this->stateFrom) {
             $flights = Flight::with(['seats' => $count_seats, 'outbound_terminal', 'inbound_terminal', 'cabin', 'cabin.seats'])->where('departure', 'LIKE', '%' . $this->stateFrom . '%')->whereDate('departure_at', '>=', Carbon::create($this->departureDate))->get();
         } else {
             $flights = [];
         }
 
-
         return view('livewire.general.general-ticket')->with(['flights' => $flights, 'states' => $states]);
     }
 
+    /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \Exception
+     */
     private function clear_prev_cache()
     {
         $id = cache()->get($this->prev_session_name);

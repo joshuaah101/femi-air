@@ -19,7 +19,9 @@
         "laravel/ui": "^3.3",
         "livewire/livewire": "^2.8",
         "pragmarx/countries": "^0.7.2",
-        "stevebauman/location": "^6.2"
+        "srmklive/paypal": "~3.0",
+        "stevebauman/location": "^6.2",
+        "unicodeveloper/laravel-paystack": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

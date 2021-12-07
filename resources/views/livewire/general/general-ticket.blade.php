@@ -1,4 +1,7 @@
 <div class="bg-white px-5 py-4 shadow-lg rounded">
+
+    <script src="https://www.paypal.com/sdk/js?client-id={{config('paypal.sandbox.client_id')}}"
+            data-sdk-integration-source="button-factory"></script>
     <section class="flex justify-between items-center border-b-2 py-3">
         <div class="flex justify-center items-center">
             <img src="{{ asset(config("app.app_logo")) }}" alt="logo" class="w-16 h-8">
@@ -70,7 +73,7 @@
                             @if($item->cabin)
                                 @foreach($item->cabin as $cabin)
                                     {{--  //check number of seats empty --}}
-                                    @if(isset($cabin->seats) && (($cabin->seats()->whereHas('booking')->count()+$noOfTicket)!== $cabin->seats()->count()))
+                                    @if(isset($cabin->seats) && (($cabin->seats()->whereDoesntHave('passenger')->count()+$noOfTicket)!== $cabin->seats()->count()))
                                         <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-200 text-center">
                                             <div class="flex flex-col space-y-4">
                                                 <div class="flex flex-col">
@@ -346,7 +349,8 @@
                                 </header>
                                 <div class="flex flex-col space-y-2 font-mono">
                                     <header class="flex justify-between text-sm">
-                                        <span class="">Flight code </span> <span class="">{{$new_booking->code}}</span>
+                                        <span class="">Flight code </span> @if($new_booking->flight) <span
+                                            class="">{{$new_booking->flight->flight_number}}</span> @endif
                                     </header>
                                     <p class="flex justify-between text-sm">
                                         <span class="">Cabin </span> <span class="">
@@ -369,12 +373,13 @@
                                     </p>
                                     @if(isset($taxes)&& count($taxes)>0)
                                         @foreach($taxes as $tax)
+
                                             {{--                                            use percentage of the ticket amount for this tax else use a flat rate--}}
                                             @if((int)$tax['use_percentage']===1)
-                                                @php $tax = $ticket_fee* ((float)$tax['percentage_amount']/100); @endphp
+                                                @php $vat = $ticket_fee * ((float)$tax['percentage_amount']/100); @endphp
                                                 <p class="flex justify-between text-sm">
-                                                    <span class="">{{$tax['title']}} </span> <span
-                                                        class="">{{$tax}} {{$ticket_fee_currency}}</span>
+                                                  @isset($tax['title'])  <span class="">{{$tax['title']}} </span>@endisset <span
+                                                        class="">{{$vat}} {{$ticket_fee_currency}}</span>
                                                 </p>
                                             @else
                                                 <p class="flex justify-between text-sm">
@@ -410,7 +415,7 @@
                     <div class="flex flex-col mt-5 space-y-3">
                         @if($noOfTicket>1)
                             @foreach($passengers as $user)
-                                <h3>Passenger {{$loop->iteration}}:</h3>
+                                <h3 class="font-extrabold text-lg">Passenger {{$loop->iteration}}:</h3>
                                 <div class="flex justify-between">
                                     <span class="">
                                         Full name:
@@ -439,6 +444,7 @@
                             </span>
                             </div>
                         @endif
+                        <hr class="text-gray-600"/>
                         <div class="flex justify-between">
                             <span class="">
                                 E-mail:
@@ -467,10 +473,10 @@
                         </div>
                         <div class="flex justify-between">
                             <span class="">
-                                Flight type:
+                                Flight Code:
                             </span>
                             <span class="">
-                              {{$new_booking->code}}
+                            @if($new_booking->flight)  {{$new_booking->flight->flight_number}} @endif
                             </span>
                         </div>
                         <div class="flex justify-between">
@@ -511,10 +517,10 @@
                             @foreach($taxes as $tax)
                                 {{--                                            use percentage of the ticket amount for this tax else use a flat rate--}}
                                 @if((int)$tax['use_percentage']===1)
-                                    @php $tax = $ticket_fee* ((float)$tax['percentage_amount']/100); @endphp
+                                    @php $vat = $ticket_fee* ((float)$tax['percentage_amount']/100); @endphp
                                     <p class="flex justify-between text-sm">
                                         <span class="">{{$tax['title']}} </span> <span
-                                            class="">{{$tax}} {{$ticket_fee_currency}}</span>
+                                            class="">{{$vat}} {{$ticket_fee_currency}}</span>
                                     </p>
                                 @else
                                     <p class="flex justify-between text-sm">
@@ -555,54 +561,117 @@
                         <img src="{{ asset('storage/img/visa-card.png') }}" alt="visa card" class="">
                     </div>
                     <div class="p-5 flex flex-col w-1/2">
-                        <header class="text-blue-700 font-sans font-medium text-3xl">
+                        <header class="text-blue-700 font-sans font-medium text-3xl mb-5">
                             Payment Details
                         </header>
                         <div class="mt-3">
-                            <form action="" method="POST" class="space-y-5" id="payemnt-form">
-                                @csrf
-                                <div class="flex flex-col">
-                                    <label for="name-on-card" class="text-xs font-medium text-gray-400">
-                                        Name on Card
-                                    </label>
-                                    <input type="text" name="name_on_card" id="name-on-card" placeholder="John smith"
-                                           class="border-b px-3 py-2 focus:outline-none" required>
+                            <div class="flex flex-col">
+                                <label for="name-on-card" class="text-xl font-medium mb-5">
+                                    Total Sum of {{$ticket_fee_currency}}{{number_format($total)}} ~
+                                    USD{{number_format(convert_currency($total,$ticket_fee_currency,'USD'))}}
+                                </label>
+                            </div>
+
+                            {{--                            <div class="flex flex-col">--}}
+                            {{--                                --}}{{--                                    <label for="card-number" class="text-xs font-medium text-gray-400">--}}
+                            {{--                                --}}{{--                                        Card Number--}}
+                            {{--                                --}}{{--                                    </label>--}}
+                            {{--                                --}}{{--                                    <input type="text" name="card_number" id="card-number"--}}
+                            {{--                                --}}{{--                                           placeholder="2233 8854 7787 8965"--}}
+                            {{--                                --}}{{--                                           class="border-b px-3 py-2 focus:outline-none" required>--}}
+                            {{--                                --}}{{--                                </div>--}}
+
+                            {{--                                --}}{{--                                <div class="flex space-x-5">--}}
+                            {{--                                --}}{{--                                    <div class="flex flex-col">--}}
+                            {{--                                --}}{{--                                        <label for="card-number" class="text-xs font-medium text-gray-400">--}}
+                            {{--                                --}}{{--                                            Valid Through--}}
+                            {{--                                --}}{{--                                        </label>--}}
+                            {{--                                --}}{{--                                        <div class="flex flex-wrap">--}}
+                            {{--                                --}}{{--                                            <input type="number" name="card_number" id="card-number" placeholder="month"--}}
+                            {{--                                --}}{{--                                                   class="border-b py-2 w-16 focus:outline-none appearance-none text"--}}
+                            {{--                                --}}{{--                                                   required>--}}
+
+                            {{--                                --}}{{--                                            <input type="number" name="card_number" id="card-number" placeholder="date"--}}
+                            {{--                                --}}{{--                                                   class="border-b py-2 w-16 focus:outline-none textfield" required>--}}
+                            {{--                                --}}{{--                                        </div>--}}
+                            {{--                                --}}{{--                                    </div>--}}
+
+                            {{--                                --}}{{--                                    <div class="flex flex-col">--}}
+                            {{--                                --}}{{--                                        <label for="cvv" class="text-xs font-medium text-gray-400">--}}
+                            {{--                                --}}{{--                                            CVV--}}
+                            {{--                                --}}{{--                                        </label>--}}
+                            {{--                                --}}{{--                                        <input type="number" name="cvv" id="cvv" placeholder="885"--}}
+                            {{--                                --}}{{--                                               class="border-b px-3 py-2 w-16 focus:outline-none" required>--}}
+                            {{--                                --}}{{--                                    </div>--}}
+                            {{--                            </div>--}}
+
+                            <div id="smart-button-container">
+                                <div style="text-align: center;">
+                                    <div id="paypal-button-container"></div>
                                 </div>
+                            </div>
+                            <script>
+                                function initPayPalButton() {
+                                    $(document).ready(function () {
+                                        paypal.Buttons({
+                                            style: {
+                                                shape: 'rect',
+                                                color: 'gold',
+                                                layout: 'vertical',
+                                                label: 'paypal',
 
-                                <div class="flex flex-col">
-                                    <label for="card-number" class="text-xs font-medium text-gray-400">
-                                        Card Number
-                                    </label>
-                                    <input type="text" name="card_number" id="card-number"
-                                           placeholder="2233 8854 7787 8965"
-                                           class="border-b px-3 py-2 focus:outline-none" required>
-                                </div>
+                                            },
 
-                                <div class="flex space-x-5">
-                                    <div class="flex flex-col">
-                                        <label for="card-number" class="text-xs font-medium text-gray-400">
-                                            Valid Through
-                                        </label>
-                                        <div class="flex flex-wrap">
-                                            <input type="number" name="card_number" id="card-number" placeholder="month"
-                                                   class="border-b py-2 w-16 focus:outline-none appearance-none text"
-                                                   required>
+                                            createOrder: function (data, actions) {
+                                                return actions.order.create({
+                                                    payer: {
+                                                        name: {
+                                                            given_name: "{{auth()->user()->first_name}}",
+                                                            surname: "{{auth()->user()->last_name}}"
+                                                        },
+                                                        email_address: "{{auth()->user()->email}}",
+                                                        phone: {
+                                                            phone_type: "MOBILE",
+                                                            phone_number: {
+                                                                national_number: "{{auth()->user()->phone}}"
+                                                            }
+                                                        }
+                                                    },
+                                                    purchase_units: [{
+                                                        "amount": {
+                                                            "currency_code": "USD",
+                                                            "value": {{number_format(convert_currency($total,$ticket_fee_currency,'USD'),2,".","")}}
+                                                        }
+                                                    }]
+                                                });
+                                            },
 
-                                            <input type="number" name="card_number" id="card-number" placeholder="date"
-                                                   class="border-b py-2 w-16 focus:outline-none textfield" required>
-                                        </div>
-                                    </div>
+                                            onApprove: function (data, actions) {
+                                                return actions.order.capture().then(function (orderData) {
+                                                    // Full available details
+                                                    // console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                                                    window.livewire.emit('paymentConfirmed', orderData);
+                                                    // Show a success message within this page, e.g.
+                                                    const element = document.getElementById('paypal-button-container');
+                                                    element.innerHTML = '';
+                                                    element.innerHTML = '<h3>Ticket Payment Successful!</h3>';
 
-                                    <div class="flex flex-col">
-                                        <label for="cvv" class="text-xs font-medium text-gray-400">
-                                            CVV
-                                        </label>
-                                        <input type="number" name="cvv" id="cvv" placeholder="885"
-                                               class="border-b px-3 py-2 w-16 focus:outline-none" required>
-                                    </div>
-                                </div>
-                            </form>
+                                                    // Or go to another URL:  actions.redirect('thank_you.html');
+
+                                                });
+                                            },
+
+                                            onError: function (err) {
+                                                console.log(err);
+                                            }
+                                        }).render('#paypal-button-container');
+                                    })
+                                }
+
+                                initPayPalButton();
+                            </script>
                         </div>
+
                     </div>
                 </div>
                 <section class="flex justify-between mt-5">
@@ -611,10 +680,10 @@
                         &lt; Back
                     </button>
 
-                    <button type="button" onclick="document.getElementsById('payemnt-form').submit()"
-                            class="px-8 py-4 text-xs font-semibold text-white bg-blue-500 hover:bg-blue-600 rounded">
-                        Pay 55,000 NGN &gt;
-                    </button>
+                    {{--                    <button type="button" onclick="document.getElementsById('payemnt-form').submit()"--}}
+                    {{--                            class="px-8 py-4 text-xs font-semibold text-white bg-blue-500 hover:bg-blue-600 rounded">--}}
+                    {{--                        Pay 55,000 NGN &gt;--}}
+                    {{--                    </button>--}}
                 </section>
             </section>
         @else

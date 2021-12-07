@@ -107,7 +107,7 @@ function get_country($country_code, $country_cca = null)
  */
 function get_state($country_code, $state_code, $country_cca = null)
 {
-    $states = get_all_states($country_code,$country_cca);
+    $states = get_all_states($country_code, $country_cca);
 
     if ($states && count($states) > 0) {
         return $states->where('postal', $state_code)->first();
@@ -150,7 +150,6 @@ function get_country_state($country_code, $state_code, $country_cca = null)
         $state_details = $state;
         return $state_details['name'] ?? $state_details['alt_names'][0];
     }
-
     return null;
 
 }

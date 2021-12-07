@@ -19,6 +19,7 @@ class CreateFlightCabinsTable extends Migration
             $table->unsignedBigInteger('cabin_id');
             $table->string('amount');
             $table->string('currency');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

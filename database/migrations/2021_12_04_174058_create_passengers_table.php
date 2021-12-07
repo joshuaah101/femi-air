@@ -16,6 +16,7 @@ class CreatePassengersTable extends Migration
         Schema::create('passengers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('booking_id');
+            $table->unsignedBigInteger('payment_id');
             $table->unsignedBigInteger('flight_seat_id');
             $table->unsignedBigInteger('cabin_id');
             $table->unsignedBigInteger('flight_id')->nullable();

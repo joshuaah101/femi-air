@@ -18,15 +18,14 @@ class CreateBookingsTable extends Migration
             $table->unsignedBigInteger('flight_id');
             $table->unsignedBigInteger('terminal_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('seat_id');
             $table->unsignedBigInteger('cabin_id');
             $table->string('country')->nullable();
             $table->string('amount')->nullable();
             $table->string('luggage_size')->nullable();
             $table->boolean('flight_type')->nullable()->default(false)->comment('false for one way trip and true for two way trip');
             $table->string('email')->nullable();
-            $table->string('phone');
-            $table->string('state');
+            $table->string('phone')->nullable();
+            $table->string('state')->nullable();
             $table->timestamps();
         });
     }

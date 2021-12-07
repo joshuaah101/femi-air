@@ -18,6 +18,7 @@ class CreateFlightSeatsTable extends Migration
             $table->unsignedBigInteger('flight_id')->nullable();
             $table->unsignedBigInteger('cabin_id');
             $table->string('code');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

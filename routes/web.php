@@ -21,14 +21,14 @@ use App\Http\Controllers\PagesController;
 //Auth::routes();
 
 Route::get('/', [PagesController::class, 'index']);
-Route::get('login', [PagesController::class, 'showLoginPage']);
+Route::get('login', [PagesController::class, 'showLoginPage'])->name('login');
 Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
 
 Route::get('register', [PagesController::class, 'showSignupPage']);
 Route::post('register', [\App\Http\Controllers\Auth\RegisterController::class, 'register']);
 Route::get('summary', [PagesController::class, 'showSummaryPage']);
 Route::get('payment', [PagesController::class, 'showPaymentPage']);
-Route::get('ticket', [PagesController::class, 'showTicketPage']);
+Route::get('ticket', [PagesController::class, 'showTicketPage'])->middleware('ticket');
 Route::get('flight', [PagesController::class, 'showFlightSelectionPage']);
 
 
@@ -36,7 +36,10 @@ Route::get('flight', [PagesController::class, 'showFlightSelectionPage']);
 // Users
 Route::prefix('user')->group(function () {
     Route::get('/', [UsersController::class, 'index']);
-
+    Route::get('/profile', [UsersController::class, 'profile']);
+    Route::get('/history', [UsersController::class, 'history']);
+    Route::get('/bookTicket', [UsersController::class, 'bookTicket']);
+    Route::get('/active', [UsersController::class, 'active']);
 });
 
 // Admin
@@ -46,13 +49,8 @@ Route::prefix('admin')->group(function () {
 
 });
 
-//Post form routes
-Route::post('ticket', function () {
-
-    $state = json_decode(file_get_contents("apis/state-api.json"));
-
-    return view('layouts.general.ticket', [
-        'states' => $state->data
-    ]);
+Route::prefix('payment')->group(function () {
+    Route::get('/', [\App\Http\Controllers\PaymentsController::class, 'handler'])->name('pay');
+    Route::get('/callback', [\App\Http\Controllers\PaymentsController::class, 'callback'])->name('payment.callback');
 });
 

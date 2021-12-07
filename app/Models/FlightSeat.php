@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\Models
  * @property int id
  * @property int flight_id
- * @property int seat_id
  * @property int cabin_id
  * @property boolean is_booked
  */
@@ -31,16 +30,13 @@ class FlightSeat extends Model
      */
     public function getIsBookedAttribute()
     {
-        return $this->booking !== null;
+        return $this->passenger !== null;
     }
 
-    /**
-     * Every booking connects this booking to this seat
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function booking()
+
+    public function passenger()
     {
-        return $this->hasOne(Booking::class, 'seat_id', 'id');
+        return $this->hasOne(Passenger::class, 'flight_seat_id', 'id');
     }
 
     /**
