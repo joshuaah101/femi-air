@@ -74,7 +74,7 @@
              </span>
             Home
         </a>
-        <a href="ticket"
+        <a href="{{url('ticket')}}"
            class="{{ request()->is('ticket') ? 'text-purple-700 hover:text-blue-100 font-bold' : '' }} flex items-center text-md px-5 py-3 text-blue-700 hover:text-blue-600 font-bold">
             <span class="mr-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
@@ -85,7 +85,7 @@
              </span>
             Book a flight
         </a>
-        <a href="login"
+        <a href="{{url('login')}}"
            class="{{ request()->is('login') ? 'text-purple-700 hover:text-blue-100 font-bold' : '' }} flex items-center text-md px-5 py-3 text-blue-700 hover:text-blue-600 font-bold">
             <span class="mr-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
@@ -96,7 +96,7 @@
              </span>
             Login
         </a>
-        <a href="register"
+        <a href="{{url('register')}}"
            class="{{ request()->is('register') ? 'text-purple-700 hover:text-blue-100 font-bold' : '' }} flex items-center text-md px-5 py-3 text-blue-700 hover:text-blue-600 font-bold">
             <span class="mr-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
