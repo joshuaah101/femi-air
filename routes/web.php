@@ -23,7 +23,7 @@ use App\Http\Controllers\PagesController;
 Route::get('/', [PagesController::class, 'index']);
 Route::get('login', [PagesController::class, 'showLoginPage'])->name('login');
 Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
-
+Route::post('logout',[App\Http\Controllers\Auth\LoginController::class,'logout']);
 Route::get('register', [PagesController::class, 'showSignupPage']);
 Route::post('register', [\App\Http\Controllers\Auth\RegisterController::class, 'register']);
 Route::get('summary', [PagesController::class, 'showSummaryPage']);
