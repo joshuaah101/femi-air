@@ -286,7 +286,6 @@ class GeneralTicket extends Component
                 if ($prev_data->count() > 0) {
                     $get_data = $prev_data->first()['data'];
                     $booking = $this->get_free_seats($get_data['booking']['flight_id'], $get_data['booking']['cabin_id'])->first();
-                    dd($booking, $get_data);
                     $this->new_booking = $booking;
                     $this->email = $get_data['email'];
                     $this->phone = $get_data['phone'];
@@ -343,7 +342,7 @@ class GeneralTicket extends Component
                 ]
             ]);
             //store prev session in cache before redirecting to login page
-            cache()->add($this->prev_session_name, $session);
+//            cache()->add($this->prev_session_name, $session);
 
             session()->flash('error', 'Login Required');
             return redirect('login');

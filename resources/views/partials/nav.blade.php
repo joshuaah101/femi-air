@@ -9,7 +9,6 @@
             </div>
 
             {{-- primary nav --}}
-
             <div class="hidden md:flex items-center">
                 <a href="/"
                    class="{{ request()->is('/') ? 'text-orange-500 border-b-2 border-orange-500 hover:text-black' : 'hover:text-orange-500 ' }}
