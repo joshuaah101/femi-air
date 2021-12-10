@@ -61,7 +61,15 @@
                         </span>
                             Profile
                         </a>
-
+                        <a href="{{url('user/profile')}}"
+                           class="{{ request()->is('user/profile') ? 'bg-orange-500 hover:bg-white border-t-2 border-gray-500' : 'hover:text-orange-500 ' }}
+                               text-xs font-semibold px-2 py-4 text-gray-900 transition duration-300">
+                            Profile
+                        </a>
+                        <form action="{{ url('logout') }}" method="post">
+                            @csrf
+                            <button class="text-xs font-semibold px-2 py-4 text-gray-900 transition duration-300" >Logout</button>
+                        </form>
                     @else
                         <a href="login" class="{{ request()->is('login') ? 'text-yellow-400 font-semibold0' : '' }}
                             text-white hover:text-orange-500 flex items-center">

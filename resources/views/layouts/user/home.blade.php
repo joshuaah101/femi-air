@@ -91,8 +91,10 @@
                     </span>
                     Profile
                 </a>
+                <form action="{{ url('logout') }}" method="post">
+                    @csrf
 
-                <a href="logout"
+                <button type="submit"
                    class="text-sm px-5 py-2 font-semibold text-red-700 hover:text-red-600 hover:bg-red-100 rounded rounded-r-full flex items-center">
                     <span class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -102,7 +104,8 @@
                         </svg>
                     </span>
                     Logout
-                </a>
+                </button>
+                </form>
             </div>
         </div>
         <div class="xs:ml-0 md:ml-1/6 px-5 w-full">
