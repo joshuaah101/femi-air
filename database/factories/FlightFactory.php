@@ -18,15 +18,17 @@ class FlightFactory extends Factory
         $code = $sentences[random_int(0, 25)] . $sentences[random_int(0, 25)] . '-' . random_int(10, 99) . random_int(10, 99);
         $dep = Terminal::inRandomOrder()->first();
         $land = Terminal::inRandomOrder()->first();
+        $departure = random_int(2, 400);
+        $landing = random_int(400, 9200);
         return [
             'flight_number' => $code,
             'outbound_terminal_id' => $dep['id'],
             'inbound_terminal_id' => $land['id'],
             'departure' => $dep['state'],
             'landing' => $land['state'],
-            'departure_at' => $this->faker->dateTimeBetween('2 hours', '8 hours'),
+            'departure_at' => $this->faker->dateTimeBetween('2 hours', $departure . ' hours'),
             'amount' => $this->faker->numberBetween(10000, 35000),
-            'landing_at' => $this->faker->dateTimeBetween('8 hours', '1 days'),
+            'landing_at' => $this->faker->dateTimeBetween('8 hours', $landing . ' days'),
             'cancelled' => $this->faker->boolean(20)
         ];
     }
