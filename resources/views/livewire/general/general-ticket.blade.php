@@ -114,16 +114,16 @@
                         </tbody>
                     @endif
 
-                        <tbody>
+                    <tbody>
 
-                        <tr>
-                            <td>
-                                <button class="bg-blue-700 text-white hover:bg-blue-900 px-2 py-3 my-3 rounded-lg"
-                                        wire:click="$set('current_step',0)">< back
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
+                    <tr>
+                        <td>
+                            <button class="bg-blue-700 text-white hover:bg-blue-900 px-2 py-3 my-3 rounded-lg"
+                                    wire:click="$set('current_step',0)">< back
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
                 </table>
             </section>
         @elseif($current_step === 2)
@@ -430,7 +430,7 @@
                                 <h3 class="font-extrabold text-lg">Passenger {{$loop->iteration}}:</h3>
                                 <div class="flex justify-between">
                                     <span class="">
-                                        Full name:
+                                        Full Name:
                                     </span>
                                     <span class="">
                                         {{ $user['first_name'] }} {{ $user['last_name'] }}
@@ -449,7 +449,7 @@
                         @else
                             <div class="flex justify-between">
                             <span class="">
-                                Full name:
+                                Full Name:
                             </span>
                                 <span class="">
                                 {{ $passengers[0]['first_name'] }} {{ $passengers[0]['last_name'] }}
@@ -524,6 +524,11 @@
                                 <span
                                     class="">{{ number_format($ticket_fee) }} {{ $ticket_fee_currency }}</span>
                             @endif
+                        </p>
+                        <p class="flex justify-between text-sm">
+                            <span>{{ $ticketType }}</span>
+                            <span>@if($new_booking->flight){{ number_format($new_booking->flight[strtolower($ticketType)],2) }} @else
+                                    0 @endif {{ $ticket_fee_currency }}</span>
                         </p>
                         @if(isset($taxes)&& count($taxes)>0)
                             @foreach($taxes as $tax)
@@ -624,7 +629,6 @@
                                     <div id="paypal-button-container"></div>
                                 </div>
                             </div>
-
                             <script>
                                 function initPayPalButton() {
                                     $(document).ready(function () {
@@ -673,7 +677,10 @@
                                             },
 
                                             onError: function (err) {
-                                                console.log(err);
+                                                if(err.message){
+                                                    window.livewire.emit('alert',{"message":err.message,"type":"error"});
+                                                }
+                                                // console.log(err);
                                             }
                                         }).render('#paypal-button-container');
                                     })
@@ -696,6 +703,168 @@
                     {{--                        Pay 55,000 NGN &gt;--}}
                     {{--                    </button>--}}
                 </section>
+            </section>
+        @elseif($current_step === 5)
+            <section
+                class="mt-5 px-5 py-4 flex xs:flex-col md:flex-row md:justify-between font-medium font-mono space-x-4">
+                <div class="w-full" id="printBooking" media="print">
+                    <header class="text-lg uppercase font-semibold">
+                        Full Flight Details
+                    </header>
+                    <div class="flex flex-col mt-5 space-y-3">
+                        @if($noOfTicket>1)
+                            @foreach($passengers as $user)
+                                <h3 class="font-extrabold text-lg">Passenger {{$loop->iteration}}:</h3>
+                                <div class="flex justify-between">
+                                    <span class="">
+                                        Full Name:
+                                    </span>
+                                    <span class="">
+                                        {{ $user['first_name'] }} {{ $user['last_name'] }}
+                                    </span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="">
+                                        Gender:
+                                    </span>
+                                    <span class="">
+                                        {{$user['gender']}}
+                                    </span>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="flex justify-between">
+                                <span class="">
+                                    Full Name:
+                                </span>
+                                <span class="">
+                                    {{ $passengers[0]['first_name'] }} {{ $passengers[0]['last_name'] }}
+                                </span>
+                            </div>
+                        @endif
+                        <hr class="text-gray-600"/>
+                        <div class="flex justify-between">
+                            <span class="">
+                                E-mail:
+                            </span>
+                            <span class="">
+                              {{$email}}
+                            </span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="">
+                                Phone:
+                            </span>
+                            <span class="">
+                              {{$phone}}
+                            </span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="">
+                                Outbound:
+                            </span>
+                            <span class="">
+{{--                                Lagos - Abuja--}}
+                                @if(isset($new_booking->flight)) {{ get_state('NGA',$new_booking->flight->landing)['name']??'' }} @endif - @if(isset($new_booking->flight)){{ $new_booking->flight->landing_at->format('d/m/y | h-m') }} @endif
+
+                            </span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="">
+                                Flight Code:
+                            </span>
+                            <span class="">
+                            @if($new_booking->flight)  {{$new_booking->flight->flight_number}} @endif
+                            </span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="">
+                                Cabin:
+                            </span>
+                            <span class="">
+                              @if(isset($new_booking->cabin)){{ $new_booking->cabin->title }} @endif
+                            </span>
+                        </div>
+                        <header class="text-lg uppercase font-semibold">
+                            Booking Details:
+                        </header>
+                        <div class="flex justify-between">
+                            <span class="">
+                                Booking ID:
+                            </span>
+                            <span class="">
+                              @if(isset($final_booking_credentials)){{ $final_booking_credentials['id'] }} @endif
+                            </span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="">
+                               Payment Reference ID:
+                            </span>
+                            <span class="">
+                              @if(isset($final_booking_credentials['payment'])){{ $final_booking_credentials['payment']['reference'] }} @endif
+                            </span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="">
+                               Payment Status:
+                            </span>
+                            <span class="">
+                              @if(isset($final_booking_credentials['payment'])){{ $final_booking_credentials['payment']['payment_successful']==1?"Confirmed":"No" }} @endif
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full">
+                    <header class="text-lg uppercase font-semibold">
+                        Price details
+                    </header>
+                    <div class="flex flex-col mt-5 space-y-5">
+                        <p class="flex justify-between text-sm">
+                            <span class="">Ticket cost </span> @if(isset($ticket_fee) && $ticket_fee)
+                                <span
+                                    class="">{{ number_format($ticket_fee) }} {{ $ticket_fee_currency }}</span>
+                            @endif
+                        </p>
+                        <p class="flex justify-between text-sm">
+                            <span>{{ $ticketType }}</span>
+                            <span>@if($new_booking->flight){{ number_format($new_booking->flight[strtolower($ticketType)],2) }} @else
+                                    0 @endif {{ $ticket_fee_currency }}</span>
+                        </p>
+                        @if(isset($taxes)&& count($taxes)>0)
+                            @foreach($taxes as $tax)
+                                {{--                                            use percentage of the ticket amount for this tax else use a flat rate--}}
+                                @if((int)$tax['use_percentage']===1)
+                                    @php $vat = $ticket_fee* ((float)$tax['percentage_amount']/100); @endphp
+                                    <p class="flex justify-between text-sm">
+                                        <span class="">{{$tax['title']}} </span> <span
+                                            class="">{{$vat}} {{$ticket_fee_currency}}</span>
+                                    </p>
+                                @else
+                                    <p class="flex justify-between text-sm">
+                                        <span class="">{{$tax['title']}} </span> <span
+                                            class="">{{number_format($tax['flat_amount'])}} {{$ticket_fee_currency}}</span>
+                                    </p>
+                                @endif
+
+                            @endforeach
+                        @endif
+                        <p class="font-bold text-md font-sans flex justify-between">
+                            <span class="">Sub Total </span> <span
+                                class="">{{number_format($sub_total)}} {{$ticket_fee_currency}}</span>
+                        </p>
+                        <p class="font-bold text-md font-sans flex justify-between">
+                            <span class="">Total @if($noOfTicket>1) (for all passengers) @endif </span>
+                            <span
+                                class="">{{number_format($total)}} {{$ticket_fee_currency}}</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="container">
+                    <button
+                        class="bg-orange-500 px-2 py-3 text-orange-100 sm:w-full mt-5 rounded hover:text-orange-500 hover:bg-white font-semibold text-md flex justify-center transition duration-300"
+                        onclick="PrintElem(document.getElementById('printBooking'))">Print
+                    </button>
+                </div>
             </section>
         @else
             <form wire:submit.prevent="bookTicket" method="POST" id="reservationForm"
@@ -855,4 +1024,34 @@
             </form>
         @endif
     </div>
+    <script type="text/javascript">
+        $('section').append(Math.random());
+
+        $(window).bind({
+            beforeunload: function (ev) {
+                ev.preventDefault();
+            },
+            unload: function (ev) {
+                ev.preventDefault();
+            }
+        });
+
+        function PrintElem(elem) {
+            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+            mywindow.document.write('<html><head><title>' + document.title + '</title>');
+            mywindow.document.write('</head><body >');
+            mywindow.document.write('<h1>' + document.title + '</h1>');
+            mywindow.document.write(document.getElementById(elem).innerHTML);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            mywindow.print();
+            mywindow.close();
+
+            return true;
+        }
+    </script>
 </div>

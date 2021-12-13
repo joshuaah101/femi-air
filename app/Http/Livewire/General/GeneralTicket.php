@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\General;
 
 use App\Models\Booking;
-use App\Models\Cabin;
 use App\Models\Flight;
 use App\Models\FlightCabin;
 use App\Models\FlightSeat;
@@ -11,7 +10,6 @@ use App\Models\Passenger;
 use App\Models\Payment;
 use App\Models\TempBooking;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 
 
@@ -40,6 +38,9 @@ class GeneralTicket extends Component
     public $taxes = [];
     public $sub_total = 0;
     public $total = 0;
+    /********************************************/
+    public $final_booking_key;
+    public $final_booking_credentials;
 
     protected $queryString = [
         'ticketType' => ['except' => ''],
@@ -90,11 +91,8 @@ class GeneralTicket extends Component
         } else {
             $booking = new Booking();
         }
-
         if (isset($this->new_booking['flight'])) $booking->terminal_id = $this->new_booking['flight']['outbound_terminal_id'];
-
         if (isset($this->new_booking['flight_id'])) $booking->flight_id = $this->new_booking['flight_id'];
-
         $booking->user_id = auth()->check() ? auth()->id() : session()->getId();
         if (isset($this->new_booking['cabin_id'])) $booking->cabin_id = $this->new_booking['cabin_id'];
         if (isset($country)) $booking->country = $country;
@@ -104,7 +102,6 @@ class GeneralTicket extends Component
         if (isset($email)) $booking->email = $email;
         $booking->phone = auth()->user()->phone;
         if (isset($this->new_booking['state'])) $booking->state = $this->new_booking['state'];
-
         $booking->save();
 
         $new_payment = new Payment();
@@ -141,6 +138,16 @@ class GeneralTicket extends Component
         $this->clear_prev_cache();
         $this->emit('alert', ['message' => 'Booking Completed Succesfully', 'type' => 'success']);
 //        return redirect(url('user/active'));
+        $this->final_booking_key = auth()->check() ? auth()->id() : session()->getId();
+        $this->get_final_booking();
+        $this->current_step = 5;
+        $this->hidden_step = 5;
+    }
+
+    public function get_final_booking()
+    {
+        $id = $this->final_booking_key;
+        $this->final_booking_credentials = Booking::with(['flight', 'payment', 'terminal', 'passengers', 'cabin'])->where('user_id', $id)->first();
     }
 
     /**

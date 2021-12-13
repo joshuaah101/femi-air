@@ -9,7 +9,6 @@
     <link href="{{ asset('css/toastr.css')  }}" rel="stylesheet"/>
     @yield('links')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
     <script src="https://www.paypal.com/sdk/js?client-id={{config('paypal.sandbox.client_id')}}" data-sdk-integration-source="button-factory"></script>
     {{-- <!--Regular Datatables CSS-->
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
