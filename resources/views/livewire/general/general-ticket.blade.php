@@ -1,7 +1,5 @@
 <div class="bg-white px-5 py-4 shadow-lg rounded">
 
-    <script src="https://www.paypal.com/sdk/js?client-id={{config('paypal.sandbox.client_id')}}"
-            data-sdk-integration-source="button-factory"></script>
     <section class="flex justify-between items-center border-b-2 py-3">
         <div class="flex justify-center items-center">
             <img src="{{ asset(config("app.app_logo")) }}" alt="logo" class="w-16 h-8">
@@ -626,6 +624,7 @@
                                     <div id="paypal-button-container"></div>
                                 </div>
                             </div>
+
                             <script>
                                 function initPayPalButton() {
                                     $(document).ready(function () {

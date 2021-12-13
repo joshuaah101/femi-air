@@ -84,7 +84,7 @@ class GeneralTicket extends Component
         }
         if (isset($payments[0]['final_capture'])) $status = $payments[0]['final_capture'];
 
-        $check = Booking::where('user_id', session()->getId())->where('flight_id', $this->new_booking['flight_id'])->where('cabin_id', $this->new_booking['cabin_id'])->whereDate('created_at', '>=', now()->addHours(2)); // booking done 2 hours ago
+        $check = Booking::where('user_id', auth()->check() ? auth()->id() : session()->getId())->where('flight_id', $this->new_booking['flight_id'])->where('cabin_id', $this->new_booking['cabin_id'])->whereDate('created_at', '>=', now()->addHours(2)); // booking done 2 hours ago
         if ($check->count() > 0) {
             $booking = $check->first();
         } else {
@@ -95,7 +95,7 @@ class GeneralTicket extends Component
 
         if (isset($this->new_booking['flight_id'])) $booking->flight_id = $this->new_booking['flight_id'];
 
-        $booking->user_id = session()->getId();
+        $booking->user_id = auth()->check() ? auth()->id() : session()->getId();
         if (isset($this->new_booking['cabin_id'])) $booking->cabin_id = $this->new_booking['cabin_id'];
         if (isset($country)) $booking->country = $country;
         if (isset($state)) $booking->state = $state;
@@ -108,7 +108,7 @@ class GeneralTicket extends Component
         $booking->save();
 
         $new_payment = new Payment();
-        $new_payment->user_id = session()->getId();
+        $new_payment->user_id = auth()->check() ? auth()->id() : session()->getId();
         $new_payment->booking_id = $booking['id'];
         if (isset($payments[0])) $new_payment->invoice_no = $payments[0]['id'];
         if (isset($reference)) $new_payment->reference = $reference;
@@ -139,7 +139,8 @@ class GeneralTicket extends Component
             ]);
         }
         $this->clear_prev_cache();
-        return redirect(url('user/active'));
+        $this->emit('alert', ['message' => 'Booking Completed Succesfully', 'type' => 'success']);
+//        return redirect(url('user/active'));
     }
 
     /**
