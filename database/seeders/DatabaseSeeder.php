@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         }
         // each flight has its own charges and number of cabins for each of the cabin and different cost for each cabin type e.g economic is has a flat fee but first class has its own extra charge
         if (Flight::count() < 1) {
-            Flight::factory()->count(500)->has(TaxCharge::factory()->count(3), 'tax_charge')->create()->each(function ($flight) {
+            Flight::factory()->count(200)->has(TaxCharge::factory()->count(3), 'tax_charge')->create()->each(function ($flight) {
                 $cabins = Cabin::all();
                 // for each flight
                 foreach ($cabins as $cabin) {

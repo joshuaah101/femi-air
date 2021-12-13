@@ -65,7 +65,7 @@ class GeneralTicket extends Component
         if (isset($payer['name']['given_name'], $payer['name']['surname'])) {
             $name = $payer['name']['given_name'] . ' ' . $payer['name']['surname'];
         } else {
-            $name = auth()->user()->first_name . ' ' . auth()->user()->last_name;
+            $name = isset($this->passengers) ? $this->passengers[0]['first_name'] . ' ' . $this->passengers[0]['last_name'] : '';
         }
         if (isset($payer['email_address'])) {
             $email = $payer['email_address'];
@@ -84,7 +84,7 @@ class GeneralTicket extends Component
         }
         if (isset($payments[0]['final_capture'])) $status = $payments[0]['final_capture'];
 
-        $check = Booking::where('user_id', auth()->id())->where('flight_id', $this->new_booking['flight_id'])->where('cabin_id', $this->new_booking['cabin_id'])->whereDate('created_at', '>=', now()->addHours(2)); // booking done 2 hours ago
+        $check = Booking::where('user_id', session()->getId())->where('flight_id', $this->new_booking['flight_id'])->where('cabin_id', $this->new_booking['cabin_id'])->whereDate('created_at', '>=', now()->addHours(2)); // booking done 2 hours ago
         if ($check->count() > 0) {
             $booking = $check->first();
         } else {
@@ -95,7 +95,7 @@ class GeneralTicket extends Component
 
         if (isset($this->new_booking['flight_id'])) $booking->flight_id = $this->new_booking['flight_id'];
 
-        $booking->user_id = auth()->id();
+        $booking->user_id = session()->getId();
         if (isset($this->new_booking['cabin_id'])) $booking->cabin_id = $this->new_booking['cabin_id'];
         if (isset($country)) $booking->country = $country;
         if (isset($state)) $booking->state = $state;
@@ -108,7 +108,7 @@ class GeneralTicket extends Component
         $booking->save();
 
         $new_payment = new Payment();
-        $new_payment->user_id = auth()->id();
+        $new_payment->user_id = session()->getId();
         $new_payment->booking_id = $booking['id'];
         if (isset($payments[0])) $new_payment->invoice_no = $payments[0]['id'];
         if (isset($reference)) $new_payment->reference = $reference;
@@ -180,7 +180,7 @@ class GeneralTicket extends Component
             'trip_type' => 'required',
             'stateFrom' => 'required',
             'stateTo' => 'required|different:stateFrom',
-            'departureDate' => 'required|after:' . Carbon::now()->format('H:i:s'),
+            'departureDate' => 'required|after:' . Carbon::now()->subDay()->format('Y-m-d'),
             'returningDate' => 'nullable|after:departureDate'
         ]);
         $this->current_step = 1;
@@ -205,7 +205,7 @@ class GeneralTicket extends Component
             $this->new_booking = $cabin;
             $this->get_ticket_fee($flight_id, $cabin_id);
             $this->get_flight_tax($flight_id);
-            $this->calculate_total($flight_id);
+            $this->calculate_total();
             // redirect to the next step of register profile;
             $this->current_step = 2;
             $this->hidden_step = 2;
@@ -231,10 +231,10 @@ class GeneralTicket extends Component
         $this->hidden_step = 3;
     }
 
-    private function calculate_total($flight_id)
+    private function calculate_total()
     {
         $taxes = $this->taxes;
-        $sum_taxes = 0;
+        $sum_taxes = 0; // all tax for this flight
         foreach ($taxes as $item) {
             if ((int)$item['use_percentage'] === 1) {
                 $sum_taxes += $this->ticket_fee * ((float)$item['percentage_amount'] / 100);
@@ -242,10 +242,15 @@ class GeneralTicket extends Component
                 $sum_taxes += (float)$item['flat_amount'];
             }
         }
-        $sub_total = $sum_taxes + $this->ticket_fee;
+        // flight Fee
+
+        $ticket_type = 0;
+        if (isset($this->ticketType)) {
+            $ticket_type = (float)$this->new_booking['flight'][strtolower($this->ticketType)];
+        }
+        $sub_total = $sum_taxes + $this->ticket_fee + $ticket_type;
         $this->sub_total = $sub_total;
         $this->total = $sub_total * (int)$this->noOfTicket;
-
     }
 
     private function get_ticket_fee($flight_id, $cabin_id)
@@ -310,14 +315,12 @@ class GeneralTicket extends Component
                     $this->current_step = 4;
                     $this->hidden_step = 4;
                 } else {
-                    if (!$this->new_booking) {
-                        session()->flash('error', 'Unable to fetch Previous Booking');
-                        return redirect(url('/'));
-                    }
+//                    if (!$this->new_booking) {
+//                        session()->flash('error', 'Unable to fetch Previous Booking');
+//                        return redirect(url('/'));
+//                    }
                 }
             }
-            $this->current_step = 4;
-            $this->hidden_step = 4;
         } else {
             // save all transaction into temporal file and register/login user before going to payment gateway
             $session = session_id();
@@ -344,20 +347,23 @@ class GeneralTicket extends Component
             //store prev session in cache before redirecting to login page
 //            cache()->add($this->prev_session_name, $session);
 
-            session()->flash('error', 'Login Required');
-            return redirect('login');
+//            session()->flash('error', 'Login Required');
+//            return redirect('login');
         }
+        $this->current_step = 4;
+        $this->hidden_step = 4;
     }
 
 
     public function render()
     {
-        $count_seats = function ($query) {
-            $query->count();
+        $count_seats = static function ($query) {
+            $query->count() > 0;
         };
         $states = get_all_states('NGA');
         if ($this->stateFrom) {
-            $flights = Flight::with(['seats' => $count_seats, 'outbound_terminal', 'inbound_terminal', 'cabin', 'cabin.seats'])->where('departure', 'LIKE', '%' . $this->stateFrom . '%')->whereDate('departure_at', '>=', Carbon::create($this->departureDate))->get();
+            $flights = Flight::with(['seats' => $count_seats, 'outbound_terminal', 'inbound_terminal', 'cabin', 'cabin.seats'])->where('departure', 'LIKE', '%' . $this->stateFrom . '%')->whereDate('departure_at', '>=', Carbon::create($this->departureDate)->toDateString())->get();
+//dd($flights);
         } else {
             $flights = [];
         }

@@ -118,12 +118,12 @@
                 </svg>
                 <label for="departureDate" class="text-sm text-white font-semibold">Departure date</label>
             </div>
-            <input type="datetime-local" wire:model="departureDate" id="departureDate"
+            <input type="date" wire:model="departureDate" id="departureDate"
                    class="shadow border border-gray-400 py-2 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-orange-200 focus:text-gray-900 text-sm"
                    required/>
             @error('departureDate') <span class="error">{{ $message }}</span> @enderror
         </div>
-        <div class="flex flex-col space-y-3 hidden" id="hide-rDate">
+        <div class="flex flex-col space-y-3  @if($trip_type!=="1"&&$trip_type!==1) hidden @endif" id="hide-rDate">
             <div class="flex space-x-1 items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" viewBox="0 0 20 20"
                      fill="currentColor">
@@ -140,8 +140,8 @@
         </div>
         <div class="flex flex-col space-y-3 justify-end">
             <label class=""></label>
-            <button type="submit" id="reservationBtn"
-                    class="bg-orange-500 px-2 py-3 text-orange-100 sm:w-full mt-5 rounded hover:text-orange-500 hover:bg-white font-semibold text-md flex justify-center transition duration-300">
+            <button type="submit" id="reservationBtn" @if($stateFrom ===$stateTo) disabled @endif
+            class="bg-orange-500 px-2 py-3 text-orange-100 sm:w-full mt-5 rounded hover:text-orange-500 hover:border-black hover:bg-white font-semibold text-md flex justify-center transition duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
                     <path fill-rule="evenodd"

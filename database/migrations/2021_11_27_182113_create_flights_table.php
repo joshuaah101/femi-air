@@ -22,7 +22,9 @@ class CreateFlightsTable extends Migration
             $table->string('landing');
             $table->dateTime('departure_at');
             $table->dateTime('landing_at');
-            $table->string('amount');
+            $table->string('child')->nullable();
+            $table->string('adult')->nullable();
+            $table->string('infant')->nullable();
             $table->boolean('cancelled')->nullable()->default(false);
             $table->boolean('has_landed')->nullable()->default(false);
             $table->softDeletes();

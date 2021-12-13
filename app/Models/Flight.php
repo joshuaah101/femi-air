@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed inbound_terminal_id
  * @property mixed departure
  * @property mixed landing
+ * @property mixed child
+ * @property mixed infant
+ * @property mixed adult
  * @property mixed departure_at
  * @property mixed landing_at
  * @property boolean cancelled
@@ -32,6 +35,19 @@ class Flight extends Model
         'cancelled' => 'boolean',
         'has_landed' => 'boolean'
     ];
+
+    protected $appends = ['return_date'];
+
+    public function getReturnDateAttribute()
+    {
+        // when a flight is given, use the flight to check the return date
+        if ($this->departure && $this->landing) {
+            if ($this->departure_at) {
+                return self::where('departure', $this->landing)->where('landing', $this->departure)->whereDate('departure_at', $this->landing_at)->get();
+            }
+        }
+        return null;
+    }
 
     public function outbound_terminal()
     {

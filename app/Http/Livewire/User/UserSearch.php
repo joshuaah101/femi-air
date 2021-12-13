@@ -23,7 +23,7 @@ class UserSearch extends Component
             'trip_type' => 'required',
             'stateFrom' => 'required',
             'stateTo' => 'required|different:stateFrom',
-            'departureDate' => 'required|after:' . Carbon::now()->format('H:i:s'),
+            'departureDate' => 'required|after:' . Carbon::now()->subDay()->format('Y-m-d'),
             'returningDate' => 'nullable|after:departureDate'
         ]);
         $data = 'ticketType=' . $this->ticketType .

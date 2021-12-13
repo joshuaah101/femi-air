@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int flight_id
  * @property int booking_id
  * @property int user_id
+ * @property mixed invoice_no
  * @property mixed reference
  * @property mixed amount
  * @property mixed currency

@@ -110,14 +110,22 @@
                             <td>
                                 <div class="container text-center h-screen">
                                     <h1 class="font-extrabold text-xl my-5">No Flight In Location</h1>
-                                    <button class="bg-blue-700 text-white hover:bg-blue-900 px-2 py-3 my-3 rounded-lg"
-                                            wire:click="$set('current_step',0)">< back
-                                    </button>
                                 </div>
                             </td>
                         </tr>
                         </tbody>
                     @endif
+
+                        <tbody>
+
+                        <tr>
+                            <td>
+                                <button class="bg-blue-700 text-white hover:bg-blue-900 px-2 py-3 my-3 rounded-lg"
+                                        wire:click="$set('current_step',0)">< back
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
                 </table>
             </section>
         @elseif($current_step === 2)
@@ -371,6 +379,11 @@
                                                 class="">{{ number_format($ticket_fee) }} {{ $ticket_fee_currency }}</span>
                                         @endif
                                     </p>
+                                    <p class="flex justify-between text-sm">
+                                        <span>{{ $ticketType }}</span>
+                                        <span>@if($new_booking->flight){{ number_format($new_booking->flight[strtolower($ticketType)],2) }} @else
+                                                0 @endif {{ $ticket_fee_currency }}</span>
+                                    </p>
                                     @if(isset($taxes)&& count($taxes)>0)
                                         @foreach($taxes as $tax)
 
@@ -378,7 +391,8 @@
                                             @if((int)$tax['use_percentage']===1)
                                                 @php $vat = $ticket_fee * ((float)$tax['percentage_amount']/100); @endphp
                                                 <p class="flex justify-between text-sm">
-                                                  @isset($tax['title'])  <span class="">{{$tax['title']}} </span>@endisset <span
+                                                    @isset($tax['title'])  <span
+                                                        class="">{{$tax['title']}} </span>@endisset <span
                                                         class="">{{$vat}} {{$ticket_fee_currency}}</span>
                                                 </p>
                                             @else
@@ -407,7 +421,7 @@
             </div>
         @elseif($current_step ===3)
             <section
-                class="mt-5 px-5 py-4 flex xs:flex-col md:flex-row md:justify-between font-medium font-mono space-x-32">
+                class="mt-5 px-5 py-4 flex xs:flex-col md:flex-row md:justify-between font-medium font-mono space-x-4">
                 <div class="w-full">
                     <header class="text-lg uppercase font-semibold">
                         Flight summary
@@ -551,7 +565,9 @@
 
                 <button wire:click="payForBooking"
                         class="px-8 py-4 text-xs font-semibold text-white bg-blue-800 hover:bg-blue-700 rounded">
-                    Proceed to Payment &gt;
+                    <span wire:loading>Processing...</span>
+                    <span wire:loading.remove>Proceed to Payment &gt;</span>
+
                 </button>
             </section>
         @elseif($current_step ===4)
@@ -625,15 +641,11 @@
                                             createOrder: function (data, actions) {
                                                 return actions.order.create({
                                                     payer: {
-                                                        name: {
-                                                            given_name: "{{auth()->user()->first_name}}",
-                                                            surname: "{{auth()->user()->last_name}}"
-                                                        },
-                                                        email_address: "{{auth()->user()->email}}",
+                                                        email_address: "{{$email}}",
                                                         phone: {
                                                             phone_type: "MOBILE",
                                                             phone_number: {
-                                                                national_number: "{{auth()->user()->phone}}"
+                                                                national_number: "{{$phone}}"
                                                             }
                                                         }
                                                     },
@@ -804,12 +816,13 @@
                         </svg>
                         <label for="departureDate" class="text-sm text-white font-semibold">Departure date</label>
                     </div>
-                    <input type="datetime-local" wire:model="departureDate" id="departureDate"
+                    <input type="date" wire:model="departureDate" id="departureDate"
                            class="shadow border border-gray-400 py-2 px-2 rounded focus:outline-none placeholder-gray-700 focus:bg-orange-200 focus:text-gray-900 text-sm"
                            required/>
                     @error('departureDate') <span class="error">{{ $message }}</span> @enderror
                 </div>
-                <div class="flex flex-col space-y-3 hidden" id="hide-rDate">
+                <div class="flex flex-col space-y-3 @if($trip_type!=="1"&&$trip_type!==1) hidden @endif"
+                     id="hide-rDate">
                     <div class="flex space-x-1 items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" viewBox="0 0 20 20"
                              fill="currentColor">
@@ -826,8 +839,8 @@
                 </div>
                 <div class="flex flex-col space-y-3 justify-end">
                     <label class=""></label>
-                    <button type="submit" id="reservationBtn"
-                            class="bg-orange-500 px-2 py-3 text-orange-100 sm:w-full mt-5 rounded hover:text-orange-500 hover:bg-white font-semibold text-md flex justify-center transition duration-300">
+                    <button type="submit" id="reservationBtn" @if($stateFrom ===$stateTo) disabled @endif
+                    class="bg-orange-500 px-2 py-3 text-orange-100 sm:w-full mt-5 rounded hover:text-orange-500 hover:bg-white font-semibold text-md flex justify-center transition duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
                             <path fill-rule="evenodd"

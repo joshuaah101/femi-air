@@ -119,7 +119,7 @@
         @error('departureDate') <span class="error">{{ $message }}</span> @enderror
     </div>
 
-    <div class="flex flex-col space-y-3 hidden" id="hide-rDate">
+    <div class="flex flex-col space-y-3  @if($trip_type!=="1"&&$trip_type!==1) hidden @endif" id="hide-rDate">
         <div class="flex space-x-1 items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-800" viewBox="0 0 20 20"
                  fill="currentColor">
@@ -135,7 +135,7 @@
     </div>
     <div class="flex flex-col space-y-3 justify-end">
         <label class=""></label>
-        <button type="submit" id="reservationBtn"
+        <button type="submit" id="reservationBtn"  @if($stateFrom ===$stateTo) disabled @endif
                 class="bg-blue-800 px-2 py-3 text-blue-100 sm:w-full mt-5 rounded hover:bg-blue-600 font-semibold text-md flex justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
