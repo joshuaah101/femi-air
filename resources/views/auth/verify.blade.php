@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('master')
 
 @section('main')
 <main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">

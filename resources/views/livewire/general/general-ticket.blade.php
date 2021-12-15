@@ -678,9 +678,9 @@
 
                                             onError: function (err) {
                                                 if(err.message){
-                                                    window.livewire.emit('alert',{"message":err.message,"type":"error"});
+                                                    window.livewire.emit('alert',{"message":err,"type":"error"})
                                                 }
-                                                // console.log(err);
+                                                console.log(JSON.parse(err));
                                             }
                                         }).render('#paypal-button-container');
                                     })

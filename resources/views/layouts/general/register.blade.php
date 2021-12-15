@@ -1,11 +1,41 @@
 @extends('master')
 @section('title')
-    Sign up
+    User Login
 @endsection
 @section('links')
     @include('partials.links')
 @endsection
 
+
+@section('header')
+    <header class="bg-plane3-bg bg-center bg-cover bg-no-repeat h-1/2 xs:px-4 md:px-8 py-3 xs:w-full">
+        {{--        @include('partials.header-contact')--}}
+        {{-- navbar --}}
+        @include('partials.nav')
+
+        <div class="flex md:justify-between items-center xs:flex-col md:flex-row px-2 py-8 xs:space-y-8 md:space-y-0">
+            <div class="xs:w-full md:w-2/3 flex flex-col">
+                <hgroup class="font-mono font-bold leading-relaxed text-orange-500 tracking-tight mt-5">
+                    <h1 class="text-5xl">
+                        Online Flight Tickets
+                    </h1>
+                    <h2 class="text-4xl">
+                        Reservation
+                    </h2>
+                </hgroup>
+                <p class="mt-4 text-sm text-white sm:w-full font-semibold leading-8 text-justify tracking-tight">
+                    With Femi-airline, you can easily book any flight you need to travel safely thanks to our detailed
+                    system, services and experience.
+                </p>
+
+                <button type="button" onclick="document.getElementById('trip-option').focus()"
+                        class="bg-transparent px-2 py-4 text-white sm:w-full md:w-1/3 mt-5 rounded border-2 border-orange-500 hover:border-white hover:text-orange-500 font-semibold text-sm transition duration-300 focus:outline-none">
+                    Book now
+                </button>
+            </div>
+        </div>
+    </header>
+@endsection
 @section('main')
     <div class="flex flex-col justify-center items-center md:p-3 xs:p-7">
         <div class="flex flex-col justify-center items-center space-y-4">
@@ -118,6 +148,10 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('footer')
+    @include('partials.footer')
 @endsection
 
 @section('scripts')
