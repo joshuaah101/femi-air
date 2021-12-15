@@ -61,6 +61,11 @@ class GeneralTicket extends Component
         $state = $this->state_of_origin;
         $payment_units = $data['purchase_units'][0];
         $payer = $data['payer'];
+        if ($this->phone) {
+            $phone = $this->phone;
+        } else {
+            if (auth()->check()) $phone = auth()->user()->phone;
+        }
 
         if (isset($data['id'])) $reference = $data['id'];
         if (isset($payer['name']['given_name'], $payer['name']['surname'])) {
@@ -71,7 +76,8 @@ class GeneralTicket extends Component
         if (isset($payer['email_address'])) {
             $email = $payer['email_address'];
         } else {
-            $email = auth()->user()->email;
+            if (auth()->check())
+                $email = auth()->user()->email;
         }
         if (isset($payer['address']['country_code'])) $country = $payer['address']['country_code'];
         $amount = $payment_units['amount']['value'] ?? $this->total;
@@ -85,7 +91,13 @@ class GeneralTicket extends Component
         }
         if (isset($payments[0]['final_capture'])) $status = $payments[0]['final_capture'];
 
-        $check = Booking::where('user_id', auth()->check() ? auth()->id() : session()->getId())->where('flight_id', $this->new_booking['flight_id'])->where('cabin_id', $this->new_booking['cabin_id'])->whereDate('created_at', '>=', now()->addHours(2)); // booking done 2 hours ago
+
+        if (auth()->check()) {
+            $id = auth()->id();
+        } else {
+            $id = session()->getId();
+        }
+        $check = Booking::where('user_id', $id)->where('flight_id', $this->new_booking['flight_id'])->where('cabin_id', $this->new_booking['cabin_id'])->whereDate('created_at', '>=', now()->addHours(2)); // booking done 2 hours ago
         if ($check->count() > 0) {
             $booking = $check->first();
         } else {
@@ -93,19 +105,28 @@ class GeneralTicket extends Component
         }
         if (isset($this->new_booking['flight'])) $booking->terminal_id = $this->new_booking['flight']['outbound_terminal_id'];
         if (isset($this->new_booking['flight_id'])) $booking->flight_id = $this->new_booking['flight_id'];
-        $booking->user_id = auth()->check() ? auth()->id() : session()->getId();
+        if (auth()->check()) {
+            $booking->user_id = auth()->id();
+        } else {
+            $booking->session_id = session()->getId();
+        }
+//        $booking->user_id = auth()->check() ? auth()->id() : session()->getId();
         if (isset($this->new_booking['cabin_id'])) $booking->cabin_id = $this->new_booking['cabin_id'];
         if (isset($country)) $booking->country = $country;
         if (isset($state)) $booking->state = $state;
         if (isset($amount)) $booking->amount = $amount;
         if (isset($this->new_booking['flight_type'])) $booking->flight_type = $this->new_booking['flight_type'];
         if (isset($email)) $booking->email = $email;
-        $booking->phone = auth()->user()->phone;
+        if (isset($phone)) $booking->phone = $phone;
         if (isset($this->new_booking['state'])) $booking->state = $this->new_booking['state'];
         $booking->save();
 
         $new_payment = new Payment();
-        $new_payment->user_id = auth()->check() ? auth()->id() : session()->getId();
+        if (auth()->check()) {
+            $new_payment->user_id = auth()->id();
+        } else {
+            $new_payment->session_id = session()->getId();
+        }
         $new_payment->booking_id = $booking['id'];
         if (isset($payments[0])) $new_payment->invoice_no = $payments[0]['id'];
         if (isset($reference)) $new_payment->reference = $reference;

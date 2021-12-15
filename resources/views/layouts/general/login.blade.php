@@ -97,7 +97,7 @@
 
                     <span class="">
                         Don't have an account?
-                        <a href="register" class="underline hover:no-underline text-blue-600">
+                        <a href="{{ url('register') }}" class="underline hover:no-underline text-blue-600">
                             Sign up
                         </a>
                     </span>

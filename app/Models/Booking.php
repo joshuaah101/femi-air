@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int flight_id
  * @property int terminal_id
  * @property int user_id
+ * @property string session_id
  * @property mixed cabin_id
  * @property mixed country
  * @property mixed amount

@@ -17,7 +17,8 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('flight_id');
             $table->unsignedBigInteger('booking_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('session_id')->nullable();
             $table->string('reference');
             $table->string('invoice_no')->nullable();
             $table->string('amount');

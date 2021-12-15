@@ -41,13 +41,12 @@
                                 @endif
                             </tr>
                         </thead>
-
                         <tbody class="">
                         <tr>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-200 flex justify-center flex-col items-center">
                                 <div class="flex items-center space-x-5">
                                     <div class="flex flex-col">
-                                        {{$item->departure_at->format('d M H:M')}}
+                                        {{$item->departure_at->format('d D M H:m')}}
                                         <span class="">
                                             {{ get_state('NGA',$item['departure'])['name'] }}
                                         </span>
@@ -58,7 +57,7 @@
                                     </span>
 
                                     <div class="flex flex-col">
-                                        {{$item->landing_at->format('d M H:M')}}
+                                        {{$item->landing_at->format('d D M H:m')}}
                                         <span class="">
                                             {{ get_state('NGA',$item['landing'])['name']}}
                                         </span>
@@ -75,7 +74,7 @@
                                         <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-200 text-center">
                                             <div class="flex flex-col space-y-4">
                                                 <div class="flex flex-col">
-                                                    {{number_format((float)$cabin->pivot->amount)}}
+                                                    {{number_format((float)$cabin->pivot->amount,2)}}
                                                     <span class="">
                                            {{$cabin->pivot->currency}}
                                         </span>
@@ -106,7 +105,7 @@
 
                         <tr>
                             <td>
-                                <div class="container text-center h-screen">
+                                <div class="container text-center @if($flights && count($flights)>0) h-screen @endif">
                                     <h1 class="font-extrabold text-xl my-5">No Flight In Location</h1>
                                 </div>
                             </td>
@@ -115,9 +114,8 @@
                     @endif
 
                     <tbody>
-
                     <tr>
-                        <td>
+                        <td class="text-center">
                             <button class="bg-blue-700 text-white hover:bg-blue-900 px-2 py-3 my-3 rounded-lg"
                                     wire:click="$set('current_step',0)">< back
                             </button>
@@ -330,7 +328,7 @@
                                     </header>
                                     <p class="text-xs">
                                         {{-- date of departure e.g -> --}}
-                                        @if(isset($new_booking->flight))   {{ $new_booking->flight->departure_at->format('d/m/y | h-m') }} @endif
+                                        @if(isset($new_booking->flight))   {{ $new_booking->flight->departure_at->format('D d/m/y | h:m') }} @endif
                                     </p>
                                 </div>
                             </section>
@@ -344,7 +342,7 @@
                                         {{-- state arrival eg. -> --}}  @if(isset($new_booking->flight)) {{ get_state('NGA',$new_booking->flight->landing)['name']??'' }} @endif
                                     </header>
                                     <p class="text-xs">
-                                        {{-- date of departure e.g -> --}}   @if(isset($new_booking->flight))  {{ $new_booking->flight->landing_at->format('d/m/y | h-m') }} @endif
+                                        {{-- date of departure e.g -> --}}   @if(isset($new_booking->flight))  {{ $new_booking->flight->landing_at->format('D d/m/y | h:m') }} @endif
                                     </p>
                                 </div>
                             </section>
@@ -374,7 +372,7 @@
                                     <p class="flex justify-between text-sm">
                                         <span class="">Ticket cost </span> @if(isset($ticket_fee) && $ticket_fee)
                                             <span
-                                                class="">{{ number_format($ticket_fee) }} {{ $ticket_fee_currency }}</span>
+                                                class="">{{ number_format($ticket_fee,2) }} {{ $ticket_fee_currency }}</span>
                                         @endif
                                     </p>
                                     <p class="flex justify-between text-sm">
@@ -396,7 +394,7 @@
                                             @else
                                                 <p class="flex justify-between text-sm">
                                                     <span class="">{{$tax['title']}} </span> <span
-                                                        class="">{{number_format($tax['flat_amount'])}} {{$ticket_fee_currency}}</span>
+                                                        class="">{{number_format($tax['flat_amount'],2)}} {{$ticket_fee_currency}}</span>
                                                 </p>
                                             @endif
 
@@ -404,12 +402,12 @@
                                     @endif
                                     <p class="font-bold text-md font-sans flex justify-between">
                                         <span class="">Sub Total </span> <span
-                                            class="">{{number_format($sub_total)}} {{$ticket_fee_currency}}</span>
+                                            class="">{{number_format($sub_total,2)}} {{$ticket_fee_currency}}</span>
                                     </p>
                                     <p class="font-bold text-md font-sans flex justify-between">
                                         <span class="">Total @if($noOfTicket>1) (for all passengers) @endif </span>
                                         <span
-                                            class="">{{number_format($total)}} {{$ticket_fee_currency}}</span>
+                                            class="">{{number_format($total,2)}} {{$ticket_fee_currency}}</span>
                                     </p>
                                 </div>
                             </section>
@@ -479,7 +477,7 @@
                             </span>
                             <span class="">
 {{--                                Lagos - Abuja--}}
-                                @if(isset($new_booking->flight)) {{ get_state('NGA',$new_booking->flight->landing)['name']??'' }} @endif - @if(isset($new_booking->flight)){{ $new_booking->flight->landing_at->format('d/m/y | h-m') }} @endif
+                                @if(isset($new_booking->flight)) {{ get_state('NGA',$new_booking->flight->landing)['name']??'' }} @endif - @if(isset($new_booking->flight)){{ $new_booking->flight->landing_at->format('D d/m/y | h:m') }} @endif
 
                             </span>
                         </div>
@@ -507,22 +505,11 @@
                         Price details
                     </header>
                     <div class="flex flex-col mt-5 space-y-5">
-                        {{--                        <p class="flex justify-between text-sm">--}}
-                        {{--                            <span class="">Ticket cost </span> <span class="">19,000 NGN</span>--}}
-                        {{--                        </p>--}}
-                        {{--                        <p class="flex justify-between text-sm">--}}
-                        {{--                            <span class="">Tax </span> <span class="">3,000 NGN</span>--}}
-                        {{--                        </p>--}}
-                        {{--                        <p class="flex justify-between text-sm">--}}
-                        {{--                            <span class="">Service charge </span> <span class="">4,000 NGN</span>--}}
-                        {{--                        </p>--}}
-                        {{--                        <p class="font-bold text-md font-sans flex justify-between">--}}
-                        {{--                            <span class="">Total </span> <span class="">50,000 NGN</span>--}}
-                        {{--                        </p>--}}
+
                         <p class="flex justify-between text-sm">
                             <span class="">Ticket cost </span> @if(isset($ticket_fee) && $ticket_fee)
                                 <span
-                                    class="">{{ number_format($ticket_fee) }} {{ $ticket_fee_currency }}</span>
+                                    class="">{{ number_format($ticket_fee,2) }} {{ $ticket_fee_currency }}</span>
                             @endif
                         </p>
                         <p class="flex justify-between text-sm">
@@ -537,12 +524,12 @@
                                     @php $vat = $ticket_fee* ((float)$tax['percentage_amount']/100); @endphp
                                     <p class="flex justify-between text-sm">
                                         <span class="">{{$tax['title']}} </span> <span
-                                            class="">{{$vat}} {{$ticket_fee_currency}}</span>
+                                            class="">{{number_format($vat,2)}} {{$ticket_fee_currency}}</span>
                                     </p>
                                 @else
                                     <p class="flex justify-between text-sm">
                                         <span class="">{{$tax['title']}} </span> <span
-                                            class="">{{number_format($tax['flat_amount'])}} {{$ticket_fee_currency}}</span>
+                                            class="">{{number_format($tax['flat_amount'],2)}} {{$ticket_fee_currency}}</span>
                                     </p>
                                 @endif
 
@@ -550,12 +537,12 @@
                         @endif
                         <p class="font-bold text-md font-sans flex justify-between">
                             <span class="">Sub Total </span> <span
-                                class="">{{number_format($sub_total)}} {{$ticket_fee_currency}}</span>
+                                class="">{{number_format($sub_total,2)}} {{$ticket_fee_currency}}</span>
                         </p>
                         <p class="font-bold text-md font-sans flex justify-between">
                             <span class="">Total @if($noOfTicket>1) (for all passengers) @endif </span>
                             <span
-                                class="">{{number_format($total)}} {{$ticket_fee_currency}}</span>
+                                class="">{{number_format($total,2)}} {{$ticket_fee_currency}}</span>
                         </p>
                     </div>
                 </div>
@@ -586,8 +573,8 @@
                         <div class="mt-3">
                             <div class="flex flex-col">
                                 <label for="name-on-card" class="text-xl font-medium mb-5">
-                                    Total Sum of {{$ticket_fee_currency}}{{number_format($total)}} ~
-                                    USD{{number_format(convert_currency($total,$ticket_fee_currency,'USD'))}}
+                                    Total Sum of {{$ticket_fee_currency}}{{number_format($total,2)}} ~
+                                    USD{{number_format(convert_currency($total,$ticket_fee_currency,'USD'),2)}}
                                 </label>
                             </div>
 
@@ -648,7 +635,7 @@
                                                         phone: {
                                                             phone_type: "MOBILE",
                                                             phone_number: {
-                                                                national_number: "{{$phone}}"
+                                                                national_number: "{{preg_replace("/[^A-Za-z0-9]/", '', $phone)}}"
                                                             }
                                                         }
                                                     },
@@ -677,8 +664,8 @@
                                             },
 
                                             onError: function (err) {
-                                                if(err.message){
-                                                    window.livewire.emit('alert',{"message":err,"type":"error"})
+                                                if (err.message) {
+                                                    window.livewire.emit('alert', {"message": err, "type": "error"})
                                                 }
                                                 console.log(JSON.parse(err));
                                             }
@@ -765,7 +752,7 @@
                             </span>
                             <span class="">
 {{--                                Lagos - Abuja--}}
-                                @if(isset($new_booking->flight)) {{ get_state('NGA',$new_booking->flight->landing)['name']??'' }} @endif - @if(isset($new_booking->flight)){{ $new_booking->flight->landing_at->format('d/m/y | h-m') }} @endif
+                                @if(isset($new_booking->flight)) {{ get_state('NGA',$new_booking->flight->landing)['name']??'' }} @endif - @if(isset($new_booking->flight)){{ $new_booking->flight->landing_at->format('D d/m/y | h:m') }} @endif
 
                             </span>
                         </div>
@@ -822,7 +809,7 @@
                         <p class="flex justify-between text-sm">
                             <span class="">Ticket cost </span> @if(isset($ticket_fee) && $ticket_fee)
                                 <span
-                                    class="">{{ number_format($ticket_fee) }} {{ $ticket_fee_currency }}</span>
+                                    class="">{{ number_format($ticket_fee,2) }} {{ $ticket_fee_currency }}</span>
                             @endif
                         </p>
                         <p class="flex justify-between text-sm">
@@ -842,7 +829,7 @@
                                 @else
                                     <p class="flex justify-between text-sm">
                                         <span class="">{{$tax['title']}} </span> <span
-                                            class="">{{number_format($tax['flat_amount'])}} {{$ticket_fee_currency}}</span>
+                                            class="">{{number_format($tax['flat_amount'],2)}} {{$ticket_fee_currency}}</span>
                                     </p>
                                 @endif
 
@@ -850,12 +837,12 @@
                         @endif
                         <p class="font-bold text-md font-sans flex justify-between">
                             <span class="">Sub Total </span> <span
-                                class="">{{number_format($sub_total)}} {{$ticket_fee_currency}}</span>
+                                class="">{{number_format($sub_total,2)}} {{$ticket_fee_currency}}</span>
                         </p>
                         <p class="font-bold text-md font-sans flex justify-between">
                             <span class="">Total @if($noOfTicket>1) (for all passengers) @endif </span>
                             <span
-                                class="">{{number_format($total)}} {{$ticket_fee_currency}}</span>
+                                class="">{{number_format($total,2)}} {{$ticket_fee_currency}}</span>
                         </p>
                     </div>
                 </div>
@@ -1025,7 +1012,6 @@
         @endif
     </div>
     <script type="text/javascript">
-        $('section').append(Math.random());
 
         $(window).bind({
             beforeunload: function (ev) {
