@@ -22,11 +22,13 @@ class CreateBookingsTable extends Migration
             $table->string('session_id')->nullable();
             $table->string('country')->nullable();
             $table->string('amount')->nullable();
+            $table->string('currency')->nullable();
             $table->string('luggage_size')->nullable();
             $table->boolean('flight_type')->nullable()->default(false)->comment('false for one way trip and true for two way trip');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('state')->nullable();
+            $table->string('number_of_passengers')->nullable();
             $table->timestamps();
         });
     }

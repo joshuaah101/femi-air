@@ -19,19 +19,24 @@ class FlightFactory extends Factory
         $code = $sentences[random_int(0, 25)] . $sentences[random_int(0, 25)] . '-' . random_int(10, 99) . random_int(10, 99);
         $dep = Terminal::inRandomOrder()->first();
         $land = Terminal::inRandomOrder()->first();
-        $departure = random_int(2, 24);
-        $landing = random_int(24, 48);
+        $day = $this->faker->randomElement(['hours', 'days']);
+        $departure = random_int(2, 24); // randomly pick departure is within 2 hours to 24 days
+        $days = $departure > 7 ? 'hours' : 'days';
+        $final_departure = $this->faker->dateTimeBetween('+' . $departure . ' hours', '+' . $departure . $days);
+
+        $landing = random_int(1, 6); // then landing should be withing 1 hour to 7 hours of the departure time
+        $final_landing = $departure + $landing;
         return [
             'flight_number' => $code,
             'outbound_terminal_id' => $dep['id'],
             'inbound_terminal_id' => $land['id'],
             'departure' => $dep['state'],
             'landing' => $land['state'],
-            'departure_at' => $this->faker->dateTimeBetween($departure . ' hours', $departure . ' days'),
             'infant' => $this->faker->numberBetween(100, 500),
             'child' => $this->faker->numberBetween(500, 1000),
             'adult' => $this->faker->numberBetween(1000, 5000),
-            'landing_at' => $this->faker->dateTimeBetween($landing . ' hours', $landing . ' days'),
+            'departure_at' => $final_departure,
+            'landing_at' => $this->faker->dateTimeBetween($final_departure, '+' . $final_landing . $days),
             'cancelled' => $this->faker->boolean(20)
         ];
     }

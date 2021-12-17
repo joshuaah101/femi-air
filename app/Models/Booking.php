@@ -15,8 +15,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed cabin_id
  * @property mixed country
  * @property mixed amount
+ * @property mixed currency
  * @property mixed email
  * @property mixed phone
+ * @property mixed number_of_passengers
  * @property mixed state
  * @property boolean flight_type
  */

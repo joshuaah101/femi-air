@@ -79,12 +79,21 @@ class GeneralTicket extends Component
             if (auth()->check())
                 $email = auth()->user()->email;
         }
+        if (isset($this->passengers)) {
+            $passengers = count($this->passengers);
+        }
         if (isset($payer['address']['country_code'])) $country = $payer['address']['country_code'];
-        $amount = $payment_units['amount']['value'] ?? $this->total;
-        if (isset($payment_units['amount']['currency_code'])) {
-            $currency = $payment_units['amount']['currency_code'];
+        $amount = $payment_units['amount']['value'];
+
+        $currency = $payment_units['amount']['currency_code'];
+
+
+        if ($this->total) {
+            $default_currency = $this->ticket_fee_currency;
+            $default_amount = $this->total;
         } else {
-            $currency = $this->ticket_fee_currency;
+            $default_amount = convert_currency($payment_units['amount']['value'], $payment_units['amount']['currency_code'], $this->new_booking['currency']);
+            $default_currency = $this->new_booking['currency'];
         }
         if (isset($payment_units['payments']['captures'])) {
             $payments = $payment_units['payments']['captures'];
@@ -114,10 +123,13 @@ class GeneralTicket extends Component
         if (isset($this->new_booking['cabin_id'])) $booking->cabin_id = $this->new_booking['cabin_id'];
         if (isset($country)) $booking->country = $country;
         if (isset($state)) $booking->state = $state;
-        if (isset($amount)) $booking->amount = $amount;
+        // default currency
+        if (isset($default_amount)) $booking->amount = $default_amount;
+        if (isset($default_currency)) $booking->currency = $default_currency;
         if (isset($this->new_booking['flight_type'])) $booking->flight_type = $this->new_booking['flight_type'];
         if (isset($email)) $booking->email = $email;
         if (isset($phone)) $booking->phone = $phone;
+        if (isset($passengers)) $booking->number_of_passengers = $passengers;
         if (isset($this->new_booking['state'])) $booking->state = $this->new_booking['state'];
         $booking->save();
 
@@ -137,8 +149,40 @@ class GeneralTicket extends Component
         if (isset($currency)) $new_payment->currency = $currency;
         if (isset($status)) $new_payment->payment_successful = $status;
         if (isset($this->new_booking['flight_id'])) $new_payment->flight_id = $this->new_booking['flight_id'];
-
         $new_payment->payment_gateway = 'paypal';
+        $breakdown = [];
+
+        // Save the main ticket fee for this flight
+        $breakdown[] = [
+            'title' => 'Ticket cost',
+            'amount' => $this->ticket_fee,
+            'currency' => $this->ticket_fee_currency
+        ];
+        // save all taxes and charges
+        foreach ($this->taxes as $tax) {
+            if ((int)$tax['use_percentage'] === 1) {
+                $breakdown[] = [
+                    'title' => $tax['title'],
+                    'amount' => $this->ticket_fee * ((float)$tax['percentage_amount'] / 100),
+                    'currency' => $this->ticket_fee_currency
+                ];
+
+            } else {
+                $breakdown[] = [
+                    'title' => $tax['title'],
+                    'amount' => $tax['flat_amount'],
+                    'currency' => $this->ticket_fee_currency
+                ];
+            }
+        }
+        // save ticket type amount
+        $breakdown[] = [
+            'title' => $this->ticketType,
+            'amount' => isset($this->new_booking['flight']) ? $this->new_booking->flight[strtolower($this->ticketType)] : 0,
+            'currency' => $this->ticket_fee_currency
+        ];
+
+        $new_payment->breakdown = $breakdown;
         $new_payment->save();
         foreach ($this->passengers as $person) {
             $flight_id = $this->new_booking['flight_id'];
@@ -167,8 +211,15 @@ class GeneralTicket extends Component
 
     public function get_final_booking()
     {
-        $id = $this->final_booking_key;
-        $this->final_booking_credentials = Booking::with(['flight', 'payment', 'terminal', 'passengers', 'cabin'])->where('user_id', $id)->first();
+        $flight = Booking::with(['flight', 'payment', 'terminal', 'passengers', 'cabin']);
+        if (auth()->check()) {
+            $id = auth()->id();
+            $this->final_booking_credentials = $flight->where('user_id', $id)->first();
+        } else {
+            $id = $this->final_booking_key;
+            $this->final_booking_credentials = $flight->where('session_id', $id)->first();
+        }
+
     }
 
     /**

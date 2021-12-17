@@ -28,6 +28,7 @@ class CreatePaymentsTable extends Migration
             $table->string('email');
             $table->string('payment_gateway');
             $table->boolean('payment_successful');
+            $table->longText('breakdown')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

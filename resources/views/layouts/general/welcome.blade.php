@@ -104,7 +104,7 @@
                 </div>
             </div>
         </section>
-
+        @include('layouts.general.search')
         <section class="flex justify-center flex-col xs:p-1 md:p-8 space-y-12">
             <div class="text-gray-700 text-2xl flex justify-center font-semibold">
                 Operational Procedure
@@ -144,7 +144,6 @@
                 </div>
             </div>
         </section>
-
 
         <div class="mt-5 mb-2 border-b text-gray-700 text-2xl font-semibold p-8 flex justify-center">
             Top destinations

@@ -32,6 +32,10 @@ Route::get('ticket', [PagesController::class, 'showTicketPage'])->middleware('ti
 Route::get('flight', [PagesController::class, 'showFlightSelectionPage']);
 
 
+Route::get('booking/search',[PagesController::class,'searchBooking']);
+
+
+
 //dynamic menu across both user and admin dashboard area
 // Users
 Route::prefix('user')->group(function () {

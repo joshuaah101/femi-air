@@ -47,5 +47,9 @@ class PagesController extends Controller
         return view('layouts.general.flight-selection');
     }
 
+    public function searchBooking()
+    {
+        return view('layouts.booking.search');
+    }
 
 }

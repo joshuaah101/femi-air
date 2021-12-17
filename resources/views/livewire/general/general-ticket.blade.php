@@ -46,18 +46,16 @@
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-200 flex justify-center flex-col items-center">
                                 <div class="flex items-center space-x-5">
                                     <div class="flex flex-col">
-                                        {{$item->departure_at->format('d D M H:m')}}
+                                        {{$item->departure_at->format('D jS M H:m')}}
                                         <span class="">
                                             {{ get_state('NGA',$item['departure'])['name'] }}
                                         </span>
                                     </div>
-
                                     <span class="text-lg">
                                         &dash;
                                     </span>
-
                                     <div class="flex flex-col">
-                                        {{$item->landing_at->format('d D M H:m')}}
+                                        {{$item->landing_at->format('D jS M H:m')}}
                                         <span class="">
                                             {{ get_state('NGA',$item['landing'])['name']}}
                                         </span>
@@ -70,7 +68,7 @@
                             @if($item->cabin)
                                 @foreach($item->cabin as $cabin)
                                     {{--  //check number of seats empty --}}
-                                    @if(isset($cabin->seats) && (($cabin->seats()->whereDoesntHave('passenger')->count()+$noOfTicket)!== $cabin->seats()->count()))
+                                    @if(isset($cabin->seats) && (($cabin->seats()->whereHas('passenger')->count()+$noOfTicket)<= $cabin->seats()->count()))
                                         <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-200 text-center">
                                             <div class="flex flex-col space-y-4">
                                                 <div class="flex flex-col">
@@ -328,7 +326,7 @@
                                     </header>
                                     <p class="text-xs">
                                         {{-- date of departure e.g -> --}}
-                                        @if(isset($new_booking->flight))   {{ $new_booking->flight->departure_at->format('D d/m/y | h:m') }} @endif
+                                        @if(isset($new_booking->flight))   {{ $new_booking->flight->departure_at->format('D d M y | h:m') }} @endif
                                     </p>
                                 </div>
                             </section>
@@ -342,7 +340,7 @@
                                         {{-- state arrival eg. -> --}}  @if(isset($new_booking->flight)) {{ get_state('NGA',$new_booking->flight->landing)['name']??'' }} @endif
                                     </header>
                                     <p class="text-xs">
-                                        {{-- date of departure e.g -> --}}   @if(isset($new_booking->flight))  {{ $new_booking->flight->landing_at->format('D d/m/y | h:m') }} @endif
+                                        {{-- date of departure e.g -> --}}   @if(isset($new_booking->flight))  {{ $new_booking->flight->landing_at->format('D d M y | h:m') }} @endif
                                     </p>
                                 </div>
                             </section>
@@ -477,7 +475,7 @@
                             </span>
                             <span class="">
 {{--                                Lagos - Abuja--}}
-                                @if(isset($new_booking->flight)) {{ get_state('NGA',$new_booking->flight->landing)['name']??'' }} @endif - @if(isset($new_booking->flight)){{ $new_booking->flight->landing_at->format('D d/m/y | h:m') }} @endif
+                                @if(isset($new_booking->flight)) {{ get_state('NGA',$new_booking->flight->landing)['name']??'' }} @endif - @if(isset($new_booking->flight)){{ $new_booking->flight->landing_at->format('D d M y | h:m') }} @endif
 
                             </span>
                         </div>
@@ -699,8 +697,8 @@
                         Full Flight Details
                     </header>
                     <div class="flex flex-col mt-5 space-y-3">
-                        @if($noOfTicket>1)
-                            @foreach($passengers as $user)
+                        @if(isset($final_booking_credentials->passengers))
+                            @foreach($final_booking_credentials->passengers as $user)
                                 <h3 class="font-extrabold text-lg">Passenger {{$loop->iteration}}:</h3>
                                 <div class="flex justify-between">
                                     <span class="">
@@ -718,16 +716,16 @@
                                         {{$user['gender']}}
                                     </span>
                                 </div>
+                                <div class="flex justify-between">
+                                    <span class="">
+                                        Seat:
+                                    </span>
+                                    <span class="">
+                                     @if($user->seat)   {{$user->seat->code }} @endif
+                                    </span>
+                                </div>
+                                <hr class="bg-gray-700"/>
                             @endforeach
-                        @else
-                            <div class="flex justify-between">
-                                <span class="">
-                                    Full Name:
-                                </span>
-                                <span class="">
-                                    {{ $passengers[0]['first_name'] }} {{ $passengers[0]['last_name'] }}
-                                </span>
-                            </div>
                         @endif
                         <hr class="text-gray-600"/>
                         <div class="flex justify-between">
@@ -751,8 +749,8 @@
                                 Outbound:
                             </span>
                             <span class="">
-{{--                                Lagos - Abuja--}}
-                                @if(isset($new_booking->flight)) {{ get_state('NGA',$new_booking->flight->landing)['name']??'' }} @endif - @if(isset($new_booking->flight)){{ $new_booking->flight->landing_at->format('D d/m/y | h:m') }} @endif
+
+                                @if(isset($new_booking->flight)) {{ get_state('NGA',$new_booking->flight->landing)['name']??'' }} @endif - @if(isset($new_booking->flight)){{ $new_booking->flight->landing_at->format('D d M y | h:m') }} @endif
 
                             </span>
                         </div>
@@ -779,7 +777,7 @@
                             <span class="">
                                 Booking ID:
                             </span>
-                            <span class="">
+                            <span class="text-lg font-bold">
                               @if(isset($final_booking_credentials)){{ $final_booking_credentials['id'] }} @endif
                             </span>
                         </div>
@@ -846,10 +844,12 @@
                         </p>
                     </div>
                 </div>
-                <div class="container">
+            </section>
+            <section class="mt-5 px-5 py-4 flex xs:flex-col md:flex-row md:justify-between font-medium font-mono space-x-4">
+                <div class="flex-row flex-no-wrap container">
                     <button
                         class="bg-orange-500 px-2 py-3 text-orange-100 sm:w-full mt-5 rounded hover:text-orange-500 hover:bg-white font-semibold text-md flex justify-center transition duration-300"
-                        onclick="PrintElem(document.getElementById('printBooking'))">Print
+                        onclick="printJS('printBooking', 'html')">Print
                     </button>
                 </div>
             </section>
@@ -1022,22 +1022,5 @@
             }
         });
 
-        function PrintElem(elem) {
-            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-
-            mywindow.document.write('<html><head><title>' + document.title + '</title>');
-            mywindow.document.write('</head><body >');
-            mywindow.document.write('<h1>' + document.title + '</h1>');
-            mywindow.document.write(document.getElementById(elem).innerHTML);
-            mywindow.document.write('</body></html>');
-
-            mywindow.document.close(); // necessary for IE >= 10
-            mywindow.focus(); // necessary for IE >= 10*/
-
-            mywindow.print();
-            mywindow.close();
-
-            return true;
-        }
     </script>
 </div>

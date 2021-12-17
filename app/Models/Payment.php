@@ -23,10 +23,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property mixed email
  * @property mixed payment_gateway
  * @property mixed payment_successful
+ * @property mixed breakdown
  */
 class Payment extends Model
 {
     use HasFactory;
+
+    protected $casts = ['breakdown' => 'json'];
 
     public function flight()
     {
